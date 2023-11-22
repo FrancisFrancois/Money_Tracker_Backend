@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Money_Tracker.API.props" />
+</Project>

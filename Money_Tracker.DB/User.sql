@@ -1,0 +1,14 @@
+﻿CREATE TABLE [dbo].[User]
+(
+	[User_Id] INT NOT NULL IDENTITY,
+	[Name] NVARCHAR(50)NOT NULL,
+	[Firstname] NVARCHAR(50)NOT NULL,
+	[Pseudo] NVARCHAR(50) NOT NULL,
+	[Email] NVARCHAR(50) NOT NULL,
+	[Hash_Password] CHAR(100) NOT NULL,
+	[Roles] NVARCHAR(50) NOT NULL
+	CONSTRAINT PK_User PRIMARY KEY ([User_Id])
+	CONSTRAINT UK_User__Email UNIQUE ([Email])
+	CONSTRAINT UK_User__Pseudo UNIQUE ([Pseudo])
+
+)
