@@ -11,37 +11,28 @@ Modèle de script de post-déploiement
 */
 
 -- insertion de données factices pour la table users
--- Insertion de données factices supplémentaires pour la table Users (noms d'acteurs fictifs)
-INSERT INTO Users (Name, Firstname, Email) VALUES
-('Depp', 'Johnny', 'johnny.depp@example.com'),
-('Winslet', 'Kate', 'kate.winslet@example.com'),
-('DiCaprio', 'Leonardo', 'leonardo.dicaprio@example.com'),
-('Lawrence', 'Jennifer', 'jennifer.lawrence@example.com'),
-('Smith', 'Will', 'will.smith@example.com'),
-('Roberts', 'Julia', 'julia.roberts@example.com'),
-('Hanks', 'Tom', 'tom.hanks@example.com'),
-('Johansson', 'Scarlett', 'scarlett.johansson@example.com'),
-('Damon', 'Matt', 'matt.damon@example.com'),
-('Kidman', 'Nicole', 'nicole.kidman@example.com');
+INSERT INTO [User] (Name, Firstname, Pseudo, Email, Hash_Password, Roles)
+VALUES 
+    ('Depp', 'Johnny', 'johnnydepp', 'johnny.depp@example.com', 'hashed_password_1', 'admin'),
+    ('Winslet', 'Kate', 'katewinslet', 'kate.winslet@example.com', 'hashed_password_2', 'invite'),
+    ('DiCaprio', 'Leonardo', 'leonardodicaprio', 'leonardo.dicaprio@example.com', 'hashed_password_3', 'invite'),
+    ('Lawrence', 'Jennifer', 'jenniferlawrence', 'jennifer.lawrence@example.com', 'hashed_password_4', 'invite'),
+    ('Smith', 'Will', 'willsmith', 'will.smith@example.com', 'hashed_password_5', 'invite'),
+    ('Roberts', 'Julia', 'juliaroberts', 'julia.roberts@example.com', 'hashed_password_6', 'invite'),
+    ('Hanks', 'Tom', 'tomhanks', 'tom.hanks@example.com', 'hashed_password_7', 'invite'),
+    ('Johansson', 'Scarlett', 'scarlettjohansson', 'scarlett.johansson@example.com', 'hashed_password_8', 'invite'),
+    ('Damon', 'Matt', 'mattdamon', 'matt.damon@example.com', 'hashed_password_9', 'invite');
 
 
 -- Insertion de données factices supplémentaires pour la table Homes
-INSERT INTO Homes (User_ID, Name_Home) VALUES
+INSERT INTO Home (User_ID, Name_Home) VALUES
 (1, 'John  Second Home'),
 (2, 'Alice  Vacation House'),
 (3, 'Bob Family Residence');
 
--- Insertion de données factices pour la table Home_User (liaison entre Users et Homes)
-INSERT INTO Home_User (Owner_User_ID, Home_ID, Resident_User_ID, Assigned_Home_ID) VALUES
-(1, 1, 2, 1), -- John (User_ID 1) possède la maison 1 et Alice (User_ID 2) y réside.
-(2, 2, 3, 2), -- Alice (User_ID 2) possède la maison 2 et Bob (User_ID 3) y réside.
-(3, 3, 1, 3), -- Bob (User_ID 3) possède la maison 3 et John (User_ID 1) y réside.
-(4, 1, 5, 1), -- Nouvelle personne (User_ID 4) réside aussi dans la maison 1 de John (User_ID 1).
-(5, 2, 6, 2), -- Nouvelle personne (User_ID 5) réside aussi dans la maison 2 de Alice (User_ID 2).
-(6, 3, 4, 3); -- Nouvelle personne (User_ID 6) réside aussi dans la maison 3 de Bob (User_ID 3).
 
 -- insertion de données factices pour la table categories
-INSERT INTO Categories (Category_Name) VALUES
+INSERT INTO Category (Category_Name) VALUES
 ('Alimentation'),
 ('Transport'),
 ('Services publics'),
@@ -53,8 +44,18 @@ INSERT INTO Categories (Category_Name) VALUES
 ('Vêtements'),
 ('Autres');
 
+INSERT INTO Home_User (Home_Id, User_Id, Owner_User_Id, Resident_User_Id)
+VALUES
+(1, 1, 1, 2), -- John (User_ID 1) possède la maison 1 et Alice (User_ID 2) y réside.
+(2, 2, 2, 3), -- Alice (User_ID 2) possède la maison 2 et Bob (User_ID 3) y réside.
+(3, 3, 3, 1), -- Bob (User_ID 3) possède la maison 3 et John (User_ID 1) y réside.
+(1, 4, 1, 1), -- Nouvelle personne (User_ID 4) réside aussi dans la maison 1 de John (User_ID 1).
+(2, 5, 2, 2), -- Nouvelle personne (User_ID 5) réside aussi dans la maison 2 de Alice (User_ID 2).
+(3, 6, 3, 3); -- Nouvelle personne (User_ID 6) réside aussi dans la maison 3 de Bob (User_ID 3).
+
+
 -- insertion de données factices pour la table expenses
-INSERT INTO Expenses (Category_ID, User_ID, Home_ID, Amount, Description, Date_Expense) VALUES
+INSERT INTO Expense (Category_ID, User_ID, Home_ID, Amount, Description, Date_Expense) VALUES
 (1, 1, 1, 40.75, 'Légumes', '2023-11-05'),
 (2, 2, 2, 25.00, 'Tickets de métro', '2023-11-06'),
 (3, 3, 3, 85.50, 'Facture d''eau', '2023-11-08'),

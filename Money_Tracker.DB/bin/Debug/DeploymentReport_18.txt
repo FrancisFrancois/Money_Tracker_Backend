@@ -1,0 +1,27 @@
+﻿** Met en surbrillance
+     Tables qui seront recréées avec les données migrées
+       Aucun
+     Index ordonnés en clusters à supprimer
+       Aucun
+     Index ordonnés en clusters à créer.
+       Aucun
+     Problèmes de données possibles
+       Aucun
+
+** Actions de l'utilisateur
+     Créer
+       [dbo].[Category] (Table)
+       [dbo].[Expense] (Table)
+       [dbo].[Home] (Table)
+       [dbo].[Home_User] (Table)
+       [dbo].[User] (Table)
+       [dbo].[FK_Expense_Category] (Clé étrangère)
+       [dbo].[FK_Expense_Home] (Clé étrangère)
+       [dbo].[FK_Expense_User] (Clé étrangère)
+       [dbo].[FK_Home_User] (Clé étrangère)
+       [dbo].[FK_Home_User_Home] (Clé étrangère)
+       [dbo].[FK_Home_User_User] (Clé étrangère)
+       [dbo].[FK_Home_User_Owner] (Clé étrangère)
+       [dbo].[FK_Home_User_Resident] (Clé étrangère)
+
+** Actions de support
