@@ -14,8 +14,8 @@ Modèle de script de post-déploiement
 INSERT INTO [User] (Name, Firstname, Pseudo, Email, Hash_Password, Roles)
 VALUES 
     ('Depp', 'Johnny', 'johnnydepp', 'johnny.depp@example.com', 'hashed_password_1', 'admin'),
-    ('Winslet', 'Kate', 'katewinslet', 'kate.winslet@example.com', 'hashed_password_2', 'invite'),
-    ('DiCaprio', 'Leonardo', 'leonardodicaprio', 'leonardo.dicaprio@example.com', 'hashed_password_3', 'invite'),
+    ('Winslet', 'Kate', 'katewinslet', 'kate.winslet@example.com', 'hashed_password_2', 'admin'),
+    ('DiCaprio', 'Leonardo', 'leonardodicaprio', 'leonardo.dicaprio@example.com', 'hashed_password_3', 'admin'),
     ('Lawrence', 'Jennifer', 'jenniferlawrence', 'jennifer.lawrence@example.com', 'hashed_password_4', 'invite'),
     ('Smith', 'Will', 'willsmith', 'will.smith@example.com', 'hashed_password_5', 'invite'),
     ('Roberts', 'Julia', 'juliaroberts', 'julia.roberts@example.com', 'hashed_password_6', 'invite'),
@@ -25,10 +25,10 @@ VALUES
 
 
 -- Insertion de données factices supplémentaires pour la table Homes
-INSERT INTO Home (User_ID, Name_Home) VALUES
-(1, 'John  Second Home'),
-(2, 'Alice  Vacation House'),
-(3, 'Bob Family Residence');
+INSERT INTO Home (Home_ID, Name_Home) VALUES
+(1, 'Johnny House'),
+(2, 'Kate Vacation House'),
+(3, 'Leonardo Family Residence');
 
 
 -- insertion de données factices pour la table categories
@@ -46,9 +46,9 @@ INSERT INTO Category (Category_Name) VALUES
 
 INSERT INTO Home_User (Home_Id, User_Id, Owner_User_Id, Resident_User_Id)
 VALUES
-(1, 1, 1, 2), -- John (User_ID 1) possède la maison 1 et Alice (User_ID 2) y réside.
-(2, 2, 2, 3), -- Alice (User_ID 2) possède la maison 2 et Bob (User_ID 3) y réside.
-(3, 3, 3, 1), -- Bob (User_ID 3) possède la maison 3 et John (User_ID 1) y réside.
+(1, 1, 1, 2), -- Johnny (User_ID 1) possède la maison 1 et Alice (User_ID 2) y réside.
+(2, 2, 2, 3), -- Kate (User_ID 2) possède la maison 2 et Bob (User_ID 3) y réside.
+(3, 3, 3, 1), -- Leonardo (User_ID 3) possède la maison 3 et John (User_ID 1) y réside.
 (1, 4, 1, 1), -- Nouvelle personne (User_ID 4) réside aussi dans la maison 1 de John (User_ID 1).
 (2, 5, 2, 2), -- Nouvelle personne (User_ID 5) réside aussi dans la maison 2 de Alice (User_ID 2).
 (3, 6, 3, 3); -- Nouvelle personne (User_ID 6) réside aussi dans la maison 3 de Bob (User_ID 3).
