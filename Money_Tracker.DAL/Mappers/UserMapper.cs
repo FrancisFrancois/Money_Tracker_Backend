@@ -1,12 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Money_Tracker.DAL.Entities;
+using System.Data;
+
 
 namespace Money_Tracker.DAL.Mappers
 {
-    internal class UserMapper
+    public class UserMapper
     {
+        public static User Mapper(IDataRecord record)
+        {
+            return new User
+            {
+                Id = (int)record["Id"],
+                Lastname = (string)record["Name"],
+                Firstname = (string)record["Firstname"],
+                Pseudo = (string)record["Pseudo"],
+                Email = (string)record["Email"],
+                Password = (string)record["Hash_Password"],
+                Roles = (string)record["Roles"]
+            };
+        }
     }
 }
