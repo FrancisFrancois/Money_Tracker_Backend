@@ -13,19 +13,19 @@ Modèle de script de post-déploiement
 -- insertion de données factices pour la table users
 INSERT INTO [User] (Name, Firstname, Pseudo, Email, Hash_Password, Roles)
 VALUES 
-    ('Depp', 'Johnny', 'johnnydepp', 'johnny.depp@example.com', 'hashed_password_1', 'admin'),
-    ('Winslet', 'Kate', 'katewinslet', 'kate.winslet@example.com', 'hashed_password_2', 'admin'),
-    ('DiCaprio', 'Leonardo', 'leonardodicaprio', 'leonardo.dicaprio@example.com', 'hashed_password_3', 'admin'),
-    ('Lawrence', 'Jennifer', 'jenniferlawrence', 'jennifer.lawrence@example.com', 'hashed_password_4', 'invite'),
-    ('Smith', 'Will', 'willsmith', 'will.smith@example.com', 'hashed_password_5', 'invite'),
-    ('Roberts', 'Julia', 'juliaroberts', 'julia.roberts@example.com', 'hashed_password_6', 'invite'),
-    ('Hanks', 'Tom', 'tomhanks', 'tom.hanks@example.com', 'hashed_password_7', 'invite'),
-    ('Johansson', 'Scarlett', 'scarlettjohansson', 'scarlett.johansson@example.com', 'hashed_password_8', 'invite'),
-    ('Damon', 'Matt', 'mattdamon', 'matt.damon@example.com', 'hashed_password_9', 'invite');
+('Depp', 'Johnny', 'johnnydepp', 'johnny.depp@example.com', 'hashed_password_1', 'admin'),
+('Winslet', 'Kate', 'katewinslet', 'kate.winslet@example.com', 'hashed_password_2', 'admin'),
+('DiCaprio', 'Leonardo', 'leonardodicaprio', 'leonardo.dicaprio@example.com', 'hashed_password_3', 'admin'),
+('Lawrence', 'Jennifer', 'jenniferlawrence', 'jennifer.lawrence@example.com', 'hashed_password_4', 'invite'),
+('Smith', 'Will', 'willsmith', 'will.smith@example.com', 'hashed_password_5', 'invite'),
+('Roberts', 'Julia', 'juliaroberts', 'julia.roberts@example.com', 'hashed_password_6', 'invite'),
+('Hanks', 'Tom', 'tomhanks', 'tom.hanks@example.com', 'hashed_password_7', 'invite'),
+('Johansson', 'Scarlett', 'scarlettjohansson', 'scarlett.johansson@example.com', 'hashed_password_8', 'invite'),
+('Damon', 'Matt', 'mattdamon', 'matt.damon@example.com', 'hashed_password_9', 'invite');
 
 
 -- Insertion de données factices supplémentaires pour la table Homes
-INSERT INTO Home (Home_ID, Name_Home) VALUES
+INSERT INTO Home (USER_ID, Name_Home) VALUES
 (1, 'Johnny House'),
 (2, 'Kate Vacation House'),
 (3, 'Leonardo Family Residence');
@@ -44,14 +44,15 @@ INSERT INTO Category (Category_Name) VALUES
 ('Vêtements'),
 ('Autres');
 
-INSERT INTO Home_User (Home_Id, User_Id, Owner_User_Id, Resident_User_Id)
+-- insertion de données factices pour la home_user
+INSERT INTO Home_User (Home_Id, User_Id)
 VALUES
-(1, 1, 1, 2), -- Johnny (User_ID 1) possède la maison 1 et Alice (User_ID 2) y réside.
-(2, 2, 2, 3), -- Kate (User_ID 2) possède la maison 2 et Bob (User_ID 3) y réside.
-(3, 3, 3, 1), -- Leonardo (User_ID 3) possède la maison 3 et John (User_ID 1) y réside.
-(1, 4, 1, 1), -- Nouvelle personne (User_ID 4) réside aussi dans la maison 1 de John (User_ID 1).
-(2, 5, 2, 2), -- Nouvelle personne (User_ID 5) réside aussi dans la maison 2 de Alice (User_ID 2).
-(3, 6, 3, 3); -- Nouvelle personne (User_ID 6) réside aussi dans la maison 3 de Bob (User_ID 3).
+(1, 1), 
+(2, 2), 
+(3, 3), 
+(1, 4), 
+(2, 5),
+(3, 6); 
 
 
 -- insertion de données factices pour la table expenses
