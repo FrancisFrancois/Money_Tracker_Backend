@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Money_Tracker.Tools
+namespace Money_Tracker.Tools.Interfaces
 {
     /// <summary>
     /// Représente une interface de service générique CRUD (Create, Read, Update, Delete).

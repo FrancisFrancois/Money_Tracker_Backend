@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Money_Tracker.Tools
+namespace Money_Tracker.Tools.Interfaces
 {
     /// <summary>
     /// Interface générique pour les opérations CRUD (Create, Read, Update, Delete).
@@ -24,7 +24,7 @@ namespace Money_Tracker.Tools
         /// </summary>
         /// <param name="id">L'identifiant de l'entité à récupérer.</param>
         /// <returns>L'entité de type TEntity correspondante à l'identifiant fourni.</returns>
-        TEntity GetById(TId id);
+        TEntity? GetById(TId id);
 
         /// <summary>
         /// Crée une nouvelle entité de type TEntity.

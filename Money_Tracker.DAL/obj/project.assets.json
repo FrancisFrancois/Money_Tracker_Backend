@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "Money_Tracker.Tools/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Money_Tracker.Tools.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Money_Tracker.Tools.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Money_Tracker.Tools/1.0.0": {
+      "type": "project",
+      "path": "../Money_Tracker.Tools/Money_Tracker.Tools.csproj",
+      "msbuildProject": "../Money_Tracker.Tools/Money_Tracker.Tools.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "Money_Tracker.Tools >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Student\\.nuget\\packages\\": {},
@@ -40,7 +59,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Student\\Documents\\MakerHub\\Money_Tracker_Backend\\Money_Tracker.Tools\\Money_Tracker.Tools.csproj": {
+              "projectPath": "C:\\Users\\Student\\Documents\\MakerHub\\Money_Tracker_Backend\\Money_Tracker.Tools\\Money_Tracker.Tools.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
