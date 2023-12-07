@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Money_Tracker.BLL.Models;
 
 namespace Money_Tracker.BLL.Interfaces
 {
-    internal interface IUserService
+    public interface IUserService
     {
+        public IEnumerable<User> GetAll();
+        public User? GetById(int id);
+        public User Insert(User user);
+        public bool Update(int id, User user);
+        public bool Delete(int id);
     }
 }
+
