@@ -1,6 +1,25 @@
+using Money_Tracker.BLL.Interfaces;
+using Money_Tracker.BLL.Services;
+using Money_Tracker.DAL.Interfaces;
+using Money_Tracker.DAL.Repositories;
+using System.Data.Common;
+using System.Data.SqlClient;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// DbConnection
+builder.Services.AddTransient<DbConnection>(service =>
+{
+    string connectionString = builder.Configuration.GetConnectionString("Default");
+    return new SqlConnection(connectionString);
+});
+
+// Services
+builder.Services.AddScoped<IUserService, UserService>();
+
+// Repositories
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
