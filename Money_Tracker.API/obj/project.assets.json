@@ -88,6 +88,42 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "Money_Tracker.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Money_Tracker.DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Money_Tracker.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Money_Tracker.BLL.dll": {}
+        }
+      },
+      "Money_Tracker.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Money_Tracker.Tools": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Money_Tracker.DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Money_Tracker.DAL.dll": {}
+        }
+      },
+      "Money_Tracker.Tools/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Money_Tracker.Tools.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Money_Tracker.Tools.dll": {}
+        }
       }
     }
   },
@@ -429,10 +465,26 @@
         "swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "Money_Tracker.BLL/1.0.0": {
+      "type": "project",
+      "path": "../Money_Tracker.BLL/Money_Tracker.BLL.csproj",
+      "msbuildProject": "../Money_Tracker.BLL/Money_Tracker.BLL.csproj"
+    },
+    "Money_Tracker.DAL/1.0.0": {
+      "type": "project",
+      "path": "../Money_Tracker.DAL/Money_Tracker.DAL.csproj",
+      "msbuildProject": "../Money_Tracker.DAL/Money_Tracker.DAL.csproj"
+    },
+    "Money_Tracker.Tools/1.0.0": {
+      "type": "project",
+      "path": "../Money_Tracker.Tools/Money_Tracker.Tools.csproj",
+      "msbuildProject": "../Money_Tracker.Tools/Money_Tracker.Tools.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Money_Tracker.BLL >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
@@ -469,7 +521,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Student\\Documents\\MakerHub\\Money_Tracker_Backend\\Money_Tracker.BLL\\Money_Tracker.BLL.csproj": {
+              "projectPath": "C:\\Users\\Student\\Documents\\MakerHub\\Money_Tracker_Backend\\Money_Tracker.BLL\\Money_Tracker.BLL.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
