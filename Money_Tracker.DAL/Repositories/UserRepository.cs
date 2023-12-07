@@ -34,7 +34,7 @@ namespace Money_Tracker.DAL.Repositories
 
         public User? GetById(int id)
         {
-            User? user = null;
+            User? result = null;
             using (DbCommand command = _DbConnection.CreateCommand())
             {
                 command.CommandText = "SELECT * FROM [Users] WHERE [User_Id] = @Id";
@@ -44,18 +44,23 @@ namespace Money_Tracker.DAL.Repositories
                 {
                     if (reader.Read())
                     {
-                        user = UserMapper.Mapper(reader);
+                        result = UserMapper.Mapper(reader);
                     }
                 };
                 _DbConnection.Close();
             };
-            return user;
+            return result;
         }
 
-        public User Create(User entity)
+        public User Create(User user)
         {
-            throw new NotImplementedException();
+            User user;
         }
+
+
+
+
+
         public bool Update(int id, User entity)
         {
             throw new NotImplementedException();

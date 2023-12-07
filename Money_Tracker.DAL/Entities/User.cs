@@ -19,7 +19,7 @@ namespace Money_Tracker.DAL.Entities
         /// <summary>
         /// Obtient ou définit le nom de famille de l'utilisateur.
         /// </summary>
-        public string Lastname { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Obtient ou définit le prénom de l'utilisateur.
