@@ -14,7 +14,27 @@ namespace Money_Tracker.BLL.Mappers
         {
             return new Models.User
             {
+                Id = entity.Id,
+                Name = entity.Name,
+                Firstname = entity.Firstname,
+                Pseudo = entity.Pseudo,
+                Email = entity.Email,
+                Password = entity.Password,
+                Roles = entity.Roles,
+            };
+        }
 
+        public static Entities.User ToEntity(this Models.User model)
+        {
+            return new Entities.User
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Firstname = model.Firstname,
+                Pseudo = model.Pseudo,
+                Email = model.Email,
+                Password = model.Password,
+                Roles = model.Roles,
             };
         }
     }
