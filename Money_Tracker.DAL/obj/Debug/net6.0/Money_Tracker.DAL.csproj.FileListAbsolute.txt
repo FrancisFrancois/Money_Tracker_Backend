@@ -1,0 +1,15 @@
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\bin\Debug\net6.0\Money_Tracker.DAL.deps.json
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\bin\Debug\net6.0\Money_Tracker.DAL.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\bin\Debug\net6.0\Money_Tracker.DAL.pdb
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\bin\Debug\net6.0\Money_Tracker.Tools.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\bin\Debug\net6.0\Money_Tracker.Tools.pdb
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\obj\Debug\net6.0\Money_Tracker.DAL.csproj.AssemblyReference.cache
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\obj\Debug\net6.0\Money_Tracker.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\obj\Debug\net6.0\Money_Tracker.DAL.AssemblyInfoInputs.cache
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\obj\Debug\net6.0\Money_Tracker.DAL.AssemblyInfo.cs
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\obj\Debug\net6.0\Money_Tracker.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\obj\Debug\net6.0\Money_Tracker.DAL.csproj.CopyComplete
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\obj\Debug\net6.0\Money_Tracker.DAL.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\obj\Debug\net6.0\refint\Money_Tracker.DAL.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\obj\Debug\net6.0\Money_Tracker.DAL.pdb
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DAL\obj\Debug\net6.0\ref\Money_Tracker.DAL.dll

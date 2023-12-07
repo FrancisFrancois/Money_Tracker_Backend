@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money_Tracker.API", "Money_Tracker.API\Money_Tracker.API.csproj", "{7BA8D989-6F8F-41D5-A311-423EBADCAC2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Money_Tracker.API", "Money_Tracker.API\Money_Tracker.API.csproj", "{7BA8D989-6F8F-41D5-A311-423EBADCAC2A}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Money_Tracker.DB", "Money_Tracker.DB\Money_Tracker.DB.sqlproj", "{99BD1F26-4F94-4A29-BDFE-B897502CC2C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money_Tracker.DAL", "Money_Tracker.DAL\Money_Tracker.DAL.csproj", "{7F036359-4982-420A-9E1F-921A8B9E8A85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Money_Tracker.DAL", "Money_Tracker.DAL\Money_Tracker.DAL.csproj", "{7F036359-4982-420A-9E1F-921A8B9E8A85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money_Tracker.BLL", "Money_Tracker.BLL\Money_Tracker.BLL.csproj", "{85CC11EB-709A-4468-AAEC-F65441784978}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Money_Tracker.BLL", "Money_Tracker.BLL\Money_Tracker.BLL.csproj", "{85CC11EB-709A-4468-AAEC-F65441784978}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money_Tracker.Tools", "Money_Tracker.Tools\Money_Tracker.Tools.csproj", "{163553F7-752A-40C5-9047-F1F81503B080}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{85CC11EB-709A-4468-AAEC-F65441784978}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85CC11EB-709A-4468-AAEC-F65441784978}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85CC11EB-709A-4468-AAEC-F65441784978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{163553F7-752A-40C5-9047-F1F81503B080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{163553F7-752A-40C5-9047-F1F81503B080}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{163553F7-752A-40C5-9047-F1F81503B080}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{163553F7-752A-40C5-9047-F1F81503B080}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

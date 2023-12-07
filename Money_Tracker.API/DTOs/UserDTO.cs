@@ -81,3 +81,4 @@
         /// </summary>
         public string Roles { get; set; } = string.Empty;
     }
+}

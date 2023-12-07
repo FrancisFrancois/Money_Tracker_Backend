@@ -1,0 +1,49 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Money_Tracker.BLL/1.0.0": {
+        "dependencies": {
+          "Money_Tracker.DAL": "1.0.0"
+        },
+        "runtime": {
+          "Money_Tracker.BLL.dll": {}
+        }
+      },
+      "Money_Tracker.DAL/1.0.0": {
+        "dependencies": {
+          "Money_Tracker.Tools": "1.0.0"
+        },
+        "runtime": {
+          "Money_Tracker.DAL.dll": {}
+        }
+      },
+      "Money_Tracker.Tools/1.0.0": {
+        "runtime": {
+          "Money_Tracker.Tools.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Money_Tracker.BLL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Money_Tracker.DAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Money_Tracker.Tools/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

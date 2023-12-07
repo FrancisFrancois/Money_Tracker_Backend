@@ -30,3 +30,15 @@ C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\obj\
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\obj\Debug\net6.0\Money_Tracker.API.pdb
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\obj\Debug\net6.0\Money_Tracker.API.genruntimeconfig.cache
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\obj\Debug\net6.0\ref\Money_Tracker.API.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\System.Data.SqlClient.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Money_Tracker.BLL.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Money_Tracker.DAL.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Money_Tracker.Tools.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Money_Tracker.BLL.pdb
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Money_Tracker.DAL.pdb
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Money_Tracker.Tools.pdb
