@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Money_Tracker.DAL",
+    "\\Money_Tracker.DAL\\Repositories"
   ],
-  "SelectedNode": "\\Money_Tracker.sln",
+  "SelectedNode": "\\Money_Tracker.DAL\\Repositories\\HomeRepository.cs",
   "PreviewInSolutionExplorer": false
 }
