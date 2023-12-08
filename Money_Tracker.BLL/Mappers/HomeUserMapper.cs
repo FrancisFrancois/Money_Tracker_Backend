@@ -21,8 +21,8 @@ namespace Money_Tracker.BLL.Mappers
             {
                 return new Models.HomeUser
                 {
-                    User_Id = entity.User_Id,
-                    Home_Id = entity.Home_Id                
+                    Home_Id = entity.Home_Id,
+                    
                 };
             }
 
@@ -35,7 +35,6 @@ namespace Money_Tracker.BLL.Mappers
             {
                 return new Entities.HomeUser
                 {
-                    User_Id = model.User_Id,
                     Home_Id = model.Home_Id
                 };
             }
