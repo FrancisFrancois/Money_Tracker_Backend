@@ -14,7 +14,7 @@ namespace Money_Tracker.BLL.Models
         /// <summary>
         /// Obtient ou définit l'utilisateur associé à cette relation maison-utilisateur.
         /// </summary>
-        public int User_Id { get; set; }
+        public User? User { get; set; }
 
         /// <summary>
         /// Obtient ou définit la maison associée à cette relation maison-utilisateur.

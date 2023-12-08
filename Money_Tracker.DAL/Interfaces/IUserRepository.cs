@@ -5,5 +5,6 @@ namespace Money_Tracker.DAL.Interfaces
 {
     public interface IUserRepository : ICrud<int, User>
     {
+        public bool isLivingInHouse(int id);
     }
 }

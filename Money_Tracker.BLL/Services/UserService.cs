@@ -1,4 +1,5 @@
-﻿using Money_Tracker.BLL.Interfaces;
+﻿using Money_Tracker.BLL.CustomExceptions;
+using Money_Tracker.BLL.Interfaces;
 using Money_Tracker.BLL.Mappers;
 using Money_Tracker.BLL.Models;
 using Money_Tracker.DAL.Interfaces;
@@ -70,6 +71,11 @@ namespace Money_Tracker.BLL.Services
         /// <returns>Booléen indiquant si la suppression a réussi.</returns>
         public bool Delete(int id)
         {
+            if (_UserRepository.isLivingInHouse(id))
+            {
+                throw new AlreadyLivingException("User is already living in the house");
+            }
+
             bool deleted = _UserRepository.Delete(id);
             if (!deleted)
             {

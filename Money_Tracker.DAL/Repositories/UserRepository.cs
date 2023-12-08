@@ -178,7 +178,34 @@ namespace Money_Tracker.DAL.Repositories
             }
         }
 
+        /// <summary>
+        /// Vérifie si l'utilisateur spécifié vit dans une maison.
+        /// </summary>
+        /// <param name="id">L'identifiant de l'utilisateur à vérifier.</param>
+        /// <returns>True si l'utilisateur vit dans une maison, sinon False.</returns>
+        public bool isLivingInHouse(int id)
+        {
+            bool isLiving = false;
 
+            using (DbCommand command = _DbConnection.CreateCommand())
+            {
+                command.CommandText = "SELECT * FROM [Home_User] WHERE [User_Id] = @Id";
+                command.addParamWithValue("Id", id);
+
+                _DbConnection.Open();
+                using (DbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        isLiving = true;
+                    }
+                }
+
+                _DbConnection.Close();
+            }
+
+            return isLiving;
+        }
 
     }
 }
