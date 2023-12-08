@@ -50,7 +50,7 @@ namespace Money_Tracker.DAL.Repositories
             User? result = null;
             using (DbCommand command = _DbConnection.CreateCommand())
             {
-                command.CommandText = "SELECT * FROM [User] WHERE [User_Id] = @Id";
+                command.CommandText = "SELECT * FROM [User] WHERE [User_Id] = @id";
                 command.addParamWithValue("id", id);
                 _DbConnection.Open();
                 using (DbDataReader reader = command.ExecuteReader())

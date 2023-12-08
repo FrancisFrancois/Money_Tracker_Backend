@@ -5,5 +5,6 @@ namespace Money_Tracker.DAL.Interfaces
 {
     public interface IHomeRepository : ICrud <int, Home>
     {
+        IEnumerable<HomeUser> GetUsers(int userId);
     }
 }

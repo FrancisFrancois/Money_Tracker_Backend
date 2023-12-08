@@ -4,6 +4,7 @@ using Money_Tracker.DAL.Mappers;
 using Money_Tracker.Tools.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
@@ -42,7 +43,7 @@ namespace Money_Tracker.DAL.Repositories
             Home? result = null;
             using (DbCommand command = _DbConnection.CreateCommand())
             {
-                command.CommandText = "SELECT * FROM [Home] WHERE [Home_Id] = @Id";
+                command.CommandText = "SELECT * FROM [Home] WHERE [Home_Id] = @id";
                 command.addParamWithValue("id", id);
                 _DbConnection.Open();
                 using (DbDataReader reader = command.ExecuteReader())
@@ -97,14 +98,52 @@ namespace Money_Tracker.DAL.Repositories
             return result;
         }
 
-        public bool Update(int id, Home entity)
+        public bool Update(int id, Home home)
         {
-            throw new NotImplementedException();
+            using (DbCommand command = _DbConnection.CreateCommand())
+            {
+                command.CommandText =
+                    "UPDATE [Home]" +
+                    " SET [Name_Home] = @name_home," +
+                    " WHERE [Home_Id] = @id";
+                command.addParamWithValue("name_home", home.Name_Home);
+                command.addParamWithValue("id", id);
+                _DbConnection.Open();
+                int nbRowUpdated = command.ExecuteNonQuery();
+                _DbConnection.Close();
+                return nbRowUpdated == 1;
+            }
         }
-
+    
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+        using (DbCommand command = _DbConnection.CreateCommand())
+        {
+            command.CommandText = "DELETE FROM [Home] WHERE [Home_Id] = @id";
+            command.addParamWithValue("id", id);
+            _DbConnection.Open();
+            int nbRowDeleted = command.ExecuteNonQuery();
+            _DbConnection.Close();
+            return nbRowDeleted == 1;
+        };
+    }
+
+        public IEnumerable<HomeUser> GetUsers(int userId)
+        {
+            using (DbCommand command = _DbConnection.CreateCommand()) 
+            {
+                command.CommandText = "SELECT * FROM [Home_User] WHERE [Home_id] = @id";
+                command.addParamWithValue("id", userId);
+                _DbConnection.Open();
+                using (DbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        yield return HomeUserMapper.MapperHS(reader);
+                    }
+                };
+                _DbConnection.Close();
+            }
         }
     }
 }
