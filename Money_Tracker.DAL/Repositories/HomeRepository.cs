@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace Money_Tracker.DAL.Repositories
 {
+    /// <summary>
+    /// Implémentation du repository pour accéder aux données liées aux maisons.
+    /// </summary>
     public class HomeRepository : IHomeRepository
     {
         private readonly DbConnection _DbConnection;
@@ -21,6 +24,9 @@ namespace Money_Tracker.DAL.Repositories
             _DbConnection = dbConnection;
         }
 
+        /// <summary>
+        /// Récupère toutes les maisons depuis la base de données.
+        /// </summary>
         public IEnumerable<Home> GetAll()
         {
             using (DbCommand command = _DbConnection.CreateCommand())
@@ -38,6 +44,9 @@ namespace Money_Tracker.DAL.Repositories
             }
         }
 
+        /// <summary>
+        /// Récupère une maison par son ID depuis la base de données.
+        /// </summary>
         public Home? GetById(int id)
         {
             Home? result = null;
@@ -58,6 +67,9 @@ namespace Money_Tracker.DAL.Repositories
             return result;
         }
 
+        /// <summary>
+        /// Crée une nouvelle maison dans la base de données.
+        /// </summary>
         public Home Create(Home home)
         {
             Home result;
@@ -98,6 +110,9 @@ namespace Money_Tracker.DAL.Repositories
             return result;
         }
 
+        /// <summary>
+        /// Met à jour une maison dans la base de données.
+        /// </summary>
         public bool Update(int id, Home home)
         {
             using (DbCommand command = _DbConnection.CreateCommand())
@@ -114,20 +129,26 @@ namespace Money_Tracker.DAL.Repositories
                 return nbRowUpdated == 1;
             }
         }
-    
+
+        /// <summary>
+        /// Supprime une maison de la base de données par son ID.
+        /// </summary>
         public bool Delete(int id)
         {
-        using (DbCommand command = _DbConnection.CreateCommand())
-        {
-            command.CommandText = "DELETE FROM [Home] WHERE [Home_Id] = @id";
-            command.addParamWithValue("id", id);
-            _DbConnection.Open();
-            int nbRowDeleted = command.ExecuteNonQuery();
-            _DbConnection.Close();
-            return nbRowDeleted == 1;
-        };
-    }
+            using (DbCommand command = _DbConnection.CreateCommand())
+            {
+                command.CommandText = "DELETE FROM [Home] WHERE [Home_Id] = @id";
+                command.addParamWithValue("id", id);
+                _DbConnection.Open();
+                int nbRowDeleted = command.ExecuteNonQuery();
+                _DbConnection.Close();
+                return nbRowDeleted == 1;
+            };
+        }
 
+        /// <summary>
+        /// Récupère les utilisateurs associés à une maison depuis la base de données.
+        /// </summary>
         public IEnumerable<HomeUser> GetUsers(int userId)
         {
             using (DbCommand command = _DbConnection.CreateCommand()) 
