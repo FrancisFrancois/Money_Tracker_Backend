@@ -9,3 +9,4 @@ C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.Tools\ob
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.Tools\obj\Debug\net6.0\refint\Money_Tracker.Tools.dll
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.Tools\obj\Debug\net6.0\Money_Tracker.Tools.pdb
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.Tools\obj\Debug\net6.0\ref\Money_Tracker.Tools.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.Tools\obj\Debug\net6.0\Money_Tracker.Tools.csproj.AssemblyReference.cache
