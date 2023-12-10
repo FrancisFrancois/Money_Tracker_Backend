@@ -46,7 +46,7 @@ namespace Money_Tracker.API.Controllers
 
         public IActionResult Insert([FromBody] UserDataDTO user)
         {
-            UserDTO result = _UserService.Insert(user.ToModel()).ToDTO();
+            UserDTO result = _UserService.Create(user.ToModel()).ToDTO();
             return CreatedAtAction(nameof(GetById), new { userId = result.Id }, result);
         }
 

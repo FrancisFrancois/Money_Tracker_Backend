@@ -73,26 +73,17 @@ namespace Money_Tracker.DAL.Repositories
         public Home Create(Home home)
         {
             Home result;
-            using (DbCommand command = _DbConnection.CreateCommand())
+            try
             {
-                command.CommandText = "SELECT COUNT(*) FROM [Home] WHERE [Name_Home] = @name_home";
-                command.addParamWithValue("name_home", home.Name_Home);
-                _DbConnection.Open();
-
-                int homeCount = (int)command.ExecuteScalar();
-
-                if (homeCount > 0)
+                using (DbCommand command = _DbConnection.CreateCommand())
                 {
-                    throw new Exception("Le nom de maison existe déjà");
-                }
-                else
-                {
-                    command.CommandText = "INSERT INTO [Home] ([Name_Home] " +
-                                          "OUTPUT INSERTED.* " +
-                                          "VALUES (@name_home,)";
-                    command.addParamWithValue("name_home", home.Name_Home);
-       
+                    command.CommandText = "INSERT INTO [Home] ([User_Id],[Name_Home]) " +
+                                            " OUTPUT INSERTED.* " +
+                                            "VALUES (@user_id, @name_home)";
+                    command.addParamWithValue("@user_id", home.User_Id);
+                    command.addParamWithValue("@name_home", home.Name_Home);
 
+                    _DbConnection.Open();
                     using (DbDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
@@ -104,11 +95,21 @@ namespace Money_Tracker.DAL.Repositories
                             throw new Exception("Erreur lors de l'ajout de la maison");
                         }
                     }
-                };
+                }
+            }
+            catch (DbException ex)
+            {
+                // Gérer l'exception liée à l'accès aux données
+                throw new Exception("Erreur d'accès aux données : " + ex.Message);
+            }
+            finally
+            {
                 _DbConnection.Close();
-            };
+            }
+
             return result;
         }
+
 
         /// <summary>
         /// Met à jour une maison dans la base de données.

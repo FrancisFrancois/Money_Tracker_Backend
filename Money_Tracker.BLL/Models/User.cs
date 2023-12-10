@@ -19,7 +19,7 @@ namespace Money_Tracker.BLL.Models
         /// <summary>
         /// Obtient ou définit le nom de famille de l'utilisateur.
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
 
         /// <summary>
         /// Obtient ou définit le prénom de l'utilisateur.

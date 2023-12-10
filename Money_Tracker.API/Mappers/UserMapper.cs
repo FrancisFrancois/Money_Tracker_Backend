@@ -18,7 +18,7 @@ namespace Money_Tracker.API.Mappers
             return new UserDTO
             {
                 Id = model.Id,
-                Name = model.Name,
+                Lastname = model.Lastname,
                 Firstname = model.Firstname,
                 Pseudo = model.Pseudo,
                 Email = model.Email,
@@ -37,7 +37,7 @@ namespace Money_Tracker.API.Mappers
             return new User
             {
                 Id = user.Id,
-                Name = user.Name,
+                Lastname = user.Lastname,
                 Firstname = user.Firstname,
                 Pseudo = user.Pseudo,
                 Email = user.Email,

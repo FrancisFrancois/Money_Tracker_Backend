@@ -22,7 +22,7 @@ namespace Money_Tracker.DAL.Mappers
                 Id = (int)record["User_Id"],
 
                 // Mappage du champ 'Name' de IDataRecord à la propriété 'Name' de User.
-                Name = (string)record["Name"],
+                Lastname = (string)record["Name"],
 
                 // Mappage du champ 'Firstname' de IDataRecord à la propriété 'Firstname' de User.
                 Firstname = (string)record["Firstname"],

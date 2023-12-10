@@ -103,7 +103,7 @@ namespace Money_Tracker.DAL.Repositories
                     command.CommandText = "INSERT INTO [User] ([Name],[Firstname],[Pseudo],[Email],[Hash_Password],[Roles]) " +
                                           "OUTPUT INSERTED.* " +
                                           "VALUES (@name, @firstname, @pseudo, @email, @hash_password, @roles)";
-                    command.addParamWithValue("name", user.Name);
+                    command.addParamWithValue("name", user.Lastname);
                     command.addParamWithValue("firstname", user.Firstname);
                     command.addParamWithValue("pseudo", user.Pseudo);
                     command.addParamWithValue("email", user.Email);
@@ -145,7 +145,7 @@ namespace Money_Tracker.DAL.Repositories
                                       "    [Hash_Password] = @hash_password, " +
                                       "    [Roles] = @roles " +
                                       " WHERE [User_Id] = @id";
-                command.addParamWithValue("name", user.Name);
+                command.addParamWithValue("name", user.Lastname);
                 command.addParamWithValue("firstname", user.Firstname);
                 command.addParamWithValue("pseudo", user.Pseudo);
                 command.addParamWithValue("email", user.Email);

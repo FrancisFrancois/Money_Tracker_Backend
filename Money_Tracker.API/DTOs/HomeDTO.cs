@@ -1,4 +1,6 @@
-﻿namespace Money_Tracker.API.DTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Money_Tracker.API.DTOs
 {
     /// <summary>
     /// Représente un modèle simplifié pour une maison (Home).
@@ -61,5 +63,12 @@
         /// Obtient ou définit l'identifiant de la maison.
         /// </summary>
         public int Home_Id { get; set; }
+    }
+
+    public class HomeDataDTO
+    {
+        [Required]
+        public int User_Id { get; set; }
+        public string Name_Home { get; set; } = string.Empty;
     }
 }

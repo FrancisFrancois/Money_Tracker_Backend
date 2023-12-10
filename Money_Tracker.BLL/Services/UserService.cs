@@ -43,7 +43,7 @@ namespace Money_Tracker.BLL.Services
         /// </summary>
         /// <param name="user">Le modèle de l'utilisateur à insérer.</param>
         /// <returns>Le modèle de l'utilisateur inséré.</returns>
-        public User Insert(User user)
+        public User Create(User user)
         {
             return _UserRepository.Create(user.ToEntity()).ToModel();
         }
@@ -73,7 +73,7 @@ namespace Money_Tracker.BLL.Services
         {
             if (_UserRepository.isLivingInHouse(id))
             {
-                throw new AlreadyLivingException("User is already living in the house");
+                throw new AlreadyLivingException("User is already attributed to the house");
             }
 
             bool deleted = _UserRepository.Delete(id);

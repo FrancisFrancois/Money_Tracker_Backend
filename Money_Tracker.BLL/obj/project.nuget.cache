@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "Bpw0NDAVNXcVZoXp4RewzAmMqjpryaM2dxNSOoCP5Ah5L27Xv74H6yQZ/sK58wLrwrX5ASCOGMdM8X4jN6qSxg==",
+  "dgSpecHash": "gsQDn2zkP4RDw2VQAeEI2Y8yvgAJg7lrQCAAN/8rFFusEnUitp5eRf9vurRI5o0FxF/Qyyt8obPG720M1p3kkw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Student\\Documents\\MakerHub\\Money_Tracker_Backend\\Money_Tracker.BLL\\Money_Tracker.BLL.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Student\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.0.3\\microsoft.identitymodel.abstractions.7.0.3.nupkg.sha512",
+    "C:\\Users\\Student\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.0.3\\microsoft.identitymodel.jsonwebtokens.7.0.3.nupkg.sha512",
+    "C:\\Users\\Student\\.nuget\\packages\\microsoft.identitymodel.logging\\7.0.3\\microsoft.identitymodel.logging.7.0.3.nupkg.sha512",
+    "C:\\Users\\Student\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.0.3\\microsoft.identitymodel.tokens.7.0.3.nupkg.sha512",
+    "C:\\Users\\Student\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.0.3\\system.identitymodel.tokens.jwt.7.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

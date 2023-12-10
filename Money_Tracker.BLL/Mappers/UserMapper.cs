@@ -23,7 +23,7 @@ namespace Money_Tracker.BLL.Mappers
             return new Models.User
             {
                 Id = entity.Id,
-                Name = entity.Name,
+                Lastname = entity.Lastname,
                 Firstname = entity.Firstname,
                 Pseudo = entity.Pseudo,
                 Email = entity.Email,
@@ -42,7 +42,7 @@ namespace Money_Tracker.BLL.Mappers
             return new Entities.User
             {
                 Id = model.Id,
-                Name = model.Name,
+                Lastname = model.Lastname,
                 Firstname = model.Firstname,
                 Pseudo = model.Pseudo,
                 Email = model.Email,

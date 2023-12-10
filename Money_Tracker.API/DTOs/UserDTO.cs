@@ -13,7 +13,7 @@
         /// <summary>
         /// Nom de l'utilisateur.
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Lastname { get; set; } = string.Empty;
 
         /// <summary>
         /// Prénom de l'utilisateur.
@@ -54,7 +54,7 @@
         /// <summary>
         /// Nom de l'utilisateur.
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Lastname { get; set; } = string.Empty;
 
         /// <summary>
         /// Prénom de l'utilisateur.
