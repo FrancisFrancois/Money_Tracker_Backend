@@ -5,11 +5,11 @@
     /// </summary>
     public class UserDTO
     {
+
         /// <summary>
         /// ID de l'utilisateur.
         /// </summary>
         public int Id { get; set; }
-
         /// <summary>
         /// Nom de l'utilisateur.
         /// </summary>
@@ -30,15 +30,6 @@
         /// </summary>
         public string Email { get; set; } = string.Empty;
 
-        /// <summary>
-        /// Mot de passe de l'utilisateur.
-        /// </summary>
-        public string Password { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Rôles de l'utilisateur.
-        /// </summary>
-        public string Roles { get; set; } = string.Empty;
     }
 
     /// <summary>

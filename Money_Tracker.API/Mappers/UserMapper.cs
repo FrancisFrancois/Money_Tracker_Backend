@@ -22,8 +22,6 @@ namespace Money_Tracker.API.Mappers
                 Firstname = model.Firstname,
                 Pseudo = model.Pseudo,
                 Email = model.Email,
-                Password = model.Password,
-                Roles = model.Roles,
             };
         }
 

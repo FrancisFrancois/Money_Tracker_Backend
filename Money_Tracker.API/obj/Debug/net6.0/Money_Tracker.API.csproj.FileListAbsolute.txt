@@ -42,3 +42,11 @@ C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Money_Tracker.BLL.pdb
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Money_Tracker.DAL.pdb
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Money_Tracker.Tools.pdb
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

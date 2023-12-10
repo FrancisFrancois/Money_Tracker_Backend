@@ -44,7 +44,7 @@ namespace Money_Tracker.API.Controllers
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(UserDTO))]
 
-        public IActionResult Insert([FromBody] UserDataDTO user)
+        public IActionResult Create([FromBody] UserDataDTO user)
         {
             UserDTO result = _UserService.Create(user.ToModel()).ToDTO();
             return CreatedAtAction(nameof(GetById), new { userId = result.Id }, result);
