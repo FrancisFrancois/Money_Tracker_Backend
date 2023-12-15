@@ -73,40 +73,27 @@ namespace Money_Tracker.DAL.Repositories
         public Home Create(Home home)
         {
             Home result;
-            try
+            using (DbCommand command = _DbConnection.CreateCommand())
             {
-                using (DbCommand command = _DbConnection.CreateCommand())
+                command.CommandText = "INSERT INTO [Home] ([User_Id],[Name_Home]) " +
+                                      " OUTPUT INSERTED.* " +
+                                      "VALUES (@user_id, @name_home)";
+                command.addParamWithValue("@user_id", home.User_Id);
+                command.addParamWithValue("@name_home", home.Name_Home);
+                _DbConnection.Open();
+                using (DbDataReader reader = command.ExecuteReader())
                 {
-                    command.CommandText = "INSERT INTO [Home] ([User_Id],[Name_Home]) " +
-                                            " OUTPUT INSERTED.* " +
-                                            "VALUES (@user_id, @name_home)";
-                    command.addParamWithValue("@user_id", home.User_Id);
-                    command.addParamWithValue("@name_home", home.Name_Home);
-
-                    _DbConnection.Open();
-                    using (DbDataReader reader = command.ExecuteReader())
+                    if (reader.Read())
                     {
-                        if (reader.Read())
-                        {
-                            result = HomeMapper.Mapper(reader);
-                        }
-                        else
-                        {
-                            throw new Exception("Erreur lors de l'ajout de la maison");
-                        }
+                        result = HomeMapper.Mapper(reader);
                     }
-                }
-            }
-            catch (DbException ex)
-            {
-                // Gérer l'exception liée à l'accès aux données
-                throw new Exception("Erreur d'accès aux données : " + ex.Message);
-            }
-            finally
-            {
+                    else
+                    {
+                        throw new Exception("Erreur lors de l'ajout de la maison");
+                    }
+                };
                 _DbConnection.Close();
-            }
-
+            };   
             return result;
         }
 

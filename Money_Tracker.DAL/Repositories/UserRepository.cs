@@ -75,14 +75,14 @@ namespace Money_Tracker.DAL.Repositories
             User result;
             using (DbCommand command = _DbConnection.CreateCommand())
             {
-                command.CommandText = "SELECT COUNT(*) FROM [User] WHERE [Email] = @email";
-                command.addParamWithValue("email", user.Email);
+                command.CommandText = "SELECT COUNT(*) FROM [User] WHERE [Email] = @email1";
+                command.addParamWithValue("email1", user.Email);
                 _DbConnection.Open();
 
                 int emailCount = (int)command.ExecuteScalar();
 
-                command.CommandText = "SELECT COUNT(*) FROM [User] WHERE [Pseudo] = @pseudo";
-                command.addParamWithValue("pseudo", user.Pseudo);
+                command.CommandText = "SELECT COUNT(*) FROM [User] WHERE [Pseudo] = @pseudo1";
+                command.addParamWithValue("pseudo1", user.Pseudo);
 
                 int pseudoCount = (int)command.ExecuteScalar();
 
@@ -102,12 +102,12 @@ namespace Money_Tracker.DAL.Repositories
                 {
                     command.CommandText = "INSERT INTO [User] ([Name],[Firstname],[Pseudo],[Email],[Hash_Password],[Roles]) " +
                                           "OUTPUT INSERTED.* " +
-                                          "VALUES (@name, @firstname, @pseudo, @email, @hash_password, @roles)";
+                                          "VALUES (@name, @firstname, @pseudo, @email, @password, @roles)";
                     command.addParamWithValue("name", user.Lastname);
                     command.addParamWithValue("firstname", user.Firstname);
                     command.addParamWithValue("pseudo", user.Pseudo);
                     command.addParamWithValue("email", user.Email);
-                    command.addParamWithValue("hash_password", user.Password);
+                    command.addParamWithValue("password", user.Password);
                     command.addParamWithValue("roles", user.Roles);
 
                     using (DbDataReader reader = command.ExecuteReader())

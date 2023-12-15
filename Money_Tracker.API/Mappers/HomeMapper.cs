@@ -64,6 +64,7 @@ namespace Money_Tracker.API.Mappers
             {
                 Id = 0,
                 Name_Home = home.Name_Home,
+                User_Id = home.User_Id,
             };
         }
     }
