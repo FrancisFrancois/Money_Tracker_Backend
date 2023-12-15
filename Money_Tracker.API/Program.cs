@@ -20,11 +20,13 @@ builder.Services.AddTransient<DbConnection>(service =>
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IExpenseService, ExpenseService>();
 
 // Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IHomeRepository, HomeRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
