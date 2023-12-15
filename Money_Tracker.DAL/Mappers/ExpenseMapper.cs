@@ -14,10 +14,11 @@ namespace Money_Tracker.DAL.Mappers
         {
             return new Expense
             {
-                Id = (int)record["Id"],
+                Id = (int)record["Expense_Id"],
+                Category_Id = (int)record["Category_Id"],
                 User_Id = (int)record["User_Id"],
                 Home_Id = (int)record["Home_Id"],
-                Amount = (float)record["Amount"],
+                Amount = (double)record["Amount"],
                 Description = (string)record["Description"],
                 Date_Expense = (DateTime)record["Date_Expense"]
             };

@@ -10,6 +10,7 @@ namespace Money_Tracker.BLL.Mappers
             return new Models.Expense
             {
                 Id = entity.Id,
+                Category_Id = entity.Category_Id,
                 User_Id = entity.User_Id,
                 Home_Id = entity.Home_Id,
                 Amount = entity.Amount,
@@ -23,6 +24,7 @@ namespace Money_Tracker.BLL.Mappers
             return new Entities.Expense
             {
                 Id = model.Id,
+                Category_Id = model.Category_Id,
                 User_Id = model.User_Id,
                 Home_Id = model.Home_Id,
                 Amount = model.Amount,

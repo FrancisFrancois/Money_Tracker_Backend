@@ -93,5 +93,44 @@ namespace Money_Tracker.API.Controllers
 
             return deleted ? NoContent() : NotFound("Expense not found");
         }
+
+        [HttpGet("ExpensesByDay")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]
+
+        public IActionResult GetExpensesByDay([FromQuery] DateTime date)
+        {
+            IEnumerable<ExpenseDTO> result = _ExpenseService.GetExpensesByDay(date).Select(e => e.ToDTO());
+            return Ok(result);
+        }
+
+        [HttpGet("ExpensesByWeek")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]
+
+        public IActionResult GetExpensesByWeek([FromQuery] DateTime date)
+        {
+            IEnumerable<ExpenseDTO> result = _ExpenseService.GetExpensesByWeek(date).Select(e => e.ToDTO());
+            return Ok(result);
+        }
+
+        [HttpGet("ExpensesByMonth")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]
+
+        public IActionResult GetExpensesByMonth([FromQuery] DateTime date)
+        {
+            IEnumerable<ExpenseDTO> result = _ExpenseService.GetExpensesByMonth(date).Select(e => e.ToDTO());
+            return Ok(result);
+        }
+
+        [HttpGet("ExpensesByYear")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]
+
+        public IActionResult GetExpensesByYear([FromQuery] DateTime date)
+        {
+            IEnumerable<ExpenseDTO> result = _ExpenseService.GetExpensesByYear(date).Select(e => e.ToDTO());
+            return Ok(result);
+        }
+
+
+
     }
 }
