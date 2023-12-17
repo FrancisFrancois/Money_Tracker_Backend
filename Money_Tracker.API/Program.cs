@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Localization;
 using Money_Tracker.BLL.Interfaces;
 using Money_Tracker.BLL.Services;
 using Money_Tracker.DAL.Interfaces;
@@ -7,6 +8,7 @@ using System.Data.SqlClient;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 // DbConnection

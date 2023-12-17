@@ -72,5 +72,24 @@ namespace Money_Tracker.BLL.Services
         {
             return _ExpenseRepository.GetExpensesByYear(date).Select(e => e.ToModel());
         }
+        public double GetTotalExpensesByDay(DateTime date)
+        {
+            return GetExpensesByDay(date).Sum(expense => expense.Amount);
+        }
+
+        public double GetTotalExpensesByWeek(DateTime date)
+        {
+            return GetExpensesByWeek(date).Sum(expense => expense.Amount);
+        }
+
+        public double GetTotalExpensesByMonth(DateTime date)
+        {
+            return GetExpensesByMonth(date).Sum(expense => expense.Amount);
+        }
+
+        public double GetTotalExpensesByYear(DateTime date)
+        {
+            return GetExpensesByYear(date).Sum(expense => expense.Amount);
+        }
     }
 }

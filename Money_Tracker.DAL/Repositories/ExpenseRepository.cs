@@ -5,6 +5,7 @@ using Money_Tracker.Tools.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -238,6 +239,115 @@ namespace Money_Tracker.DAL.Repositories
             }
 
             return expenses;
+        }
+
+        public double GetTotalExpensesByDay(DateTime date)
+        {
+            double total = 0;
+            try
+            {
+                using (DbCommand command = _DbConnection.CreateCommand())
+                {
+                    command.CommandText = "SELECT SUM(Amount) FROM [Expense] WHERE CAST([Date_Expense] AS DATE) = @date";
+                    command.addParamWithValue("date", date.Date);
+
+                    _DbConnection.Open();
+                    var result = command.ExecuteScalar();
+                    total = (result != DBNull.Value) ? Convert.ToDouble(result) : 0;
+                    _DbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to calculate total Expense By Day", ex);
+            }
+            return total;
+        }
+
+        public double GetTotalExpensesByWeek(DateTime date)
+        {
+            double total = 0;
+            try
+            {
+                DayOfWeek firstDayOfWeek = DayOfWeek.Monday;
+                int daysUntilFirstDayOfWeek = (7 + date.DayOfWeek - firstDayOfWeek) % 7;
+                DateTime startDate = date.AddDays(-daysUntilFirstDayOfWeek);
+                DateTime endDate = startDate.AddDays(7);
+
+
+                using (DbCommand command = _DbConnection.CreateCommand())
+                {
+                    command.CommandText = "SELECT SUM(Amount) FROM [Expense] WHERE [Date_Expense] >= @startDate AND [Date_Expense] < @endDate";
+                    command.addParamWithValue("startDate", startDate.Date);
+                    command.addParamWithValue("endDate", endDate.Date);
+
+                    _DbConnection.Open();
+                    var result = command.ExecuteScalar();
+                    total = (result != DBNull.Value) ? Convert.ToDouble(result) : 0;
+                    _DbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to calculate total Expenses By Week", ex);
+            }
+            return total;
+        }
+
+        public double GetTotalExpensesByMonth(DateTime date)
+        {
+            double total = 0;
+            try
+            {
+                DateTime firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+                DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+                using (DbCommand command = _DbConnection.CreateCommand())
+                {
+                    command.CommandText = "SELECT SUM(Amount) FROM [Expense] WHERE [Date_Expense] >= @startDate AND [Date_Expense] <= @endDate";
+                    command.addParamWithValue("startDate", firstDayOfMonth);
+                    command.addParamWithValue("endDate", lastDayOfMonth);
+
+                    _DbConnection.Open();
+                    var result = command.ExecuteScalar();
+                    total = (result != DBNull.Value) ? Convert.ToDouble(result) : 0;
+                    _DbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to calculate total Expenses By Month", ex);
+            }
+
+            return total;
+        }
+
+        public double GetTotalExpensesByYear(DateTime date)
+        {
+            double total = 0;
+            try
+            {
+                DateTime firstDayOfYear = new DateTime(date.Year, 1, 1);
+                DateTime lastDayOfYear = new DateTime(date.Year, 12, 31);
+
+                using (DbCommand command = _DbConnection.CreateCommand())
+                {
+                    command.CommandText = "SELECT SUM(Amount) FROM [Expense] WHERE [Date_Expense] >= @startDate AND [Date_Expense] <= @endDate";
+                    command.addParamWithValue("startDate", firstDayOfYear);
+                    command.addParamWithValue("endDate", lastDayOfYear);
+
+                    _DbConnection.Open();
+                    var result = command.ExecuteScalar();
+                    total = (result != DBNull.Value) ? Convert.ToDouble(result) : 0;
+                    _DbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to calculate total Expenses By Year", ex);
+            }
+
+            return total;
         }
 
     }

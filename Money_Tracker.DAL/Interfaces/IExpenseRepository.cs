@@ -9,6 +9,10 @@ namespace Money_Tracker.DAL.Interfaces
         IEnumerable<Expense> GetExpensesByWeek(DateTime date);
         IEnumerable<Expense> GetExpensesByMonth(DateTime date);
         IEnumerable<Expense> GetExpensesByYear(DateTime date);
+        double GetTotalExpensesByDay(DateTime date);
+        double GetTotalExpensesByWeek(DateTime date);
+        double GetTotalExpensesByMonth(DateTime date);
+        double GetTotalExpensesByYear(DateTime date);
 
     }
 }
