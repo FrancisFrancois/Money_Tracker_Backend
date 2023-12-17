@@ -2,6 +2,7 @@
 using Money_Tracker.BLL.Mappers;
 using Money_Tracker.BLL.Models;
 using Money_Tracker.DAL.Interfaces;
+using Money_Tracker.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -110,6 +111,26 @@ namespace Money_Tracker.BLL.Services
         public IEnumerable<Expense> GetExpensesByCategoryByYear(DateTime date, int categoryId)
         {
             return _ExpenseRepository.GetExpensesByCategoryByYear(date, categoryId).Select(e => e.ToModel());
+        }
+
+        public double GetTotalExpensesByCategoryByDay(DateTime date, int categoryId)
+        {
+            return GetExpensesByCategoryByDay(date, categoryId).Sum(expense => expense.Amount);
+        }
+
+        public double GetTotalExpensesByCategoryByWeek(DateTime date, int categoryId)
+        {
+            return GetExpensesByCategoryByWeek(date, categoryId).Sum(expense => expense.Amount);
+        }
+
+        public double GetTotalExpensesByCategoryByMonth(DateTime date, int categoryId)
+        {
+            return GetExpensesByCategoryByMonth(date, categoryId).Sum(expense => expense.Amount);
+        }
+
+        public double GetTotalExpensesByCategoryByYear(DateTime date, int categoryId)
+        {
+            return GetExpensesByCategoryByYear(date, categoryId).Sum(expense => expense.Amount);
         }
     }
 }

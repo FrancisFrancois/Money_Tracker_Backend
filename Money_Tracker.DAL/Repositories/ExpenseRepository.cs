@@ -57,6 +57,7 @@ namespace Money_Tracker.DAL.Repositories
             };
             return result;
         }
+
         public Expense Create(Expense expense)
         {
             Expense result;
@@ -208,6 +209,7 @@ namespace Money_Tracker.DAL.Repositories
 
             return expenses;
         }
+
         public IEnumerable<Expense> GetExpensesByYear(DateTime date)
         {
             List<Expense> expenses = new List<Expense>();
@@ -480,6 +482,120 @@ namespace Money_Tracker.DAL.Repositories
             }
             return expenses;
         }
+
+        public double GetTotalExpensesByCategoryByDay(DateTime date, int categoryId)
+        {
+            double total = 0;
+            try
+            {
+                using (DbCommand command = _DbConnection.CreateCommand())
+                {
+                    command.CommandText = "SELECT SUM(Amount) FROM [Expense] WHERE CAST([Date_Expense] AS DATE) = @date AND Category_Id = @categoryId";
+                    command.addParamWithValue("date", date);
+                    command.addParamWithValue("@categoryId", categoryId);
+
+                    _DbConnection.Open();
+                    var result = command.ExecuteScalar();
+                    total = (result != DBNull.Value) ? Convert.ToDouble(result) : 0;
+                    _DbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to calculate total Expense By Day and Category", ex);
+            }
+            return total;
+        }
+
+        public double GetTotalExpensesByCategoryByWeek(DateTime date, int categoryId)
+        {
+            double total = 0;
+            try
+            {
+                DayOfWeek firstDayOfWeek = DayOfWeek.Monday;
+                int daysUntilFirstDayOfWeek = (7 + date.DayOfWeek - firstDayOfWeek) % 7;
+                DateTime startDate = date.AddDays(-daysUntilFirstDayOfWeek);
+                DateTime endDate = startDate.AddDays(7);
+
+                using (DbCommand command = _DbConnection.CreateCommand())
+                {
+                    command.CommandText = "SELECT SUM(Amount) FROM [Expense] WHERE [Date_Expense] >= @startDate AND [Date_Expense] < @endDate AND Category_Id = @categoryId";
+                    command.addParamWithValue("startDate", startDate);
+                    command.addParamWithValue("endDate", endDate);
+                    command.addParamWithValue("categoryId", categoryId);
+
+                    _DbConnection.Open();
+                    var result = command.ExecuteScalar();
+                    total = (result != DBNull.Value) ? Convert.ToDouble(result) : 0;
+                    _DbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to calculate total Expenses By Week and Category", ex);
+            }
+            return total;
+        }
+
+        public double GetTotalExpensesByCategoryByMonth(DateTime date, int categoryId)
+        {
+            double total = 0;
+            try
+            {
+                DateTime firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+                DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+                using (DbCommand command = _DbConnection.CreateCommand())
+                {
+                    command.CommandText = "SELECT SUM(Amount) FROM [Expense] WHERE [Date_Expense] >= @startDate AND [Date_Expense] <= @endDate AND Category_Id = @categoryId";
+                    command.addParamWithValue("startDate", firstDayOfMonth);
+                    command.addParamWithValue("endDate", lastDayOfMonth);
+                    command.addParamWithValue("categoryId", categoryId);
+
+                    _DbConnection.Open();
+                    var result = command.ExecuteScalar();
+                    total = (result != DBNull.Value) ? Convert.ToDouble(result) : 0;
+                    _DbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to calculate total Expenses By Month and Category", ex);
+            }
+            return total;
+        }
+
+        public double GetTotalExpensesByCategoryByYear(DateTime date, int categoryId)
+        {
+            double total = 0;
+            try
+            {
+                DateTime firstDayOfYear = new DateTime(date.Year, 1, 1);
+                DateTime lastDayOfYear = new DateTime(date.Year, 12, 31);
+
+                using (DbCommand command = _DbConnection.CreateCommand())
+                {
+                    command.CommandText = "SELECT SUM(Amount) FROM [Expense] WHERE [Date_Expense] >= @startDate AND [Date_Expense] <= @endDate AND Category_Id = @categoryId";
+                    command.addParamWithValue("startDate", firstDayOfYear);
+                    command.addParamWithValue("endDate", lastDayOfYear);
+                    command.addParamWithValue("categoryId", categoryId);
+
+                    _DbConnection.Open();
+                    var result = command.ExecuteScalar();
+                    total = (result != DBNull.Value) ? Convert.ToDouble(result) : 0;
+                    _DbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to calculate total Expenses By Year and Category", ex);
+            }
+            return total;
+        }
+
+
+
+
 
 
 

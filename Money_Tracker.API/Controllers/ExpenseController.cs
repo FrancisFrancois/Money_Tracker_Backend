@@ -95,11 +95,17 @@ namespace Money_Tracker.API.Controllers
             return deleted ? NoContent() : NotFound("Expense not found");
         }
 
+        private bool TryParseFrenchDate(string dateString, out DateTime date)
+        {
+            return DateTime.TryParseExact(dateString, "dd/MM/yyyy", new CultureInfo("fr-FR"), DateTimeStyles.None, out date);
+        }
+
+
         [HttpGet("ExpensesByDay")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ExpenseDTO>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]
         public IActionResult GetExpensesByDay([FromQuery] string dateString)
         {
-            if (!DateTime.TryParseExact(dateString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+            if (!TryParseFrenchDate(dateString, out DateTime date))
             {
                 return BadRequest("Invalid date format. Please use 'dd/MM/yyyy'.");
             }
@@ -202,6 +208,42 @@ namespace Money_Tracker.API.Controllers
         {
             IEnumerable<ExpenseDTO> result = _ExpenseService.GetExpensesByCategoryByYear(date, categoryId).Select(e => e.ToDTO());
             return Ok(result);
+        }
+
+        [HttpGet("TotalExpenseByCategoryByDay")]
+        [ProducesResponseType(200, Type = typeof(double))]
+        [ProducesResponseType(400)]
+        public IActionResult GetTotalExpensesByCategoryByDay([FromQuery] DateTime date, [FromQuery] int categoryId)
+        {
+            double total = _ExpenseService.GetTotalExpensesByCategoryByDay(date, categoryId);
+            return Ok(total);
+        }
+
+        [HttpGet("TotalExpenseByCategoryByWeek")]
+        [ProducesResponseType(200, Type = typeof(double))]
+        [ProducesResponseType(400)]
+        public IActionResult GetTotalExpensesByCategoryByWeek([FromQuery] DateTime date, [FromQuery] int categoryId)
+        {
+            double total = _ExpenseService.GetTotalExpensesByCategoryByWeek(date, categoryId);
+            return Ok(total);
+        }
+
+        [HttpGet("TotalExpenseByCategoryByMonth")]
+        [ProducesResponseType(200, Type = typeof(double))]
+        [ProducesResponseType(400)]
+        public IActionResult GetTotalExpensesByCategoryByMonth([FromQuery] DateTime date, [FromQuery] int categoryId)
+        {
+            double total = _ExpenseService.GetTotalExpensesByCategoryByMonth(date, categoryId);
+            return Ok(total);
+        }
+
+        [HttpGet("TotalExpenseByCategoryByYear")]
+        [ProducesResponseType(200, Type = typeof(double))]
+        [ProducesResponseType(400)]
+        public IActionResult GetTotalExpensesByCategoryByYear([FromQuery] DateTime date, [FromQuery] int categoryId)
+        {
+            double total = _ExpenseService.GetTotalExpensesByCategoryByYear(date, categoryId);
+            return Ok(total);
         }
     }
 }
