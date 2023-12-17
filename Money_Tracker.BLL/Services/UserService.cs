@@ -58,6 +58,8 @@ namespace Money_Tracker.BLL.Services
         /// <returns>Booléen indiquant si la mise à jour a réussi.</returns>
         public bool Update(int id, User user)
         {
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
             bool updated = _UserRepository.Update(id, user.ToEntity());
             if (!updated)
             {
