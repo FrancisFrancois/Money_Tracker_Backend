@@ -45,6 +45,8 @@ namespace Money_Tracker.BLL.Services
         /// <returns>Le modèle de l'utilisateur inséré.</returns>
         public User Create(User user)
         {
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
             return _UserRepository.Create(user.ToEntity()).ToModel();
         }
 

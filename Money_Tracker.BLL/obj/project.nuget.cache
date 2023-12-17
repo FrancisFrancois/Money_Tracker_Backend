@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "gsQDn2zkP4RDw2VQAeEI2Y8yvgAJg7lrQCAAN/8rFFusEnUitp5eRf9vurRI5o0FxF/Qyyt8obPG720M1p3kkw==",
+  "dgSpecHash": "P6lF8gJGEeZPh5iJBvXGpY44CMDftGRqWVtt8GAj6acUoQNSE9EKpTe57L7MtjdGH2dBQzp0kEILG74ylJurEQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Student\\Documents\\MakerHub\\Money_Tracker_Backend\\Money_Tracker.BLL\\Money_Tracker.BLL.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Student\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Student\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.0.3\\microsoft.identitymodel.abstractions.7.0.3.nupkg.sha512",
     "C:\\Users\\Student\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.0.3\\microsoft.identitymodel.jsonwebtokens.7.0.3.nupkg.sha512",
     "C:\\Users\\Student\\.nuget\\packages\\microsoft.identitymodel.logging\\7.0.3\\microsoft.identitymodel.logging.7.0.3.nupkg.sha512",

@@ -50,3 +50,4 @@ C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.API\bin\Debug\net6.0\BCrypt.Net-Next.dll
