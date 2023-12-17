@@ -350,5 +350,140 @@ namespace Money_Tracker.DAL.Repositories
             return total;
         }
 
+        public IEnumerable<Expense> GetExpensesByCategoryByDay(DateTime date, int categoryId)
+        {
+            List<Expense> expenses = new List<Expense>();
+            try
+            {
+                using (DbCommand command = _DbConnection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM [Expense] WHERE CAST([Date_Expense] AS DATE) = @date AND Category_Id = @categoryId";
+                    command.addParamWithValue("date", date.Date);
+                    command.addParamWithValue("categoryId", categoryId);
+
+                    _DbConnection.Open();
+                    using (DbDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            expenses.Add(ExpenseMapper.Mapper(reader));
+                        }
+                    }
+                    _DbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to list Expenses By Day and Category", ex);
+            }
+            return expenses;
+        }
+
+        public IEnumerable<Expense> GetExpensesByCategoryByWeek(DateTime date, int categoryId)
+        {
+            List<Expense> expenses = new List<Expense>();
+            try
+            {
+                DayOfWeek firstDayOfWeek = DayOfWeek.Monday;
+                int daysUntilFirstDayOfWeek = (7 + date.DayOfWeek - firstDayOfWeek) % 7;
+                DateTime startDate = date.AddDays(-daysUntilFirstDayOfWeek);
+                DateTime endDate = startDate.AddDays(7);
+
+                using (DbCommand command = _DbConnection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM [Expense] WHERE [Date_Expense] >= @startDate AND [Date_Expense] < @endDate AND Category_Id = @categoryId";
+                    command.addParamWithValue("startDate", startDate.Date);
+                    command.addParamWithValue("endDate", endDate.Date);
+                    command.addParamWithValue("categoryId", categoryId);
+
+                    _DbConnection.Open();
+                    using (DbDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            expenses.Add(ExpenseMapper.Mapper(reader));
+                        }
+                    }
+                    _DbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to list Expenses By Week and Category", ex);
+            }
+            return expenses;
+        }
+
+        public IEnumerable<Expense> GetExpensesByCategoryByMonth(DateTime date, int categoryId)
+        {
+            List<Expense> expenses = new List<Expense>();
+            try
+            {
+                DateTime firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+                DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+                using (DbCommand command = _DbConnection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM [Expense] WHERE [Date_Expense] >= @startDate AND [Date_Expense] <= @endDate AND Category_Id = @categoryId";
+                    command.addParamWithValue("startDate", firstDayOfMonth);
+                    command.addParamWithValue("endDate", lastDayOfMonth);
+                    command.addParamWithValue("categoryId", categoryId);
+
+                    _DbConnection.Open();
+                    using (DbDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            expenses.Add(ExpenseMapper.Mapper(reader));
+                        }
+                    }
+                    _DbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Failed to list Expenses By Month and Category", ex);
+            }
+            return expenses;
+        }
+
+        public IEnumerable<Expense> GetExpensesByCategoryByYear(DateTime date, int categoryId)
+        {
+            List<Expense> expenses = new List<Expense>();
+            try
+            {
+                DateTime firstDayOfYear = new DateTime(date.Year, 1, 1);
+                DateTime lastDayOfYear = new DateTime(date.Year, 12, 31);
+
+                using (DbCommand command = _DbConnection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM [Expense] WHERE [Date_Expense] >= @startDate AND [Date_Expense] <= @endDate AND Category_Id = @categoryId";
+                    command.addParamWithValue("startDate", firstDayOfYear);
+                    command.addParamWithValue("endDate", lastDayOfYear);
+                    command.addParamWithValue("categoryId", categoryId);
+
+                    _DbConnection.Open();
+                    using (DbDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            expenses.Add(ExpenseMapper.Mapper(reader));
+                        }
+                    }
+                    _DbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to list Expenses By Year and Category", ex);
+            }
+            return expenses;
+        }
+
+
+
+
+
     }
 }

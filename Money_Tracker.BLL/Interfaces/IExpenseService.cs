@@ -18,5 +18,9 @@ namespace Money_Tracker.BLL.Interfaces
         double GetTotalExpensesByWeek(DateTime date);
         double GetTotalExpensesByMonth(DateTime date);
         double GetTotalExpensesByYear(DateTime date);
+        IEnumerable<Expense> GetExpensesByCategoryByDay(DateTime date, int categoryId);
+        IEnumerable<Expense> GetExpensesByCategoryByWeek(DateTime date, int categoryId);
+        IEnumerable<Expense> GetExpensesByCategoryByMonth(DateTime date, int categoryId);
+        IEnumerable<Expense> GetExpensesByCategoryByYear(DateTime date, int categoryId);
     }
 }

@@ -91,5 +91,25 @@ namespace Money_Tracker.BLL.Services
         {
             return GetExpensesByYear(date).Sum(expense => expense.Amount);
         }
+
+        public IEnumerable<Expense> GetExpensesByCategoryByDay(DateTime date, int categoryId)
+        {
+            return _ExpenseRepository.GetExpensesByCategoryByDay(date, categoryId).Select(e => e.ToModel());
+        }
+
+        public IEnumerable<Expense> GetExpensesByCategoryByWeek(DateTime date, int categoryId)
+        {
+            return _ExpenseRepository.GetExpensesByCategoryByWeek(date, categoryId).Select(e => e.ToModel());
+        }
+
+        public IEnumerable<Expense> GetExpensesByCategoryByMonth(DateTime date, int categoryId)
+        {
+            return _ExpenseRepository.GetExpensesByCategoryByMonth(date, categoryId).Select(e => e.ToModel());
+        }
+
+        public IEnumerable<Expense> GetExpensesByCategoryByYear(DateTime date, int categoryId)
+        {
+            return _ExpenseRepository.GetExpensesByCategoryByYear(date, categoryId).Select(e => e.ToModel());
+        }
     }
 }

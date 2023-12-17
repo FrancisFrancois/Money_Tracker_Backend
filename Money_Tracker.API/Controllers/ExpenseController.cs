@@ -137,8 +137,8 @@ namespace Money_Tracker.API.Controllers
         }
 
         [HttpGet("TotalExpenseByDay")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(double))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(200, Type = typeof(double))]
+        [ProducesResponseType(400)]
         public IActionResult GetTotalExpensesByDay([FromQuery] DateTime date)
         {
             double total = _ExpenseService.GetTotalExpensesByDay(date);
@@ -146,8 +146,8 @@ namespace Money_Tracker.API.Controllers
         }
 
         [HttpGet("TotalExpenseByWeek")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(double))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(200, Type = typeof(double))]
+        [ProducesResponseType(400)]
         public IActionResult GetTotalExpensesByWeek([FromQuery] DateTime date)
         {
             double total = _ExpenseService.GetTotalExpensesByWeek(date);
@@ -155,8 +155,8 @@ namespace Money_Tracker.API.Controllers
         }
 
         [HttpGet("TotalExpenseByMonth")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(double))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(200, Type = typeof(double))]
+        [ProducesResponseType(400)]
         public IActionResult GetTotalExpensesByMonth([FromQuery] DateTime date)
         {
             double total = _ExpenseService.GetTotalExpensesByMonth(date);
@@ -164,12 +164,44 @@ namespace Money_Tracker.API.Controllers
         }
 
         [HttpGet("TotalExpenseByYear")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(double))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(200, Type = typeof(double))]
+        [ProducesResponseType(400)]
         public IActionResult GetTotalExpensesByYear([FromQuery] DateTime date)
         {
             double total = _ExpenseService.GetTotalExpensesByYear(date);
             return Ok(total);
+        }
+
+        [HttpGet("ExpensesByCategoryByDay")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]
+        public IActionResult GetExpensesByCategoryByDay([FromQuery] DateTime date, [FromQuery] int categoryId)
+        {
+            IEnumerable<ExpenseDTO> result = _ExpenseService.GetExpensesByCategoryByDay(date, categoryId).Select(e => e.ToDTO());
+            return Ok(result);
+        }
+
+        [HttpGet("ExpensesByCategoryByWeek")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]
+        public IActionResult GetExpensesByCategoryByWeek([FromQuery] DateTime date, [FromQuery] int categoryId)
+        {
+            IEnumerable<ExpenseDTO> result = _ExpenseService.GetExpensesByCategoryByWeek(date, categoryId).Select(e => e.ToDTO());
+            return Ok(result);
+        }
+
+        [HttpGet("ExpensesByCategoryByMonth")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]
+        public IActionResult GetExpensesByCategoryByMonth([FromQuery] DateTime date, [FromQuery] int categoryId)
+        {
+            IEnumerable<ExpenseDTO> result = _ExpenseService.GetExpensesByCategoryByMonth(date, categoryId).Select(e => e.ToDTO());
+            return Ok(result);
+        }
+
+        [HttpGet("ExpensesByCategoryByYear")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]
+        public IActionResult GetExpensesByCategoryByYear([FromQuery] DateTime date, [FromQuery] int categoryId)
+        {
+            IEnumerable<ExpenseDTO> result = _ExpenseService.GetExpensesByCategoryByYear(date, categoryId).Select(e => e.ToDTO());
+            return Ok(result);
         }
     }
 }
