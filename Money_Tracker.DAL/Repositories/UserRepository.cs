@@ -207,5 +207,48 @@ namespace Money_Tracker.DAL.Repositories
             return isLiving;
         }
 
+        public User GetUserByEmail(string email)
+        {
+            User? result = null;
+            using (DbCommand command = _DbConnection.CreateCommand())
+            {
+                command.CommandText = "SELECT * FROM [User] WHERE [Email] = @email";
+                command.addParamWithValue("email", email);
+
+                _DbConnection.Open();
+                using (DbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        result = UserMapper.Mapper(reader);
+                    }
+                }
+                _DbConnection.Close();
+            }
+            return result;
+        }
+
+        public User GetUserByPseudo(string pseudo)
+        {
+            User? result = null;
+            using (DbCommand command = _DbConnection.CreateCommand())
+            {
+                command.CommandText = "SELECT * FROM [User] WHERE [Pseudo] = @pseudo";
+                command.addParamWithValue("pseudo", pseudo);
+
+                _DbConnection.Open();
+                using (DbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        result = UserMapper.Mapper(reader);
+                    }
+                }
+                _DbConnection.Close();
+            }
+            return result;
+        }
+
+
     }
 }

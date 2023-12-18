@@ -1,8 +1,13 @@
-﻿using Money_Tracker.BLL.CustomExceptions;
+﻿using Microsoft.IdentityModel.Tokens;
+using Money_Tracker.BLL.CustomExceptions;
 using Money_Tracker.BLL.Interfaces;
 using Money_Tracker.BLL.Mappers;
 using Money_Tracker.BLL.Models;
 using Money_Tracker.DAL.Interfaces;
+using Money_Tracker.DAL.Repositories;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Money_Tracker.BLL.Services
 {
@@ -87,5 +92,6 @@ namespace Money_Tracker.BLL.Services
             }
             return deleted;
         }
+
     }
 }

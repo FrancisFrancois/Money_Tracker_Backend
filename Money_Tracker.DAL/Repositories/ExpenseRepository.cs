@@ -680,7 +680,7 @@ namespace Money_Tracker.DAL.Repositories
         {
             try
             {
-                return GetExpenses(date.Date, date.Date.AddDays(1).AddTicks(-1), homeId, userId, categoryId);
+                return GetExpenses(date.Date, date.Date.AddDays(1).AddSeconds(-1), homeId, userId, categoryId);
             }
             catch (Exception ex)
             {
