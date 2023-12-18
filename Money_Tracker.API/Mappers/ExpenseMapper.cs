@@ -24,6 +24,8 @@ namespace Money_Tracker.API.Mappers
             return new Expense
             {
                 Category_Id = expense.Category_Id,
+                User_Id = expense.User_Id,
+                Home_Id = expense.Home_Id,
                 Amount = expense.Amount,
                 Description = expense.Description,
                 Date_Expense = expense.Date_Expense

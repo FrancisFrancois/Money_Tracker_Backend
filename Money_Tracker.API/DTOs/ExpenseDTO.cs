@@ -19,6 +19,12 @@ namespace Money_Tracker.API.DTOs
         public int Category_Id { get; set; }
 
         [Required]
+        public int User_Id { get; set; }
+
+        [Required]
+        public int Home_Id { get; set; }
+
+        [Required]
         public double Amount { get; set; }
 
         public string Description { get; set; } = string.Empty;

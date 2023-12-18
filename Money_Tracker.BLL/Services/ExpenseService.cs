@@ -54,83 +54,123 @@ namespace Money_Tracker.BLL.Services
             return deleted;
         }
 
-        public IEnumerable<Expense> GetExpensesByDay(DateTime date)
+        //    public IEnumerable<Expense> GetExpensesByDay(DateTime date)
+        //    {
+        //        return _ExpenseRepository.GetExpensesByDay(date).Select(e => e.ToModel());
+        //    }
+
+        //    public IEnumerable<Expense> GetExpensesByWeek(DateTime date)
+        //    {
+        //        return _ExpenseRepository.GetExpensesByWeek(date).Select(e => e.ToModel());
+        //    }
+
+        //    public IEnumerable<Expense> GetExpensesByMonth(DateTime date)
+        //    {
+        //        return _ExpenseRepository.GetExpensesByMonth(date).Select(e => e.ToModel());
+        //    }
+
+        //    public IEnumerable<Expense> GetExpensesByYear(DateTime date)
+        //    {
+        //        return _ExpenseRepository.GetExpensesByYear(date).Select(e => e.ToModel());
+        //    }
+        //    public double GetTotalExpensesByDay(DateTime date)
+        //    {
+        //        return GetExpensesByDay(date).Sum(expense => expense.Amount);
+        //    }
+
+        //    public double GetTotalExpensesByWeek(DateTime date)
+        //    {
+        //        return GetExpensesByWeek(date).Sum(expense => expense.Amount);
+        //    }
+
+        //    public double GetTotalExpensesByMonth(DateTime date)
+        //    {
+        //        return GetExpensesByMonth(date).Sum(expense => expense.Amount);
+        //    }
+
+        //    public double GetTotalExpensesByYear(DateTime date)
+        //    {
+        //        return GetExpensesByYear(date).Sum(expense => expense.Amount);
+        //    }
+
+        //    public IEnumerable<Expense> GetExpensesByCategoryByDay(DateTime date, int categoryId)
+        //    {
+        //        return _ExpenseRepository.GetExpensesByCategoryByDay(date, categoryId).Select(e => e.ToModel());
+        //    }
+
+        //    public IEnumerable<Expense> GetExpensesByCategoryByWeek(DateTime date, int categoryId)
+        //    {
+        //        return _ExpenseRepository.GetExpensesByCategoryByWeek(date, categoryId).Select(e => e.ToModel());
+        //    }
+
+        //    public IEnumerable<Expense> GetExpensesByCategoryByMonth(DateTime date, int categoryId)
+        //    {
+        //        return _ExpenseRepository.GetExpensesByCategoryByMonth(date, categoryId).Select(e => e.ToModel());
+        //    }
+
+        //    public IEnumerable<Expense> GetExpensesByCategoryByYear(DateTime date, int categoryId)
+        //    {
+        //        return _ExpenseRepository.GetExpensesByCategoryByYear(date, categoryId).Select(e => e.ToModel());
+        //    }
+
+        //    public double GetTotalExpensesByCategoryByDay(DateTime date, int categoryId)
+        //    {
+        //        return GetExpensesByCategoryByDay(date, categoryId).Sum(expense => expense.Amount);
+        //    }
+
+        //    public double GetTotalExpensesByCategoryByWeek(DateTime date, int categoryId)
+        //    {
+        //        return GetExpensesByCategoryByWeek(date, categoryId).Sum(expense => expense.Amount);
+        //    }
+
+        //    public double GetTotalExpensesByCategoryByMonth(DateTime date, int categoryId)
+        //    {
+        //        return GetExpensesByCategoryByMonth(date, categoryId).Sum(expense => expense.Amount);
+        //    }
+
+        //    public double GetTotalExpensesByCategoryByYear(DateTime date, int categoryId)
+        //    {
+        //        return GetExpensesByCategoryByYear(date, categoryId).Sum(expense => expense.Amount);
+        //    }
+
+        public IEnumerable<Expense> GetExpensesByDay(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
         {
-            return _ExpenseRepository.GetExpensesByDay(date).Select(e => e.ToModel());
+            return _ExpenseRepository.GetExpensesByDay(date, homeId, userId, categoryId).Select(e => e.ToModel());
         }
 
-        public IEnumerable<Expense> GetExpensesByWeek(DateTime date)
+        public IEnumerable<Expense> GetExpensesByWeek(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
         {
-            return _ExpenseRepository.GetExpensesByWeek(date).Select(e => e.ToModel());
+            return _ExpenseRepository.GetExpensesByWeek(date, homeId, userId, categoryId).Select(e => e.ToModel());
         }
 
-        public IEnumerable<Expense> GetExpensesByMonth(DateTime date)
+        public IEnumerable<Expense> GetExpensesByMonth(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
         {
-            return _ExpenseRepository.GetExpensesByMonth(date).Select(e => e.ToModel());
+            return _ExpenseRepository.GetExpensesByMonth(date, homeId, userId, categoryId).Select(e => e.ToModel());
         }
 
-        public IEnumerable<Expense> GetExpensesByYear(DateTime date)
+        public IEnumerable<Expense> GetExpensesByYear(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
         {
-            return _ExpenseRepository.GetExpensesByYear(date).Select(e => e.ToModel());
-        }
-        public double GetTotalExpensesByDay(DateTime date)
-        {
-            return GetExpensesByDay(date).Sum(expense => expense.Amount);
+            return _ExpenseRepository.GetExpensesByYear(date, homeId, userId, categoryId).Select(e => e.ToModel());
         }
 
-        public double GetTotalExpensesByWeek(DateTime date)
+        public double GetTotalExpensesByDay(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
         {
-            return GetExpensesByWeek(date).Sum(expense => expense.Amount);
+            return _ExpenseRepository.GetTotalExpensesByDay(date, homeId, userId, categoryId);
         }
 
-        public double GetTotalExpensesByMonth(DateTime date)
+        public double GetTotalExpensesByWeek(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
         {
-            return GetExpensesByMonth(date).Sum(expense => expense.Amount);
+            return _ExpenseRepository.GetTotalExpensesByWeek(date, homeId, userId, categoryId);
         }
 
-        public double GetTotalExpensesByYear(DateTime date)
+        public double GetTotalExpensesByMonth(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
         {
-            return GetExpensesByYear(date).Sum(expense => expense.Amount);
+            return _ExpenseRepository.GetTotalExpensesByMonth(date, homeId, userId, categoryId);
         }
 
-        public IEnumerable<Expense> GetExpensesByCategoryByDay(DateTime date, int categoryId)
+        public double GetTotalExpensesByYear(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
         {
-            return _ExpenseRepository.GetExpensesByCategoryByDay(date, categoryId).Select(e => e.ToModel());
-        }
-
-        public IEnumerable<Expense> GetExpensesByCategoryByWeek(DateTime date, int categoryId)
-        {
-            return _ExpenseRepository.GetExpensesByCategoryByWeek(date, categoryId).Select(e => e.ToModel());
-        }
-
-        public IEnumerable<Expense> GetExpensesByCategoryByMonth(DateTime date, int categoryId)
-        {
-            return _ExpenseRepository.GetExpensesByCategoryByMonth(date, categoryId).Select(e => e.ToModel());
-        }
-
-        public IEnumerable<Expense> GetExpensesByCategoryByYear(DateTime date, int categoryId)
-        {
-            return _ExpenseRepository.GetExpensesByCategoryByYear(date, categoryId).Select(e => e.ToModel());
-        }
-
-        public double GetTotalExpensesByCategoryByDay(DateTime date, int categoryId)
-        {
-            return GetExpensesByCategoryByDay(date, categoryId).Sum(expense => expense.Amount);
-        }
-
-        public double GetTotalExpensesByCategoryByWeek(DateTime date, int categoryId)
-        {
-            return GetExpensesByCategoryByWeek(date, categoryId).Sum(expense => expense.Amount);
-        }
-
-        public double GetTotalExpensesByCategoryByMonth(DateTime date, int categoryId)
-        {
-            return GetExpensesByCategoryByMonth(date, categoryId).Sum(expense => expense.Amount);
-        }
-
-        public double GetTotalExpensesByCategoryByYear(DateTime date, int categoryId)
-        {
-            return GetExpensesByCategoryByYear(date, categoryId).Sum(expense => expense.Amount);
+            return _ExpenseRepository.GetTotalExpensesByYear(date, homeId, userId, categoryId);
         }
     }
 }

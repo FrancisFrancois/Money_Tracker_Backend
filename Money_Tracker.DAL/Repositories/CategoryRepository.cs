@@ -62,10 +62,10 @@ namespace Money_Tracker.DAL.Repositories
             Category result;
             using (DbCommand command = _DbConnection.CreateCommand())
             {
-                command.CommandText = "INSERT INTO [Categopry] ([Category_Name]) " +
+                command.CommandText = "INSERT INTO [Category] ([Category_Name]) " +
                                       " OUTPUT INSERTED.* " +
                                       "VALUES (@category_name)";
-                command.addParamWithValue("name", category.Category_Name);
+                command.addParamWithValue("category_name", category.Category_Name);
                 _DbConnection.Open();
                 using (DbDataReader reader = command.ExecuteReader())
                 {

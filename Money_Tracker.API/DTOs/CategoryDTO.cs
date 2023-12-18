@@ -12,5 +12,7 @@ namespace Money_Tracker.API.DTOs
     {
         [Required]
         public string Category_Name { get; set; } = string.Empty;
+
+
     }
 }
