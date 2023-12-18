@@ -274,7 +274,7 @@ namespace Money_Tracker.API.Controllers
                 return BadRequest("Invalid date format. Please use 'dd/MM/yyyy'.");
             }
 
-            IEnumerable<ExpenseDTO> result = _ExpenseService.GetExpensesByDay(date, homeId, userId, categoryId).Select(e => e.ToDTO());
+            IEnumerable<ExpenseDTO> result = _ExpenseService.GetExpensesByWeek(date, homeId, userId, categoryId).Select(e => e.ToDTO());
 
             if (!result.Any())
             {
@@ -284,7 +284,44 @@ namespace Money_Tracker.API.Controllers
             return Ok(result);
         }
 
-        // Exemples de méthodes pour obtenir le total des dépenses avec homeId et userId
+        [HttpGet("ExpensesByMonth")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]
+        public IActionResult GetExpensesByMonth([FromQuery] string dateString, [FromQuery] int? homeId, [FromQuery] int? userId, [FromQuery] int? categoryId)
+        {
+            if (!TryParseFrenchDate(dateString, out DateTime date))
+            {
+                return BadRequest("Invalid date format. Please use 'dd/MM/yyyy'.");
+            }
+
+            IEnumerable<ExpenseDTO> result = _ExpenseService.GetExpensesByMonth(date, homeId, userId, categoryId).Select(e => e.ToDTO());
+
+            if (!result.Any())
+            {
+                return NotFound("No expenses found for the specified month.");
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet("ExpensesByYear")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]
+        public IActionResult GetExpensesByYear([FromQuery] string dateString, [FromQuery] int? homeId, [FromQuery] int? userId, [FromQuery] int? categoryId)
+        {
+            if (!TryParseFrenchDate(dateString, out DateTime date))
+            {
+                return BadRequest("Invalid date format. Please use 'dd/MM/yyyy'.");
+            }
+
+            IEnumerable<ExpenseDTO> result = _ExpenseService.GetExpensesByYear(date, homeId, userId, categoryId).Select(e => e.ToDTO());
+
+            if (!result.Any())
+            {
+                return NotFound("No expenses found for the specified year.");
+            }
+
+            return Ok(result);
+        }
+
         [HttpGet("TotalExpenseByDay")]
         [ProducesResponseType(200, Type = typeof(double))]
         [ProducesResponseType(400)]
@@ -300,6 +337,66 @@ namespace Money_Tracker.API.Controllers
             if (total == 0)
             {
                 return NotFound("No expenses found for the specified day.");
+            }
+
+            return Ok(total);
+        }
+
+        [HttpGet("TotalExpenseByWeek")]
+        [ProducesResponseType(200, Type = typeof(double))]
+        [ProducesResponseType(400)]
+        public IActionResult GetTotalExpensesByWeek([FromQuery] string dateString, [FromQuery] int? homeId, [FromQuery] int? userId, [FromQuery] int? categoryId)
+        {
+            if (!TryParseFrenchDate(dateString, out DateTime date))
+            {
+                return BadRequest("Invalid date format. Please use 'dd/MM/yyyy'.");
+            }
+
+            double total = _ExpenseService.GetTotalExpensesByWeek(date, homeId, userId, categoryId);
+
+            if (total == 0)
+            {
+                return NotFound("No expenses found for the specified week.");
+            }
+
+            return Ok(total);
+        }
+
+        [HttpGet("TotalExpenseByMonth")]
+        [ProducesResponseType(200, Type = typeof(double))]
+        [ProducesResponseType(400)]
+        public IActionResult GetTotalExpensesByMonth([FromQuery] string dateString, [FromQuery] int? homeId, [FromQuery] int? userId, [FromQuery] int? categoryId)
+        {
+            if (!TryParseFrenchDate(dateString, out DateTime date))
+            {
+                return BadRequest("Invalid date format. Please use 'dd/MM/yyyy'.");
+            }
+
+            double total = _ExpenseService.GetTotalExpensesByMonth(date, homeId, userId, categoryId);
+
+            if (total == 0)
+            {
+                return NotFound("No expenses found for the specified month.");
+            }
+
+            return Ok(total);
+        }
+
+        [HttpGet("TotalExpenseByYear")]
+        [ProducesResponseType(200, Type = typeof(double))]
+        [ProducesResponseType(400)]
+        public IActionResult GetTotalExpensesByYear([FromQuery] string dateString, [FromQuery] int? homeId, [FromQuery] int? userId, [FromQuery] int? categoryId)
+        {
+            if (!TryParseFrenchDate(dateString, out DateTime date))
+            {
+                return BadRequest("Invalid date format. Please use 'dd/MM/yyyy'.");
+            }
+
+            double total = _ExpenseService.GetTotalExpensesByYear(date, homeId, userId, categoryId);
+
+            if (total == 0)
+            {
+                return NotFound("No expenses found for the specified year.");
             }
 
             return Ok(total);
