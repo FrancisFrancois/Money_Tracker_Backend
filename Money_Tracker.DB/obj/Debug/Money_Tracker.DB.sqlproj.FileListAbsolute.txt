@@ -4,7 +4,3 @@ C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DB\bin\D
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DB\obj\Debug\Money_Tracker.DB.sqlproj.AssemblyReference.cache
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DB\obj\Debug\Money_Tracker.DB.dll
 C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DB\obj\Debug\Money_Tracker.DB.pdb
-C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DB\obj\Debug\Model.xml
-C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DB\obj\Debug\refactor.xml
-C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DB\obj\Debug\postdeploy.sql
-C:\Users\Student\Documents\MakerHub\Money_Tracker_Backend\Money_Tracker.DB\obj\Debug\predeploy.sql

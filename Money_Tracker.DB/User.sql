@@ -5,7 +5,7 @@
 	[Firstname] NVARCHAR(50)NOT NULL,
 	[Pseudo] NVARCHAR(50) NOT NULL,
 	[Email] NVARCHAR(50) NOT NULL,
-	[Hash_Password] CHAR(100) NOT NULL,
+	[Hash_Password] NVARCHAR(MAX) NOT NULL,
 	[Roles] NVARCHAR(50) NOT NULL
 	CONSTRAINT PK_User PRIMARY KEY ([User_Id])
 	CONSTRAINT UK_User__Email UNIQUE ([Email])

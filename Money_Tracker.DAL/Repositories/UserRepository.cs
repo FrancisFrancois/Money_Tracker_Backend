@@ -220,7 +220,7 @@ namespace Money_Tracker.DAL.Repositories
                 {
                     if (reader.Read())
                     {
-                        result = UserMapper.Mapper(reader);
+                        result = UserMapper.Mapper(reader) ?? throw new Exception("User by email not found");
                     }
                 }
                 _DbConnection.Close();
@@ -241,7 +241,7 @@ namespace Money_Tracker.DAL.Repositories
                 {
                     if (reader.Read())
                     {
-                        result = UserMapper.Mapper(reader);
+                        result = UserMapper.Mapper(reader) ?? throw new Exception("User by Pseudo not found");
                     }
                 }
                 _DbConnection.Close();

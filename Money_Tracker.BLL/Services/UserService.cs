@@ -93,5 +93,51 @@ namespace Money_Tracker.BLL.Services
             return deleted;
         }
 
+        public bool IsEmailOrPseudoExists(string email, string pseudo)
+        {
+            var userByEmail = _UserRepository.GetUserByEmail(email);
+            var userByPseudo = _UserRepository.GetUserByPseudo(pseudo);
+
+            return userByEmail != null || userByPseudo != null;
+        }
+
+        private bool IsEmail(string emailOrPseudo)
+        {
+            return emailOrPseudo.Contains("@");
+        }
+
+        public bool ValidateLogin(string emailOrPseudo, string password)
+        {
+            User? user;
+            if (IsEmail(emailOrPseudo))
+            {
+                user = _UserRepository.GetUserByEmail(emailOrPseudo)?.ToModel();
+            }
+            else
+            {
+                user = _UserRepository.GetUserByPseudo(emailOrPseudo)?.ToModel();
+            }
+
+            if (user != null)
+            {
+                return VerifyPassword(password, user.Password);
+            }
+
+            return false;
+        }
+
+
+        private bool VerifyPassword(string password, string storedHash)
+        {
+            try
+            {
+                return BCrypt.Net.BCrypt.Verify(password, storedHash);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }

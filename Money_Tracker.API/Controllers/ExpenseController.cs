@@ -29,8 +29,8 @@ namespace Money_Tracker.API.Controllers
         }
 
         [HttpGet("{expenseId}")]
-        [ProducesResponseType(404, Type = typeof(string))]
         [ProducesResponseType(200, Type = typeof(ExpenseDTO))]
+        [ProducesResponseType(404, Type = typeof(string))]
 
         public IActionResult GetById([FromRoute] int expenseId)
         {
@@ -100,7 +100,7 @@ namespace Money_Tracker.API.Controllers
             return DateTime.TryParseExact(dateString, "dd/MM/yyyy", new CultureInfo("fr-FR"), DateTimeStyles.None, out date);
         }
 
-
+        #region Unused
         //[HttpGet("ExpensesByDay")]
         //[ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]
         //public IActionResult GetExpensesByDay([FromQuery] string dateString)
@@ -245,6 +245,7 @@ namespace Money_Tracker.API.Controllers
         //    double total = _ExpenseService.GetTotalExpensesByCategoryByYear(date, categoryId);
         //    return Ok(total);
         //}
+        #endregion
 
         [HttpGet("ExpensesByDay")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]

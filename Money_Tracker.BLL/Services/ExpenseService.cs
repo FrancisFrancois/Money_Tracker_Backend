@@ -143,8 +143,7 @@ namespace Money_Tracker.BLL.Services
             {
                 DateTime startDate = date.Date;
                 DateTime endDate = startDate.AddDays(1).AddSeconds(-1);
-                var expenses = _ExpenseRepository.GetExpenses(startDate, endDate, homeId, userId, categoryId);
-                return expenses.Select(e => e.ToModel());
+                return _ExpenseRepository.GetExpenses(startDate, endDate, homeId, userId, categoryId).Select(e => e.ToModel());
             }
             catch (Exception ex)
             {
@@ -156,9 +155,9 @@ namespace Money_Tracker.BLL.Services
         {   
             try
             {
-            DateTime startDate = date.AddDays(-(int)date.DayOfWeek + (int)DayOfWeek.Monday);
-            DateTime endDate = startDate.AddDays(7).AddSeconds(-1);
-            return _ExpenseRepository.GetExpenses(startDate, endDate, homeId, userId, categoryId).Select(e => e.ToModel());
+                DateTime startDate = date.AddDays(-(int)date.DayOfWeek + (int)DayOfWeek.Monday);
+                DateTime endDate = startDate.AddDays(7).AddSeconds(-1);
+                return _ExpenseRepository.GetExpenses(startDate, endDate, homeId, userId, categoryId).Select(e => e.ToModel());
             }
             catch (Exception ex)
             {
@@ -170,9 +169,9 @@ namespace Money_Tracker.BLL.Services
         {   
             try
             {
-            DateTime startDate = new DateTime(date.Year, date.Month, 1);
-            DateTime endDate = startDate.AddMonths(1).AddDays(-1);
-            return _ExpenseRepository.GetExpenses(startDate, endDate, homeId, userId, categoryId).Select(e => e.ToModel());
+                DateTime startDate = new DateTime(date.Year, date.Month, 1);
+                DateTime endDate = startDate.AddMonths(1).AddDays(-1);
+                return _ExpenseRepository.GetExpenses(startDate, endDate, homeId, userId, categoryId).Select(e => e.ToModel());
             }
             catch (Exception ex)
             {
@@ -184,9 +183,9 @@ namespace Money_Tracker.BLL.Services
         {   
             try
             {
-            DateTime startDate = new DateTime(date.Year, 1, 1);
-            DateTime endDate = new DateTime(date.Year, 12, 31);
-            return _ExpenseRepository.GetExpenses(startDate, endDate, homeId, userId, categoryId).Select(e => e.ToModel());
+                DateTime startDate = new DateTime(date.Year, 1, 1);
+                DateTime endDate = new DateTime(date.Year, 12, 31);
+                return _ExpenseRepository.GetExpenses(startDate, endDate, homeId, userId, categoryId).Select(e => e.ToModel());
             }
             catch (Exception ex)
             {
@@ -198,9 +197,9 @@ namespace Money_Tracker.BLL.Services
         {
             try
             {
-            DateTime startDate = date.Date;
-            DateTime endDate = startDate.AddDays(1).AddSeconds(-1);
-            return _ExpenseRepository.CalculateTotalExpenses(startDate, endDate, homeId, userId, categoryId);
+                DateTime startDate = date.Date;
+                DateTime endDate = startDate.AddDays(1).AddSeconds(-1);
+                return _ExpenseRepository.CalculateTotalExpenses(startDate, endDate, homeId, userId, categoryId);
             }
             catch (Exception ex)
             {
@@ -212,9 +211,9 @@ namespace Money_Tracker.BLL.Services
         {   
             try
             {
-            DateTime startDate = date.AddDays(-(int)date.DayOfWeek + (int)DayOfWeek.Monday);
-            DateTime endDate = startDate.AddDays(7).AddSeconds(-1);
-            return _ExpenseRepository.CalculateTotalExpenses(startDate, endDate, homeId, userId, categoryId);
+                DateTime startDate = date.AddDays(-(int)date.DayOfWeek + (int)DayOfWeek.Monday);
+                DateTime endDate = startDate.AddDays(7).AddSeconds(-1);
+                return _ExpenseRepository.CalculateTotalExpenses(startDate, endDate, homeId, userId, categoryId);
             }
             catch (Exception ex)
             {
@@ -226,9 +225,9 @@ namespace Money_Tracker.BLL.Services
         {   
             try
             {
-            DateTime startDate = new DateTime(date.Year, date.Month, 1);
-            DateTime endDate = startDate.AddMonths(1).AddDays(-1);
-            return _ExpenseRepository.CalculateTotalExpenses(startDate, endDate, homeId, userId, categoryId);
+                DateTime startDate = new DateTime(date.Year, date.Month, 1);
+                DateTime endDate = startDate.AddMonths(1).AddDays(-1);
+                return _ExpenseRepository.CalculateTotalExpenses(startDate, endDate, homeId, userId, categoryId);
             }
             catch (Exception ex)
             {
@@ -240,9 +239,9 @@ namespace Money_Tracker.BLL.Services
         {   
             try
             {
-            DateTime startDate = new DateTime(date.Year, 1, 1);
-            DateTime endDate = new DateTime(date.Year, 12, 31);
-            return _ExpenseRepository.CalculateTotalExpenses(startDate, endDate, homeId, userId, categoryId);
+                DateTime startDate = new DateTime(date.Year, 1, 1);
+                DateTime endDate = new DateTime(date.Year, 12, 31);
+                return _ExpenseRepository.CalculateTotalExpenses(startDate, endDate, homeId, userId, categoryId);
             }
             catch (Exception ex)
             {
