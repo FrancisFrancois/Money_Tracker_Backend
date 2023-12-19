@@ -10,6 +10,7 @@ namespace Money_Tracker.BLL.Interfaces
 {
     public interface IExpenseService : ICrudService<int, Expense>
     {
+        #region Unused
         //IEnumerable<Expense> GetExpensesByDay(DateTime date);
         //IEnumerable<Expense> GetExpensesByWeek(DateTime date);
         //IEnumerable<Expense> GetExpensesByMonth(DateTime date);
@@ -26,7 +27,7 @@ namespace Money_Tracker.BLL.Interfaces
         //double GetTotalExpensesByCategoryByWeek(DateTime date, int categoryId);
         //double GetTotalExpensesByCategoryByMonth(DateTime date, int categoryId);
         //double GetTotalExpensesByCategoryByYear(DateTime date, int categoryId);
-
+        #endregion
         IEnumerable<Expense> GetExpensesByDay(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
         IEnumerable<Expense> GetExpensesByWeek(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
         IEnumerable<Expense> GetExpensesByMonth(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);

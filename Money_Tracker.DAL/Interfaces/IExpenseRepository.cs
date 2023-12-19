@@ -5,6 +5,7 @@ namespace Money_Tracker.DAL.Interfaces
 {
     public interface IExpenseRepository : ICrud<int, Expense>
     {
+        #region Unused
         //IEnumerable<Expense> GetExpensesByDay(DateTime date);
         //IEnumerable<Expense> GetExpensesByWeek(DateTime date);
         //IEnumerable<Expense> GetExpensesByMonth(DateTime date);
@@ -18,14 +19,17 @@ namespace Money_Tracker.DAL.Interfaces
         //IEnumerable<Expense> GetExpensesByCategoryByMonth(DateTime date, int categoryId);
         //IEnumerable<Expense> GetExpensesByCategoryByYear(DateTime date, int categoryId);
 
-        IEnumerable<Expense> GetExpensesByDay(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
-        IEnumerable<Expense> GetExpensesByWeek(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
-        IEnumerable<Expense> GetExpensesByMonth(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
-        IEnumerable<Expense> GetExpensesByYear(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
-        double GetTotalExpensesByDay(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
-        double GetTotalExpensesByWeek(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
-        double GetTotalExpensesByMonth(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
-        double GetTotalExpensesByYear(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+        //IEnumerable<Expense> GetExpensesByDay(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+        //IEnumerable<Expense> GetExpensesByWeek(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+        //IEnumerable<Expense> GetExpensesByMonth(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+        //IEnumerable<Expense> GetExpensesByYear(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+        //double GetTotalExpensesByDay(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+        //double GetTotalExpensesByWeek(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+        //double GetTotalExpensesByMonth(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+        //double GetTotalExpensesByYear(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+        #endregion
+        IEnumerable<Expense> GetExpenses(DateTime startDate, DateTime endDate, int? homeId = null, int? userId = null, int? categoryId = null);
+        double CalculateTotalExpenses(DateTime startDate, DateTime endDate, int? homeId = null, int? userId = null, int? categoryId = null);
 
     }
 }

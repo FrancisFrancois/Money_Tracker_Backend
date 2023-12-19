@@ -120,6 +120,8 @@ namespace Money_Tracker.DAL.Repositories
             };
         }
 
+        #region Unused
+
         //public IEnumerable<Expense> GetExpensesByDay(DateTime date)
         //{
         //    List<Expense> expenses = new List<Expense>();
@@ -596,8 +598,10 @@ namespace Money_Tracker.DAL.Repositories
         //    return total;
         //}
 
+        #endregion
 
-        private IEnumerable<Expense> GetExpenses(DateTime startDate, DateTime endDate, int? homeId = null, int? userId = null, int? categoryId = null)
+
+        public IEnumerable<Expense> GetExpenses(DateTime startDate, DateTime endDate, int? homeId = null, int? userId = null, int? categoryId = null)
         {
             List<Expense> expenses = new List<Expense>();
             using (DbCommand command = _DbConnection.CreateCommand())
@@ -639,7 +643,7 @@ namespace Money_Tracker.DAL.Repositories
             return expenses;
         }
 
-        private double CalculateTotalExpenses(DateTime startDate, DateTime endDate, int? homeId = null, int? userId = null, int? categoryId = null)
+        public double CalculateTotalExpenses(DateTime startDate, DateTime endDate, int? homeId = null, int? userId = null, int? categoryId = null)
         {
             double total = 0;
             using (DbCommand command = _DbConnection.CreateCommand())
@@ -674,140 +678,6 @@ namespace Money_Tracker.DAL.Repositories
                 _DbConnection.Close();
             }
             return total;
-        }
-
-        public IEnumerable<Expense> GetExpensesByDay(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
-        {
-            try
-            {
-                return GetExpenses(date.Date, date.Date.AddDays(1).AddSeconds(-1), homeId, userId, categoryId);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to list Expenses By Day", ex);
-            }
-        }
-
-        public IEnumerable<Expense> GetExpensesByWeek(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
-        {
-            try
-            {
-                DateTime startDate = date.AddDays(-(int)date.DayOfWeek + (int)DayOfWeek.Monday);
-                DateTime endDate = startDate.AddDays(7);
-                return GetExpenses(startDate, endDate, homeId, userId, categoryId);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to list Expenses By Week", ex);
-            }
-        }
-
-        public IEnumerable<Expense> GetExpensesByMonth(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
-        {
-            try
-            {
-                return GetExpenses(
-                    new DateTime(date.Year, date.Month, 1),
-                    new DateTime(date.Year, date.Month, 1).AddMonths(1).AddDays(-1),
-                    homeId,
-                    userId,
-                    categoryId
-                );
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to list Expenses By Month", ex);
-            }
-        }
-
-        public IEnumerable<Expense> GetExpensesByYear(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
-        {
-            try
-            {
-                return GetExpenses(
-                    new DateTime(date.Year, 1, 1),
-                    new DateTime(date.Year, 12, 31),
-                    homeId,
-                    userId,
-                    categoryId
-                );
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to list Expenses By Year", ex);
-            }
-        }
-
-        public double GetTotalExpensesByDay(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
-        {
-            try
-            {
-                return CalculateTotalExpenses(
-                    date.Date,
-                    date.Date.AddDays(1).AddTicks(-1),
-                    homeId,
-                    userId,
-                    categoryId
-                );
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to calculate Total Expenses By Day", ex);
-            }
-        }
-
-        public double GetTotalExpensesByWeek(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
-        {
-            try
-            {
-                return CalculateTotalExpenses(
-                    date.AddDays(-(int)date.DayOfWeek + (int)DayOfWeek.Monday),
-                    date.AddDays(-(int)date.DayOfWeek + (int)DayOfWeek.Monday + 7),
-                    homeId,
-                    userId,
-                    categoryId
-                );
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to calculate Total Expenses By Week", ex);
-            }
-        }
-
-        public double GetTotalExpensesByMonth(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
-        {
-            try
-            {
-                return CalculateTotalExpenses(
-                    new DateTime(date.Year, date.Month, 1),
-                    new DateTime(date.Year, date.Month, 1).AddMonths(1).AddDays(-1),
-                    homeId,
-                    userId,
-                    categoryId
-                );
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to calculate Total Expenses By Month", ex);
-            }
-        }
-
-        public double GetTotalExpensesByYear(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null)
-        {
-            try
-            {
-                return CalculateTotalExpenses(
-                    new DateTime(date.Year, 1, 1),
-                    new DateTime(date.Year, 12, 31),
-                    homeId,
-                    userId,
-                    categoryId
-                );
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to calculate Total Expenses By Year", ex);
-            }
         }
     }
 }
