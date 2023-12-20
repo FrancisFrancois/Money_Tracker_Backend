@@ -35,21 +35,22 @@ namespace Money_Tracker.API.Controllers
             // Vérifie si l'email ou le pseudo existe déjà
             if (_UserService.IsEmailOrPseudoExists(registerDTO.Email, registerDTO.Pseudo))
             {
-                return BadRequest("Email or Pseudo already in use.");
+                return BadRequest("Email or Pseudo already in use."); // Renvoie une réponse HTTP 400 (Bad Request) si l'email ou le pseudo est déjà utilisé
+
             }
 
             // Crée l'utilisateur et le convertit en DTO
             UserDTO createdUser = _UserService.Create(registerDTO.ToModel()).ToDTO();
             if (createdUser is null)
             {
-                return BadRequest("Failed to create user.");
+                return BadRequest("Failed to create user."); // Renvoie une réponse HTTP 400 (Bad Request) si la création de l'utilisateur échoue
             }
 
             // Retourne les informations de l'utilisateur créé
             return CreatedAtAction("Register", new { userId = createdUser.Id }, createdUser);
         }
 
-        // Endpoint pour la connexion d'un utilisateur
+        // Endpoint pour la connexion d'un utilisateur et renvoie un JWT
         [HttpPost("Login")]
         [ProducesResponseType(201, Type = typeof(UserDTO))]
         [ProducesResponseType(400)]
@@ -61,13 +62,14 @@ namespace Money_Tracker.API.Controllers
                 return BadRequest("Invalid request");
             }
 
-            // Valide les informations de connexion
+            // Valide les informations de connexion de l'utilisateur
             bool isValidUser = _UserService.ValidateLogin(loginDto.PseudoOrEmail, loginDto.Password);
 
             // Retourne une erreur si les informations ne sont pas valides
             if (!isValidUser)
-            {
-                return Unauthorized("Invalid credentials");
+            {   
+                return Unauthorized("Invalid credentials");  // Renvoie une réponse HTTP 401 (Unauthorized), demande de connexion échoué.
+      
             }
 
             // Génère un jeton JWT pour l'utilisateur
