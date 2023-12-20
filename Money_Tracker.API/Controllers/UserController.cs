@@ -45,7 +45,7 @@ namespace Money_Tracker.API.Controllers
                 // Renvoie une réponse HTTP 404 (Not Found) si aucun utilisateur n'est trouvé.
                 return NotFound("User not found");
             }
-            // Renvoie une réponse HTTP 200 (OK) avec les détails de l'utilisateur (en DTO) si trouvé.
+            // Renvoie une réponse HTTP 200 (OK) avec les détails de l'utilisateur
             return Ok(userDTO);
         }
 
