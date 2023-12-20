@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Money_Tracker.API.DTOs;
 using Money_Tracker.API.Mappers;
+using Money_Tracker.BLL.CustomExceptions;
 using Money_Tracker.BLL.Interfaces;
 
 namespace Money_Tracker.API.Controllers
@@ -27,7 +28,7 @@ namespace Money_Tracker.API.Controllers
             // Récupère tous les utilisateurs et les convertit en DTO
             IEnumerable<UserDTO> result = _UserService.GetAll().Select(u => u.ToDTO());
 
-            // Renvoie une réponse HTTP 200 (OK) avec la liste des utilisateurs (en DTO) en tant que contenu.
+            // Renvoie une réponse HTTP 200 (OK) avec la liste des utilisateurs 
             return Ok(result);
         }
 
@@ -74,7 +75,7 @@ namespace Money_Tracker.API.Controllers
             }
             catch (Exception ex)
             {
-                // Renvoie une réponse HTTP 404 (Not Found) en cas d'exception (par exemple, utilisateur non trouvé).
+                // Renvoie une réponse HTTP 404 (Not Found) si l'utilisateur n'est pas trouvé
                 return NotFound(ex.Message);
             }
 
@@ -96,12 +97,19 @@ namespace Money_Tracker.API.Controllers
                 // Tente de supprimer l'utilisateur
                 deleted = _UserService.Delete(userId);
             }
-            catch (Exception ex)
+            catch (NotFoundException ex)
             {
-                // Gère les exceptions, comme un utilisateur non trouvé ou une violation de contrainte
+                // Renvoie une réponse HTTP 404 (Not Found) si l'utilisateur n'est pas trouvé.
                 return NotFound(ex.Message);
             }
-            return deleted ? NoContent() : NotFound("User not found");
+            catch (Exception ex)
+            {
+                // Renvoie une réponse HTTP 400 (Bad Request)
+                return BadRequest(ex.Message); 
+            }
+
+            // Renvoie une réponse HTTP 204 (No Content) si la suppression a réussi, sinon 404 (Not Found).
+            return deleted ? NoContent() : NotFound("User not found"); 
         }
     }
 }

@@ -27,7 +27,9 @@ namespace Money_Tracker.API.Controllers
         {
             // Récupère toutes les catégories et les convertit en DTO pour la réponse
             IEnumerable<CategoryDTO> result = _CategoryService.GetAll().Select(c => c.ToDTO());
-            return Ok(result);  // Renvoie une réponse HTTP 200 (OK) avec la liste des catégories.
+
+            // Renvoie une réponse HTTP 200 (OK) avec la liste des catégories.
+            return Ok(result);  
         }
 
         // Route GET pour obtenir une catégorie par son ID
@@ -40,9 +42,12 @@ namespace Money_Tracker.API.Controllers
             CategoryDTO? categoryDTO = _CategoryService.GetById(categoryId)?.ToDTO();
             if (categoryDTO is null)
             {
-                return NotFound("Category not found");  // Renvoie une réponse HTTP 404 si la catégorie n'est pas trouvée.
+                // Renvoie une réponse HTTP 404 (Not Found) si la catégorie n'est pas trouvée.
+                return NotFound("Category not found");  
             }
-            return Ok(categoryDTO);  // Renvoie une réponse HTTP 200 avec les détails de la catégorie.
+
+            // Renvoie une réponse HTTP 200 avec les détails de la catégorie.
+            return Ok(categoryDTO);  
         }
 
         // Route POST pour insérer une nouvelle catégorie
@@ -52,7 +57,9 @@ namespace Money_Tracker.API.Controllers
         {
             // Crée une nouvelle catégorie et la convertit en DTO
             CategoryDTO result = _CategoryService.Create(category.ToModel()).ToDTO();
-            return CreatedAtAction(nameof(GetById), new { CategoryId = result.Id }, result);  // Renvoie une réponse HTTP 201 (Created) avec la catégorie créée.
+
+            // Renvoie une réponse HTTP 201 (Created) avec la catégorie créée.
+            return CreatedAtAction(nameof(GetById), new { CategoryId = result.Id }, result);  
         }
 
         // Route PUT pour mettre à jour une catégorie
@@ -69,9 +76,11 @@ namespace Money_Tracker.API.Controllers
             }
             catch (NotFoundException ex)
             {
-                return NotFound(ex.Message);  // Renvoie une réponse HTTP 404 si la catégorie n'est pas trouvée.
+                // Renvoie une réponse HTTP 404 si la catégorie n'est pas trouvée.
+                return NotFound(ex.Message);  
             }
-            return updated ? NoContent() : NotFound("Category not found");  // Renvoie une réponse HTTP 204 si la mise à jour a réussi, sinon 404.
+            // Renvoie une réponse HTTP 204 si la mise à jour a réussi, sinon 404 (Not Found)
+            return updated ? NoContent() : NotFound("Category not found");  
         }
 
         // Route DELETE pour supprimer une catégorie
@@ -90,14 +99,17 @@ namespace Money_Tracker.API.Controllers
             }
             catch (NotFoundException ex)
             {
-                return NotFound(ex.Message);  // Renvoie une réponse HTTP 404 si la catégorie n'est pas trouvée.
+                // Renvoie une réponse HTTP 404 si la catégorie n'est pas trouvée.
+                return NotFound(ex.Message);  
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);  // Renvoie une réponse HTTP 400 en cas d'autres exceptions.
+                // Renvoie une réponse HTTP 400 en cas d'autres exceptions.
+                return BadRequest(ex.Message);  
             }
 
-            return deleted ? NoContent() : NotFound("Category not found");  // Renvoie une réponse HTTP 204 si la suppression a réussi, sinon 404.
+            // Renvoie une réponse HTTP 204 (No Content) si la suppression a réussi, sinon 404 (Not Found).
+            return deleted ? NoContent() : NotFound("Category not found");  
         }
     }
 }

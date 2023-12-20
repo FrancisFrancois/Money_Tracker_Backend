@@ -15,7 +15,7 @@ namespace Money_Tracker.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        // Déclaration des services nécessaires
+        // Déclaration de l'instance du service utilisateur et du JWT
         private readonly IUserService _UserService;
         private readonly JwtOptions _JwtOptions;
 
@@ -26,7 +26,7 @@ namespace Money_Tracker.API.Controllers
             _JwtOptions = jwtOptions;
         }
 
-        // Endpoint pour l'enregistrement d'un nouvel utilisateur
+        // Route POST pour l'enregistrement d'un nouvel utilisateur
         [HttpPost("Register")]
         [ProducesResponseType(201, Type = typeof(UserDTO))]
         [ProducesResponseType(400)]
@@ -35,22 +35,23 @@ namespace Money_Tracker.API.Controllers
             // Vérifie si l'email ou le pseudo existe déjà
             if (_UserService.IsEmailOrPseudoExists(registerDTO.Email, registerDTO.Pseudo))
             {
-                return BadRequest("Email or Pseudo already in use."); // Renvoie une réponse HTTP 400 (Bad Request) si l'email ou le pseudo est déjà utilisé
-
+                // Renvoie une réponse HTTP 400 (Bad Request) si l'email ou le pseudo est déjà utilisé
+                return BadRequest("Email or Pseudo already in use."); 
             }
 
             // Crée l'utilisateur et le convertit en DTO
             UserDTO createdUser = _UserService.Create(registerDTO.ToModel()).ToDTO();
             if (createdUser is null)
             {
-                return BadRequest("Failed to create user."); // Renvoie une réponse HTTP 400 (Bad Request) si la création de l'utilisateur échoue
+                // Renvoie une réponse HTTP 400 (Bad Request) si la création de l'utilisateur échoue
+                return BadRequest("Failed to create user.");
             }
 
-            // Retourne les informations de l'utilisateur créé
+            // Renvoie une réponse HTTP 201 (Created) avec les détails de l'utilisateur créé.
             return CreatedAtAction("Register", new { userId = createdUser.Id }, createdUser);
         }
 
-        // Endpoint pour la connexion d'un utilisateur et renvoie un JWT
+        // Route POST pour la connexion d'un utilisateur et renvoie un JWT
         [HttpPost("Login")]
         [ProducesResponseType(201, Type = typeof(UserDTO))]
         [ProducesResponseType(400)]
@@ -67,8 +68,9 @@ namespace Money_Tracker.API.Controllers
 
             // Retourne une erreur si les informations ne sont pas valides
             if (!isValidUser)
-            {   
-                return Unauthorized("Invalid credentials");  // Renvoie une réponse HTTP 401 (Unauthorized), demande de connexion échoué.
+            {
+                // Renvoie une réponse HTTP 401 (Unauthorized), demande de connexion échoué.
+                return Unauthorized("Invalid credentials");  
       
             }
 
