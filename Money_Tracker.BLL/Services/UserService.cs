@@ -11,60 +11,49 @@ using System.Text;
 
 namespace Money_Tracker.BLL.Services
 {
-    /// <summary>
-    /// Service pour la gestion des utilisateurs.
-    /// Implémente les opérations définies dans l'interface IUserService.
-    /// </summary>
+    // Classe UserService gérant les opérations liées aux utilisateurs
     public class UserService : IUserService
     {
+        // Référence au repository utilisateur pour interagir avec la base de données
         private readonly IUserRepository _UserRepository;
 
+        // Constructeur initialisant le repository utilisateur
         public UserService(IUserRepository userRepository)
         {
             _UserRepository = userRepository;
         }
 
-        /// <summary>
-        /// Récupère tous les utilisateurs.
-        /// </summary>
-        /// <returns>Une collection de modèles d'utilisateurs.</returns>
+        // Récupère la liste de tous les utilisateurs de la base de données
         public IEnumerable<User> GetAll()
         {
+            // Convertit chaque entité utilisateur en modèle utilisateur
             return _UserRepository.GetAll().Select(u => u.ToModel());
         }
 
-        /// <summary>
-        /// Récupère un utilisateur par son ID.
-        /// </summary>
-        /// <param name="id">ID de l'utilisateur à récupérer.</param>
-        /// <returns>Le modèle de l'utilisateur correspondant à l'ID donné.</returns>
+        // Récupère un utilisateur spécifique par son ID
         public User? GetById(int id)
         {
+            // Cherche l'utilisateur par ID et le convertit en modèle si trouvé
             return _UserRepository.GetById(id)?.ToModel();
         }
 
-        /// <summary>
-        /// Insère un nouvel utilisateur.
-        /// </summary>
-        /// <param name="user">Le modèle de l'utilisateur à insérer.</param>
-        /// <returns>Le modèle de l'utilisateur inséré.</returns>
+        // Crée et enregistre un nouvel utilisateur
         public User Create(User user)
         {
+            // Hache le mot de passe avant de l'enregistrer
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
 
+            // Crée l'utilisateur dans la base de données et renvoie le modèle créé
             return _UserRepository.Create(user.ToEntity()).ToModel();
         }
 
-        /// <summary>
-        /// Met à jour les informations d'un utilisateur.
-        /// </summary>
-        /// <param name="id">ID de l'utilisateur à mettre à jour.</param>
-        /// <param name="user">Nouvelles informations de l'utilisateur.</param>
-        /// <returns>Booléen indiquant si la mise à jour a réussi.</returns>
+        // Met à jour les informations d'un utilisateur existant
         public bool Update(int id, User user)
         {
+            // Hash le mot de passe pour la mise à jour
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
 
+            // Tente de mettre à jour l'utilisateur et lève une exception si non trouvé
             bool updated = _UserRepository.Update(id, user.ToEntity());
             if (!updated)
             {
@@ -73,18 +62,16 @@ namespace Money_Tracker.BLL.Services
             return updated;
         }
 
-        /// <summary>
-        /// Supprime un utilisateur.
-        /// </summary>
-        /// <param name="id">ID de l'utilisateur à supprimer.</param>
-        /// <returns>Booléen indiquant si la suppression a réussi.</returns>
+        // Supprime un utilisateur de la base de données
         public bool Delete(int id)
         {
+            // Vérifie d'abord si l'utilisateur est associé à une maison
             if (_UserRepository.isLivingInHouse(id))
             {
                 throw new AlreadyLivingException("User is already attributed to the house");
             }
 
+            // Tente de supprimer l'utilisateur et lève une exception si non trouvé
             bool deleted = _UserRepository.Delete(id);
             if (!deleted)
             {
@@ -93,6 +80,7 @@ namespace Money_Tracker.BLL.Services
             return deleted;
         }
 
+        // Vérifie si l'email ou le pseudo est déjà utilisé
         public bool IsEmailOrPseudoExists(string email, string pseudo)
         {
             var userByEmail = _UserRepository.GetUserByEmail(email);
@@ -101,11 +89,13 @@ namespace Money_Tracker.BLL.Services
             return userByEmail != null || userByPseudo != null;
         }
 
+        // Détermine si la chaîne donnée est un email
         private bool IsEmail(string emailOrPseudo)
         {
             return emailOrPseudo.Contains("@");
         }
 
+        // Valide les informations de connexion de l'utilisateur
         public bool ValidateLogin(string emailOrPseudo, string password)
         {
             User? user;
@@ -118,6 +108,7 @@ namespace Money_Tracker.BLL.Services
                 user = _UserRepository.GetUserByPseudo(emailOrPseudo)?.ToModel();
             }
 
+            // Vérifie si l'utilisateur existe et que le mot de passe correspond
             if (user != null)
             {
                 return VerifyPassword(password, user.Password);
@@ -126,7 +117,7 @@ namespace Money_Tracker.BLL.Services
             return false;
         }
 
-
+        // Vérifie si le mot de passe donné correspond au hash stocké
         private bool VerifyPassword(string password, string storedHash)
         {
             try
@@ -138,6 +129,5 @@ namespace Money_Tracker.BLL.Services
                 return false;
             }
         }
-
     }
 }

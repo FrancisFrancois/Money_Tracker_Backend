@@ -10,57 +10,71 @@ using System.Text;
 
 namespace Money_Tracker.API.Controllers
 {
+    // Définit le chemin de base pour accéder au contrôleur AuthController
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
+        // Déclaration des services nécessaires
         private readonly IUserService _UserService;
         private readonly JwtOptions _JwtOptions;
 
+        // Constructeur pour injecter les dépendances
         public AuthController(IUserService userService, JwtOptions jwtOptions)
         {
             _UserService = userService;
             _JwtOptions = jwtOptions;
         }
 
+        // Endpoint pour l'enregistrement d'un nouvel utilisateur
         [HttpPost("Register")]
         [ProducesResponseType(201, Type = typeof(UserDTO))]
         [ProducesResponseType(400)]
         public IActionResult Register([FromBody] RegisterDTO registerDTO)
         {
+            // Vérifie si l'email ou le pseudo existe déjà
             if (_UserService.IsEmailOrPseudoExists(registerDTO.Email, registerDTO.Pseudo))
             {
                 return BadRequest("Email or Pseudo already in use.");
             }
 
-            var createdUser = _UserService.Create(registerDTO.ToModel());
+            // Crée l'utilisateur et le convertit en DTO
+            UserDTO createdUser = _UserService.Create(registerDTO.ToModel()).ToDTO();
             if (createdUser is null)
             {
                 return BadRequest("Failed to create user.");
             }
 
-            var resultDTO = createdUser.ToDTO();
-            return CreatedAtAction("Register", new { userId = resultDTO.Id }, resultDTO);
+            // Retourne les informations de l'utilisateur créé
+            return CreatedAtAction("Register", new { userId = createdUser.Id }, createdUser);
         }
 
-        [HttpPost("login")]
+        // Endpoint pour la connexion d'un utilisateur
+        [HttpPost("Login")]
+        [ProducesResponseType(201, Type = typeof(UserDTO))]
+        [ProducesResponseType(400)]
         public IActionResult Login([FromBody] LoginDTO loginDto)
         {
+            // Vérifie si le DTO de connexion est valide
             if (loginDto is null)
             {
                 return BadRequest("Invalid request");
             }
 
+            // Valide les informations de connexion
             bool isValidUser = _UserService.ValidateLogin(loginDto.PseudoOrEmail, loginDto.Password);
 
+            // Retourne une erreur si les informations ne sont pas valides
             if (!isValidUser)
             {
                 return Unauthorized("Invalid credentials");
             }
 
-            var token = GenerateJwtToken(loginDto.PseudoOrEmail);
-            var expiration = DateTime.Now.AddSeconds(_JwtOptions.Expiration);
+            // Génère un jeton JWT pour l'utilisateur
+            string token = GenerateJwtToken(loginDto.PseudoOrEmail);
+            DateTime expiration = DateTime.Now.AddSeconds(_JwtOptions.Expiration);
 
+            // Retourne le jeton et la date d'expiration
             return Ok(new
             {
                 accessToken = token,
@@ -68,31 +82,31 @@ namespace Money_Tracker.API.Controllers
             });
         }
 
+        // Méthode privée pour générer un jeton JWT
         private string GenerateJwtToken(string userNameOrEmail)
         {
-            var claims = new List<Claim>
+            // Crée les revendications (claims) pour le jeton
+            List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, userNameOrEmail)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_JwtOptions.SigningKey));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            // Crée une clé symétrique pour signer le jeton
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_JwtOptions.SigningKey));
+            SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+            // Crée le jeton JWT
             JwtSecurityToken Token = new JwtSecurityToken
                 (
-
                 issuer: _JwtOptions.Issuer,
                 audience: _JwtOptions.Audience,
                 claims: claims,
                 expires: DateTime.Now.AddSeconds(_JwtOptions.Expiration),
                 signingCredentials: creds
-
                 );
 
+            // Retourne le jeton JWT sous forme de chaîne
             return new JwtSecurityTokenHandler().WriteToken(Token);
         }
     }
 }
-    
-
-
