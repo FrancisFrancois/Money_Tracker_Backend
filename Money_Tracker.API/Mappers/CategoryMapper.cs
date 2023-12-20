@@ -11,7 +11,7 @@ namespace Money_Tracker.API.Mappers
         {
             return new CategoryDTO
             {
-                Id = model.Id, // Transfère l'ID du modèle vers le DTO
+                Id = model.Id, // Transfère l'ID du Modèle vers le DTO
                 Category_Name = model.Category_Name // Transfère le nom de la catégorie du modèle vers le DTO
             };
         }

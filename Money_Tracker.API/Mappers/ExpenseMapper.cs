@@ -6,7 +6,7 @@ namespace Money_Tracker.API.Mappers
     // Classe ExpenseMapper : Contient des méthodes statiques pour mapper les dépenses entre les modèles et les DTOs
     public static class ExpenseMapper
     {
-        // Convertit un Modèles Expense en ExpenseDTO
+        // Convertit un Modèle Expense en ExpenseDTO
         public static ExpenseDTO ToDTO(this Expense model)
         {
             return new ExpenseDTO
@@ -21,7 +21,7 @@ namespace Money_Tracker.API.Mappers
             };
         }
 
-        // Convertit un ExpenseDataDTO en Modèles Expense
+        // Convertit un ExpenseDataDTO en Modèle Expense
         public static Expense ToModel(this ExpenseDataDTO expense)
         {
             return new Expense

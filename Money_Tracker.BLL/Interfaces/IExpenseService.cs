@@ -1,40 +1,37 @@
 ﻿using Money_Tracker.BLL.Models;
 using Money_Tracker.Tools.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Money_Tracker.BLL.Interfaces
 {
+    // Interface IExpenseService : Spécifie les opérations pour la gestion des dépenses
+    // Hérite de ICrudService pour implémenter les opérations CRUD de base pour les objets Expense
     public interface IExpenseService : ICrudService<int, Expense>
     {
         #region Unused
-        //IEnumerable<Expense> GetExpensesByDay(DateTime date);
-        //IEnumerable<Expense> GetExpensesByWeek(DateTime date);
-        //IEnumerable<Expense> GetExpensesByMonth(DateTime date);
-        //IEnumerable<Expense> GetExpensesByYear(DateTime date);
-        //double GetTotalExpensesByDay(DateTime date);
-        //double GetTotalExpensesByWeek(DateTime date);
-        //double GetTotalExpensesByMonth(DateTime date);
-        //double GetTotalExpensesByYear(DateTime date);
-        //IEnumerable<Expense> GetExpensesByCategoryByDay(DateTime date, int categoryId);
-        //IEnumerable<Expense> GetExpensesByCategoryByWeek(DateTime date, int categoryId);
-        //IEnumerable<Expense> GetExpensesByCategoryByMonth(DateTime date, int categoryId);
-        //IEnumerable<Expense> GetExpensesByCategoryByYear(DateTime date, int categoryId);
-        //double GetTotalExpensesByCategoryByDay(DateTime date, int categoryId);
-        //double GetTotalExpensesByCategoryByWeek(DateTime date, int categoryId);
-        //double GetTotalExpensesByCategoryByMonth(DateTime date, int categoryId);
-        //double GetTotalExpensesByCategoryByYear(DateTime date, int categoryId);
         #endregion
+
+        // Récupère les dépenses pour un jour donné, avec des options de filtrage par domicile, utilisateur, et catégorie
         IEnumerable<Expense> GetExpensesByDay(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+
+        // Récupère les dépenses pour une semaine donnée, avec des options de filtrage similaires
         IEnumerable<Expense> GetExpensesByWeek(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+
+        // Récupère les dépenses pour un mois donné, avec des options de filtrage similaires
         IEnumerable<Expense> GetExpensesByMonth(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+
+        // Récupère les dépenses pour une année donnée, avec des options de filtrage similaires
         IEnumerable<Expense> GetExpensesByYear(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+
+        // Calcule le total des dépenses pour un jour donné, avec des options de filtrage similaires
         double GetTotalExpensesByDay(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+
+        // Calcule le total des dépenses pour une semaine donnée, avec des options de filtrage similaires
         double GetTotalExpensesByWeek(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+
+        // Calcule le total des dépenses pour un mois donné, avec des options de filtrage similaires
         double GetTotalExpensesByMonth(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
+
+        // Calcule le total des dépenses pour une année donnée, avec des options de filtrage similaires
         double GetTotalExpensesByYear(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
     }
 }
