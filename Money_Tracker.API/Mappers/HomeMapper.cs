@@ -3,70 +3,51 @@ using Money_Tracker.BLL.Models;
 
 namespace Money_Tracker.API.Mappers
 {
-    /// <summary>
-    /// Classe contenant des méthodes pour mapper les objets Home et HomeUser vers leurs DTO correspondants.
-    /// </summary>
+    // Classe HomeMapper : Contient des méthodes statiques pour mapper les maisons entre les modèles et les DTOs
     public static class HomeMapper
     {
-        /// <summary>
-        /// Convertit un objet Home en objet HomeDTO.
-        /// </summary>
-        /// <param name="model">Objet Home à mapper.</param>
-        /// <returns>Objet HomeDTO mappé.</returns>
+        // Convertit un Modèle Home en HomeDTO
         public static HomeDTO ToDTO(this Home model)
         {
             return new HomeDTO
             {
-                Id = model.Id,
-                User_Id = model.User_Id,
-                Name_Home = model.Name_Home,
+                Id = model.Id, // Transfère l'ID du modèle Home vers HomeDTO
+                User_Id = model.User_Id, // Transfère l'ID de l'utilisateur du modèle Home vers HomeDTO
+                Name_Home = model.Name_Home // Transfère le nom du domicile du modèle Home vers HomeDTO
             };
         }
 
-        /// <summary>
-        /// Convertit un objet Home en objet HomeFullDTO incluant les utilisateurs associés.
-        /// </summary>
-        /// <param name="model">Objet Home à mapper.</param>
-        /// <returns>Objet HomeFullDTO mappé.</returns>
+        // Convertit un Modèle Home en HomeFullDTO, incluant les utilisateurs associés
         public static HomeFullDTO ToFullDTO(this Home model)
         {
             return new HomeFullDTO
             {
-                Id = model.Id,
-                User_Id = model.User_Id,
-                Name_Home = model.Name_Home,
-                Users = model.Users.Select(u => u.ToHomeUserDTO())
+                Id = model.Id, // Transfère l'ID du modèle Home vers HomeFullDTO
+                User_Id = model.User_Id, // Transfère l'ID de l'utilisateur du modèle Home vers HomeFullDTO
+                Name_Home = model.Name_Home, // Transfère le nom du domicile
+                Users = model.Users.Select(u => u.ToHomeUserDTO()) // Convertit les utilisateurs associés en HomeUserDTO
             };
         }
 
-        /// <summary>
-        /// Convertit un objet HomeUser en objet HomeUserDTO représentant un utilisateur associé à une maison.
-        /// </summary>
-        /// <param name="model">Objet HomeUser à mapper.</param>
-        /// <returns>Objet HomeUserDTO mappé.</returns>
+        // Convertit un Modèle HomeUser en HomeUserDTO
         public static HomeUserDTO ToHomeUserDTO(this HomeUser model)
         {
             return new HomeUserDTO
             {
-                User_Id = model.User?.Id ?? 0,
-                Home_Id = model.Home_Id,
+                User_Id = model.User?.Id ?? 0, // Transfère l'ID de l'utilisateur (vérifie si l'utilisateur n'est pas null)
+                Home_Id = model.Home_Id // Transfère l'ID du domicile associé
             };
         }
 
-        /// <summary>
-        /// Convertit un objet HomeDTO en un objet Home.
-        /// </summary>
-        /// <param name="home">L'objet HomeDTO à convertir.</param>
-        /// <returns>Un nouvel objet Home avec les valeurs de l'objet HomeDTO.</returns>
+        // Convertit un HomeDataDTO en Modèle Home
         public static Home ToModel(this HomeDataDTO home)
         {
             return new Home
             {
-                Id = 0,
-                Name_Home = home.Name_Home,
-                User_Id = home.User_Id,
+                Id = 0, // L'ID est défini à 0, généralement auto-généré dans la base de données
+                Name_Home = home.Name_Home, // Transfère le nom du domicile du DTO vers le modèle
+                User_Id = home.User_Id // Transfère l'ID de l'utilisateur du DTO vers le modèle
             };
         }
     }
 }
-
