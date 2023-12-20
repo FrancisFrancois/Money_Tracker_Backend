@@ -301,12 +301,25 @@ namespace Money_Tracker.BLL.Services
         {   
             try
             {
+                // Calcule le début de la semaine basée sur la date donnée.
+                // 'AddDays(-(int)date.DayOfWeek + (int)DayOfWeek.Monday)' calcule le lundi de la semaine actuelle,
+                // En soustrayant le nombre de jours écoulés depuis le lundi.
                 DateTime startDate = date.AddDays(-(int)date.DayOfWeek + (int)DayOfWeek.Monday);
+
+                // Calcule la fin de la semaine (le dimanche suivant).
+                // 'AddDays(7)' ajoute sept jours à 'startDate' (le lundi), puis 'AddSeconds(-1)' soustrait une seconde pour arriver à la fin du dimanche.
                 DateTime endDate = startDate.AddDays(7).AddSeconds(-1);
+
+                // Calcule le total des dépenses pour cette semaine en utilisant la méthode 'CalculateTotalExpenses' du repository
+                // Les dépenses sont récupérées pour la semaine définie par 'startDate' et 'endDate'.
+                // Les paramètres optionnels 'homeId', 'userId' et 'categoryId' permettent de filtrer les dépenses
+                // Par domicile, utilisateur ou catégorie, si ces valeurs sont fournies.
                 return _ExpenseRepository.CalculateTotalExpenses(startDate, endDate, homeId, userId, categoryId);
             }
             catch (Exception ex)
             {
+                // En cas d'erreur lors du calcul du total des dépenses, une exception est levée.
+                // L'exception originale 'ex' est incluse pour fournir des détails supplémentaires sur l'erreur survenue.
                 throw new Exception("Failed to get total expenses by week", ex);
             }
         }
@@ -315,12 +328,25 @@ namespace Money_Tracker.BLL.Services
         {   
             try
             {
+                // Définit le début du mois basé sur la date donnée.
+                // Utilise l'année et le mois de la date fournie, mais fixe le jour à 1, début du mois.
                 DateTime startDate = new DateTime(date.Year, date.Month, 1);
+
+                // Définit la fin du mois.
+                // 'AddMonths(1)' ajoute un mois à 'startDate' pour se déplacer au début du mois suivant,
+                // puis 'AddDays(-1)' soustrait un jour pour revenir au dernier jour du mois actuel.
                 DateTime endDate = startDate.AddMonths(1).AddDays(-1);
+
+                // Calcule le total des dépenses pour ce mois en utilisant la méthode 'CalculateTotalExpenses' du repository
+                // Les dépenses sont récupérées pour le mois défini par 'startDate' et 'endDate'.
+                // Les paramètres optionnels 'homeId', 'userId' et 'categoryId' permettent de filtrer les dépenses
+                // Par domicile, utilisateur ou catégorie, si ces valeurs sont fournies.
                 return _ExpenseRepository.CalculateTotalExpenses(startDate, endDate, homeId, userId, categoryId);
             }
             catch (Exception ex)
             {
+                // En cas d'erreur lors du calcul du total des dépenses, une exception est levée.
+                // L'exception originale 'ex' est incluse pour fournir des détails supplémentaires sur l'erreur survenue.
                 throw new Exception("Failed to get total expenses by month", ex);
             }
         }
@@ -329,12 +355,24 @@ namespace Money_Tracker.BLL.Services
         {   
             try
             {
+                // Définit le début de l'année basé sur la date donnée.
+                // Utilise l'année de la date fournie, mais fixe le mois et le jour au début de l'année (1er janvier).
                 DateTime startDate = new DateTime(date.Year, 1, 1);
+
+                // Définit la fin de l'année.
+                // Utilise l'année de la date fournie et fixe le mois et le jour à la fin de l'année (31 décembre).
                 DateTime endDate = new DateTime(date.Year, 12, 31);
+
+                // Calcule le total des dépenses pour cette année en utilisant la méthode 'CalculateTotalExpenses' du repository
+                // Les dépenses sont récupérées pour l'année définie par 'startDate' et 'endDate'.
+                // Les paramètres optionnels 'homeId', 'userId' et 'categoryId' permettent de filtrer les dépenses
+                // Par domicile, utilisateur ou catégorie, si ces valeurs sont fournies.
                 return _ExpenseRepository.CalculateTotalExpenses(startDate, endDate, homeId, userId, categoryId);
             }
             catch (Exception ex)
             {
+                // En cas d'erreur lors du calcul du total des dépenses, une exception est levée.
+                // L'exception originale 'ex' est incluse pour fournir des détails supplémentaires sur l'erreur survenue.
                 throw new Exception("Failed to get total expenses by year", ex);
             }
         }
