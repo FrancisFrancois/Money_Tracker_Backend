@@ -1,90 +1,41 @@
 ﻿namespace Money_Tracker.API.DTOs
 {
-    /// <summary>
-    /// Classe représentant un objet de transfert de données (DTO) pour un utilisateur.
-    /// </summary>
+    // Classe UserDTO : Utilisée pour représenter les données des users dans les réponses API
     public class UserDTO
     {
-
-        /// <summary>
-        /// ID de l'utilisateur.
-        /// </summary>
-        public int Id { get; set; }
-        /// <summary>
-        /// Nom de l'utilisateur.
-        /// </summary>
-        public string Lastname { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Prénom de l'utilisateur.
-        /// </summary>
-        public string Firstname { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Pseudo de l'utilisateur.
-        /// </summary>
-        public string Pseudo { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Email de l'utilisateur.
-        /// </summary>
-        public string Email { get; set; } = string.Empty;
-
+        public int Id { get; set; } // Identifiant unique de l'utilisateur
+        public string Lastname { get; set; } = string.Empty; // Nom de famille de l'utilisateur
+        public string Firstname { get; set; } = string.Empty; // Prénom de l'utilisateur
+        public string Pseudo { get; set; } = string.Empty; // Pseudo de l'utilisateur
+        public string Email { get; set; } = string.Empty; // Adresse email de l'utilisateur
     }
 
-    /// <summary>
-    /// Classe représentant un objet de transfert de données (DTO) pour les données d'utilisateur.
-    /// </summary>
+    // Classe UserDataDTO :  Utilisée pour capturer les données de la dépense lors des requêtes de création ou de mise à jour 
     public class UserDataDTO
     {
-        /// <summary>
-        /// ID de l'utilisateur.
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
-        /// Nom de l'utilisateur.
-        /// </summary>
-        public string Lastname { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Prénom de l'utilisateur.
-        /// </summary>
-        public string Firstname { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Pseudo de l'utilisateur.
-        /// </summary>
-        public string Pseudo { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Email de l'utilisateur.
-        /// </summary>
-        public string Email { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Mot de passe de l'utilisateur.
-        /// </summary>
-        public string Password { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Rôles de l'utilisateur.
-        /// </summary>
-        public string Roles { get; set; } = string.Empty;
+        public int Id { get; set; } // Identifiant unique de l'utilisateur 
+        public string Lastname { get; set; } = string.Empty; // Nom de famille de l'utilisateur
+        public string Firstname { get; set; } = string.Empty; // Prénom de l'utilisateur
+        public string Pseudo { get; set; } = string.Empty; // Pseudo de l'utilisateur
+        public string Email { get; set; } = string.Empty; // Adresse email de l'utilisateur
+        public string Password { get; set; } = string.Empty; // Mot de passe de l'utilisateur
+        public string Roles { get; set; } = string.Empty; // Rôles de l'utilisateur 
     }
 
-    public class  LoginDTO
+    // Classe LoginDTO : Uttilisée pour les données de connexion de l'utilisateur
+    public class LoginDTO
     {
-        public string PseudoOrEmail { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        public string PseudoOrEmail { get; set; } = string.Empty; // Pseudo ou email pour la connexion
+        public string Password { get; set; } = string.Empty; // Mot de passe pour la connexion
     }
 
+    // Classe RegisterDTO : Utilisée pour les données d'enregistrement de l'utilisateur
     public class RegisterDTO
     {
-        public string Lastname { get; set; } = string.Empty;
-        public string Firstname { get; set; } = string.Empty;
-        public string Pseudo { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        public string Lastname { get; set; } = string.Empty; // Nom de famille de l'utilisateur
+        public string Firstname { get; set; } = string.Empty; // Prénom de l'utilisateur
+        public string Pseudo { get; set; } = string.Empty; // Pseudo de l'utilisateur
+        public string Email { get; set; } = string.Empty; // Adresse email de l'utilisateur
+        public string Password { get; set; } = string.Empty; // Mot de passe de l'utilisateur
     }
 }
