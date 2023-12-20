@@ -1,11 +1,14 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.IdentityModel.Tokens;
 using Money_Tracker.BLL.Interfaces;
+using Money_Tracker.BLL.Models;
 using Money_Tracker.BLL.Services;
 using Money_Tracker.DAL.Interfaces;
 using Money_Tracker.DAL.Repositories;
 using System.Data.Common;
 using System.Data.SqlClient;
-
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +32,31 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IHomeRepository, HomeRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
+
+//JwtToken Config
+JwtOptions options = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>();
+builder.Services.AddSingleton(options);
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer
+    (
+            o =>
+            {
+                //Je vais rechercher ma clé de signature
+                byte[] sKey = Encoding.UTF8.GetBytes(options.SigningKey);
+
+                o.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = options.Issuer,
+                    ValidAudience = options.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(sKey)
+                };
+            }
+    );
+builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

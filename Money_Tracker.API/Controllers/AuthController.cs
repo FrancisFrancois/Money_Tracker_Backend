@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Money_Tracker.API.DTOs;
 using Money_Tracker.API.Mappers;
 using Money_Tracker.BLL.Interfaces;
-using Money_Tracker.BLL.Services;
+using Money_Tracker.BLL.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Money_Tracker.API.Controllers
 {
@@ -12,10 +15,12 @@ namespace Money_Tracker.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserService _UserService;
+        private readonly JwtOptions _JwtOptions;
 
-        public AuthController(IUserService userService)
+        public AuthController(IUserService userService, JwtOptions jwtOptions)
         {
             _UserService = userService;
+            _JwtOptions = jwtOptions;
         }
 
         [HttpPost("Register")]
@@ -38,9 +43,7 @@ namespace Money_Tracker.API.Controllers
             return CreatedAtAction("Register", new { userId = resultDTO.Id }, resultDTO);
         }
 
-        [HttpPost("Login")]
-        [ProducesResponseType(201, Type = typeof(UserDTO))]
-        [ProducesResponseType(400)]
+        [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDTO loginDto)
         {
             if (loginDto is null)
@@ -52,10 +55,44 @@ namespace Money_Tracker.API.Controllers
 
             if (!isValidUser)
             {
-                return Unauthorized("Invalid Credential");
+                return Unauthorized("Invalid credentials");
             }
 
-            return Ok("Login successful");
+            var token = GenerateJwtToken(loginDto.PseudoOrEmail);
+            var expiration = DateTime.Now.AddSeconds(_JwtOptions.Expiration);
+
+            return Ok(new
+            {
+                accessToken = token,
+                Expiration = expiration
+            });
+        }
+
+        private string GenerateJwtToken(string userNameOrEmail)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, userNameOrEmail)
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_JwtOptions.SigningKey));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            JwtSecurityToken Token = new JwtSecurityToken
+                (
+
+                issuer: _JwtOptions.Issuer,
+                audience: _JwtOptions.Audience,
+                claims: claims,
+                expires: DateTime.Now.AddSeconds(_JwtOptions.Expiration),
+                signingCredentials: creds
+
+                );
+
+            return new JwtSecurityTokenHandler().WriteToken(Token);
         }
     }
 }
+    
+
+
