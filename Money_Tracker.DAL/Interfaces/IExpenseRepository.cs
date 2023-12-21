@@ -3,6 +3,8 @@ using Money_Tracker.Tools.Interfaces;
 
 namespace Money_Tracker.DAL.Interfaces
 {
+    // Interface IExpenseRepository : Définit les opérations spécifiques pour la gestion des dépenses
+    // Hérite de l'interface générique ICrud pour fournir des opérations CRUD standard
     public interface IExpenseRepository : ICrud<int, Expense>
     {
         #region Unused
@@ -28,8 +30,13 @@ namespace Money_Tracker.DAL.Interfaces
         //double GetTotalExpensesByMonth(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
         //double GetTotalExpensesByYear(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
         #endregion
+
+        // Méthode pour récupérer une liste d'objets Expense (dépenses) dans une période spécifiée, avec des options de filtrage.
         IEnumerable<Expense> GetExpenses(DateTime startDate, DateTime endDate, int? homeId = null, int? userId = null, int? categoryId = null);
+
+        // Méthode pour calculer le total des dépenses dans une période spécifiée, avec des options de filtrage.
         double CalculateTotalExpenses(DateTime startDate, DateTime endDate, int? homeId = null, int? userId = null, int? categoryId = null);
+
 
     }
 }
