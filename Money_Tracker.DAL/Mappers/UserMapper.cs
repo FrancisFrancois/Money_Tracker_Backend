@@ -1,45 +1,38 @@
 ﻿using Money_Tracker.DAL.Entities;
 using System.Data;
 
-
 namespace Money_Tracker.DAL.Mappers
 {
-    /// <summary>
-    /// Classe responsable du mapping entre IDataRecord et les objets User.
-    /// </summary>
+    // Classe UserMapper : Contient des méthodes pour mapper des enregistrements de base de données vers des objets
     public class UserMapper
     {
-        /// <summary>
-        /// Mappe un IDataRecord à un objet User.
-        /// </summary>
-        /// <param name="record">L'IDataRecord à mapper.</param>
-        /// <returns>Un objet User.</returns>
+        // Méthode pour mapper un enregistrement de base de données (IDataRecord) vers un objet User.
         public static User Mapper(IDataRecord record)
         {
+            // Crée et renvoie un nouvel objet User basé sur les données extraites de l'enregistrement.
             return new User
             {
-                // Mappage du champ 'Id' de IDataRecord à la propriété 'Id' de User.
+                // Extraction et affectation de l'identifiant de l'utilisateur.
                 Id = (int)record["User_Id"],
 
-                // Mappage du champ 'Name' de IDataRecord à la propriété 'Name' de User.
+                // Extraction et affectation du nom de famille de l'utilisateur.
                 Lastname = (string)record["Name"],
 
-                // Mappage du champ 'Firstname' de IDataRecord à la propriété 'Firstname' de User.
+                // Extraction et affectation du prénom de l'utilisateur.
                 Firstname = (string)record["Firstname"],
 
-                // Mappage du champ 'Pseudo' de IDataRecord à la propriété 'Pseudo' de User.
+                // Extraction et affectation du pseudo de l'utilisateur.
                 Pseudo = (string)record["Pseudo"],
 
-                // Mappage du champ 'Email' de IDataRecord à la propriété 'Email' de User.
+                // Extraction et affectation de l'adresse e-mail de l'utilisateur.
                 Email = (string)record["Email"],
 
-                // Mappage du champ 'Hash_Password' de IDataRecord à la propriété 'Password' de User.
+                // Extraction et affectation du mot de passe (hashé) de l'utilisateur.
                 Password = (string)record["Hash_Password"],
 
-                // Mappage du champ 'Roles' de IDataRecord à la propriété 'Roles' de User.
+                // Extraction et affectation des rôles de l'utilisateur.
                 Roles = (string)record["Roles"]
             };
         }
     }
-
 }
