@@ -1,43 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Models = Money_Tracker.BLL.Models;
+﻿using Models = Money_Tracker.BLL.Models;
 using Entities = Money_Tracker.DAL.Entities;
 
 namespace Money_Tracker.BLL.Mappers
 {
-    namespace Money_Tracker.BLL.Mappers
+    // Classe HomeUserMapper : Fournit des méthodes statiques pour mapper entre les modèles de la BLL et les HomeUser de la DAL.
+    public static class HomeUserMapper
     {
-        public static class HomeUserMapper
+        // Convertit une entité HomeUser (DAL) en un modèle HomeUser (BLL).
+        public static Models.HomeUser ToModel(this Entities.HomeUser entity)
         {
-            /// <summary>
-            /// Convertit une entité HomeUser en un modèle HomeUser.
-            /// </summary>
-            /// <param name="entity">L'entité HomeUser à convertir.</param>
-            /// <returns>Un objet de type Models.HomeUser.</returns>
-            public static Models.HomeUser ToModel(this Entities.HomeUser entity)
-            {
-                return new Models.HomeUser
-                {
-                    Home_Id = entity.Home_Id,
-                    
-                };
-            }
+            return new Models.HomeUser
+            {  
+                Home_Id = entity.Home_Id, // Mappe l'identifiant du domicile de l'entité vers le modèle.
+            };
+        }
 
-            /// <summary>
-            /// Convertit un modèle HomeUser en une entité HomeUser.
-            /// </summary>
-            /// <param name="model">Le modèle HomeUser à convertir.</param>
-            /// <returns>Un objet de type Entities.HomeUser.</returns>
-            public static Entities.HomeUser ToEntity(this Models.HomeUser model)
+        // Convertit un modèle HomeUser (BLL) en une entité HomeUser (DAL).
+        public static Entities.HomeUser ToEntity(this Models.HomeUser model)
+        {
+            return new Entities.HomeUser
             {
-                return new Entities.HomeUser
-                {
-                    Home_Id = model.Home_Id
-                };
-            }
+                Home_Id = model.Home_Id // Mappe l'identifiant du domicile du modèle vers l'entité.
+            };
         }
     }
 }

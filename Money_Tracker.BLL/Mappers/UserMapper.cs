@@ -1,53 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Models = Money_Tracker.BLL.Models;
+﻿using Models = Money_Tracker.BLL.Models;
 using Entities = Money_Tracker.DAL.Entities;
 
 namespace Money_Tracker.BLL.Mappers
 {
-    /// <summary>
-    /// Classe statique contenant des méthodes d'extension pour la conversion entre entités utilisateur et modèles utilisateur.
-    /// </summary>
+    // Classe UserMapper :Fournit des méthodes statiques pour mapper entre les modèles de la BLL et les entités de la DAL.
     public static class UserMapper
     {
-        /// <summary>
-        /// Convertit une entité utilisateur en modèle utilisateur.
-        /// </summary>
-        /// <param name="entity">Entité utilisateur à convertir.</param>
-        /// <returns>Modèle utilisateur correspondant à l'entité donnée.</returns>
+        // Convertit une entité User (DAL) en un modèle User (BLL).
         public static Models.User ToModel(this Entities.User entity)
         {
             return new Models.User
             {
-                Id = entity.Id,
-                Lastname = entity.Lastname,
-                Firstname = entity.Firstname,
-                Pseudo = entity.Pseudo,
-                Email = entity.Email,
-                Password = entity.Password,
-                Roles = entity.Roles,
+                Id = entity.Id, // Mappe l'identifiant de l'entité vers le modèle.
+                Lastname = entity.Lastname, // Mappe le nom de famille de l'entité vers le modèle.
+                Firstname = entity.Firstname, // Mappe le prénom de l'entité vers le modèle.
+                Pseudo = entity.Pseudo, // Mappe le pseudo de l'entité vers le modèle.
+                Email = entity.Email, // Mappe l'email de l'entité vers le modèle.
+                Password = entity.Password, // Mappe le mot de passe de l'entité vers le modèle.
+                Roles = entity.Roles, // Mappe les rôles de l'entité vers le modèle.
             };
         }
 
-        /// <summary>
-        /// Convertit un modèle utilisateur en entité utilisateur.
-        /// </summary>
-        /// <param name="model">Modèle utilisateur à convertir.</param>
-        /// <returns>Entité utilisateur correspondant au modèle donné.</returns>
+        // Convertit un modèle User (BLL) en une entité User (DAL).
         public static Entities.User ToEntity(this Models.User model)
         {
             return new Entities.User
             {
-                Id = model.Id,
-                Lastname = model.Lastname,
-                Firstname = model.Firstname,
-                Pseudo = model.Pseudo,
-                Email = model.Email,
-                Password = model.Password,
-                Roles = model.Roles,
+                Id = model.Id, // Mappe l'identifiant du modèle vers l'entité.
+                Lastname = model.Lastname, // Mappe le nom de famille du modèle vers l'entité.
+                Firstname = model.Firstname, // Mappe le prénom du modèle vers l'entité.
+                Pseudo = model.Pseudo, // Mappe le pseudo du modèle vers l'entité.
+                Email = model.Email, // Mappe l'email du modèle vers l'entité.
+                Password = model.Password, // Mappe le mot de passe du modèle vers l'entité.
+                Roles = model.Roles, // Mappe les rôles du modèle vers l'entité.
             };
         }
     }
