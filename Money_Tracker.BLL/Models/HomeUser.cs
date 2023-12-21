@@ -6,19 +6,13 @@ using System.Threading.Tasks;
 
 namespace Money_Tracker.BLL.Models
 {
-    /// <summary>
-    /// Représente une relation entre un utilisateur (User) et une maison (Home).
-    /// </summary>
+    // Classe HomeUser : Représente une relation entre un utilisateur (User) et une maison (Home).
     public class HomeUser
     {
-        /// <summary>
-        /// Obtient ou définit l'utilisateur associé à cette relation maison-utilisateur.
-        /// </summary>
-        public User? User { get; set; }
+        public User? User { get; set; } // Référence à l'objet utilisateur associé à cette relation maison-utilisateur.
+                                        // Permet de relier directement un utilisateur à une maison.
 
-        /// <summary>
-        /// Obtient ou définit la maison associée à cette relation maison-utilisateur.
-        /// </summary>
-        public int Home_Id { get; set; }
+        public int Home_Id { get; set; } // Identifiant de la maison associée à cette relation.
+                                         // Utilisé pour relier cette relation à une maison spécifique.
     }
 }

@@ -1,31 +1,17 @@
 ﻿using Money_Tracker.DAL.Entities;
 
-
 namespace Money_Tracker.BLL.Models
 {
-    /// <summary>
-    /// Représente une entité "Home" contenant des informations sur une maison.
-    /// </summary>
+    // Classe Home : Représente une maison 
     public class Home
     {
-        /// <summary>
-        /// Obtient ou définit l'identifiant de la maison.
-        /// </summary>
-        public int Id { get; set; }
+        public int Id { get; set; } // Identifiant unique de la maison. 
 
-        /// <summary>
-        /// Obtient ou définit l'identifiant de l'utilisateur associé à la maison.
-        /// </summary>
-        public int User_Id { get; set; }
+        public int User_Id { get; set; } // Identifiant de l'utilisateur principal associé à la maison.
 
-        /// <summary>
-        /// Obtient ou définit le nom de la maison.
-        /// </summary>
-        public string Name_Home { get; set; } = string.Empty;
+        public string Name_Home { get; set; } = string.Empty; // Nom de la maison
 
-        /// <summary>
-        /// Obtient ou définit une collection d'utilisateurs associés à la maison.
-        /// </summary>
-        public IEnumerable<HomeUser> Users { get; set; }
+        public IEnumerable<HomeUser> Users { get; set; } // Collection d'utilisateurs associés à la maison.
+                                                         
     }
 }

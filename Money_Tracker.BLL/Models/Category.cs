@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace Money_Tracker.BLL.Models
 {
+    // Classe Category : Représente une catégorie de dépense
     public class Category
     {
-        public int Id { get; set; }
-        public string Category_Name { get; set; } = string.Empty;
+        public int Id { get; set; } // Identifiant unique de la catégorie
+
+        public string Category_Name { get; set; } = string.Empty; // Nom de la catégorie. 
+                                                             
     }
 }
