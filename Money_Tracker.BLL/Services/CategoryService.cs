@@ -43,7 +43,7 @@ namespace Money_Tracker.BLL.Services
         // Met à jour une catégorie existante
         public bool Update(int id, Category category)
         {
-            // Tente de mettre à jour la catégorie et renvoie un booléen indiquant le succès de l'opération.
+            // Tente de mettre à jour la catégorie et renvoie un booléen indiquant si la mise à jour a réussi
             bool updated = _CategoryRepository.Update(id, category.ToEntity());
             if (!updated)
             {
@@ -56,7 +56,7 @@ namespace Money_Tracker.BLL.Services
         // Supprime une catégorie par son ID
         public bool Delete(int id)
         {
-            // Tente de mettre à jour la catégorie et renvoie un booléen indiquant le succès de l'opération.
+            // Tente de mettre à jour la catégorie et renvoie un booléen indiquant si la suppression a réussi
             bool deleted = _CategoryRepository.Delete(id);
             if (!deleted)
             {

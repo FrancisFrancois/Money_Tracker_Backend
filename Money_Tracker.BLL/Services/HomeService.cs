@@ -8,47 +8,38 @@ using Money_Tracker.DAL.Interfaces;
 
 namespace Money_Tracker.BLL.Services
 {
-    /// <summary>
-    /// Service responsable de la gestion des opérations liées aux maisons (Home).
-    /// </summary>
+    // Classe HomeService : Implémente les opérations de gestion des maisons spécifiées dans l'interface IHomeService
     public class HomeService : IHomeService
     {
+        // Référence au repository des catégories et des utilisateurs pour l'interaction avec la base de données
         private readonly IHomeRepository _HomeRepository;
         private readonly IUserRepository _UserRepository;
 
-        /// <summary>
-        /// Initialise une nouvelle instance de la classe HomeService.
-        /// </summary>
-        /// <param name="homeRepository">Le repository des maisons.</param>
-        /// <param name="userRepository">Le repository des utilisateurs.</param>
+        // Constructeur pour injecter les dépendances des repositories
         public HomeService(IHomeRepository homeRepository, IUserRepository userRepository)
         {
             _HomeRepository = homeRepository;
             _UserRepository = userRepository;
         }
 
-        // Méthodes pour gérer les opérations CRUD des maisons
-
-        /// <summary>
-        /// Récupère toutes les maisons et les renvoie sous forme de modèles Home.
-        /// </summary>
-        /// <returns>Une collection de modèles Home.</returns>
+        // Récupère tous les domiciles et les convertit en modèles
         public IEnumerable<Home> GetAll()
         {
+            // Utilise le repository pour récupérer tous les domiciles et les convertit en modèles Home
             return _HomeRepository.GetAll().Select(h => h.ToModel());
         }
 
-        /// <summary>
-        /// Récupère une maison par son identifiant avec les utilisateurs associés et renvoie un modèle Home.
-        /// </summary>
-        /// <param name="id">L'identifiant de la maison à récupérer.</param>
-        /// <returns>Un modèle Home avec les utilisateurs associés.</returns>
+        // Récupère un domicile spécifique par son ID et le convertir en modèle
         public Home? GetById(int id)
         {
+            // Utilise le repository pour trouver une maison par son ID et la convertir en modèle, renvoie null si non trouvée
             Home? home = _HomeRepository.GetById(id)?.ToModel();
 
+            // Si le domicile est trouvé, récupère et assigne les utilisateurs associés au domicile
             if (home is not null)
             {
+                // Utilise _HomeRepository pour obtenir les utilisateurs associés au domicile
+                // et on les joint avec les données des utilisateurs obtenues par _UserRepository
                 IEnumerable<HomeUser> homeUsers = _HomeRepository.GetUsers(home.Id)
                     .Join(_UserRepository.GetAll(), hs => hs.User_Id, u => u.Id, (hs, u) =>
                     {
@@ -56,48 +47,41 @@ namespace Money_Tracker.BLL.Services
                         hsModel.User = u.ToModel();
                         return hsModel;
                     });
+                // Assignation des utilisateurs associés au modèle Home
                 home.Users = homeUsers;
             }
 
             return home;
         }
 
-        /// <summary>
-        /// Crée une nouvelle maison à partir du modèle Home spécifié.
-        /// </summary>
-        /// <param name="home">Le modèle Home à créer.</param>
-        /// <returns>Un modèle Home nouvellement créé.</returns>
+        // Crée un nouveau domicile
         public Home Create(Home home)
         {
+            // Utilise le repository pour créer une nouvelle maison dans la base de données et renvoie le modèle créé
             return _HomeRepository.Create(home.ToEntity()).ToModel();
         }
 
-        /// <summary>
-        /// Met à jour une maison avec l'identifiant spécifié en utilisant le modèle Home spécifié.
-        /// </summary>
-        /// <param name="id">L'identifiant de la maison à mettre à jour.</param>
-        /// <param name="home">Le modèle Home mis à jour.</param>
-        /// <returns>True si la mise à jour a réussi, sinon False.</returns>
+        // Met à jour un domicile existant
         public bool Update(int id, Home home)
         {
+            // Tente de mettre à jour le domicile et renvoie un booléen indiquant si la mise à jour a réussi
             bool updated = _HomeRepository.Update(id, home.ToEntity());
             if (!updated)
             {
+                // Exception indique que l'opération de suppression a échoué 
                 throw new NotFoundException("Home not found");
             }
             return updated;
         }
 
-        /// <summary>
-        /// Supprime une maison avec l'identifiant spécifié.
-        /// </summary>
-        /// <param name="id">L'identifiant de la maison à supprimer.</param>
-        /// <returns>True si la suppression a réussi, sinon False.</returns>
+        // Supprime un domicile par son ID
         public bool Delete(int id)
         {
+            // Tente de supprimer le domicile et renvoie un booléen indiquant si la suppression a réussi
             bool deleted = _HomeRepository.Delete(id);
             if (!deleted)
             {
+                // Si la suppression échoue, une exception est levée
                 throw new NotFoundException("Home not found");
             }
 

@@ -44,7 +44,7 @@ namespace Money_Tracker.BLL.Services
         // Met à jour une dépense existante.
         public bool Update(int id, Expense expense)
         {
-            // Tente de mettre à jour la dépense et renvoie un booléen indiquant le succès de l'opération.
+            // Tente de mettre à jour la dépense et renvoie un booléen indiquant si la mise à jour a réussi
             bool updated = _ExpenseRepository.Update(id, expense.ToEntity());
             if (!updated)
             {
@@ -57,7 +57,7 @@ namespace Money_Tracker.BLL.Services
         // Supprime une dépense par son ID.
         public bool Delete(int id)
         {
-            // Tente de supprimer la dépense et renvoie un booléen indiquant le succès de l'opération.
+            // Tente de supprimer la dépense et renvoie un booléen indiquant si la suppression à jour a réussi
             bool deleted = _ExpenseRepository.Delete(id);
             if (!deleted)
             {
