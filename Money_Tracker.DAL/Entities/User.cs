@@ -6,45 +6,22 @@ using System.Threading.Tasks;
 
 namespace Money_Tracker.DAL.Entities
 {
-    /// <summary>
-    /// Représente un utilisateur.
-    /// </summary>
+    // Classe User : Représente un utilisateur 
     public class User
     {
-        /// <summary>
-        /// Obtient ou définit l'identifiant de l'utilisateur.
-        /// </summary>
-        public int Id { get; set; }
+        public int Id { get; set; } // Identifiant unique de l'utilisateur
 
-        /// <summary>
-        /// Obtient ou définit le nom de famille de l'utilisateur.
-        /// </summary>
-        public string Lastname { get; set; } = string.Empty;
+        public string Lastname { get; set; } = string.Empty; // Nom de famille de l'utilisateur.
 
-        /// <summary>
-        /// Obtient ou définit le prénom de l'utilisateur.
-        /// </summary>
-        public string Firstname { get; set; } = string.Empty;
+        public string Firstname { get; set; } = string.Empty; // Prénom de l'utilisateur.
 
-        /// <summary>
-        /// Obtient ou définit le pseudo de l'utilisateur.
-        /// </summary>
-        public string Pseudo { get; set; } = string.Empty;
+        public string Pseudo { get; set; } = string.Empty; // Pseudo de l'utilisateur
 
-        /// <summary>
-        /// Obtient ou définit l'adresse e-mail de l'utilisateur.
-        /// </summary>
-        public string Email { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty; // Adresse e-mail de l'utilisateur
 
-        /// <summary>
-        /// Obtient ou définit le mot de passe de l'utilisateur.
-        /// </summary>
-        public string Password { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty; // Mot de passe de l'utilisateur
 
-        /// <summary>
-        /// Obtient ou définit les rôles de l'utilisateur.
-        /// </summary>
-        public string Roles { get; set; } = string.Empty;
+        public string Roles { get; set; } = string.Empty; // Rôles de l'utilisateur. Utilisé pour définir les permissions et accès dans l'application.
     }
-
 }
+

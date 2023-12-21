@@ -6,19 +6,13 @@ using System.Threading.Tasks;
 
 namespace Money_Tracker.DAL.Entities
 {
-    /// <summary>
-    /// Représente une catégorie.
-    /// </summary>
+    // Classe Category : Représente une catégorie de dépense
     public class Category
     {
-        /// <summary>
-        /// Obtient ou définit l'identifiant de la catégorie.
-        /// </summary>
-        public int Id { get; set; }
+        public int Id { get; set; } // Identifiant unique de la catégorie
 
-        /// <summary>
-        /// Obtient ou définit le nom de la catégorie.
-        /// </summary>
-        public string Category_Name { get; set; } = string.Empty;
+        public string Category_Name { get; set; } = string.Empty; // Nom de la catégorie. 
+
     }
 }
+

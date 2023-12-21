@@ -6,25 +6,16 @@ using System.Threading.Tasks;
 
 namespace Money_Tracker.DAL.Entities
 {
-    /// <summary>
-    /// Représente un domicile.
-    /// </summary>
+    // Classe Home : Représente une maison 
     public class Home
     {
-        /// <summary>
-        /// Obtient ou définit l'identifiant du domicile.
-        /// </summary>
-        public int Id { get; set; }
+        public int Id { get; set; } // Identifiant unique de la maison. 
 
-        /// <summary>
-        /// Obtient ou définit l'identifiant de l'utilisateur associé au domicile.
-        /// </summary>
-        public int User_Id { get; set; }
+        public int User_Id { get; set; } // Identifiant de l'utilisateur principal associé à la maison.
 
-        /// <summary>
-        /// Obtient ou définit le nom du domicile.
-        /// </summary>
-        public string Name_Home { get; set; } = string.Empty;
+        public string Name_Home { get; set; } = string.Empty; // Nom de la maison
+
+        public IEnumerable<HomeUser> Users { get; set; } // Collection d'utilisateurs associés à la maison.
+
     }
-
 }

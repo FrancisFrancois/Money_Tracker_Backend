@@ -6,45 +6,21 @@ using System.Threading.Tasks;
 
 namespace Money_Tracker.DAL.Entities
 {
-    /// <summary>
-    /// Représente une dépense.
-    /// </summary>
+    // Classe Expense : Représente une dépense
     public class Expense
     {
-        /// <summary>
-        /// Obtient ou définit l'identifiant de la dépense.
-        /// </summary>
-        public int Id { get; set; }
+        public int Id { get; set; } // Identifiant unique de la dépense.
 
-        /// <summary>
-        /// Obtient ou définit l'identifiant de la catégorie de la dépense.
-        /// </summary>
-        public int Category_Id { get; set; }
+        public int Category_Id { get; set; } // Identifiant de la catégorie associée à la dépense.
 
-        /// <summary>
-        /// Obtient ou définit l'identifiant de l'utilisateur lié à la dépense.
-        /// </summary>
-        public int User_Id { get; set; }
+        public int User_Id { get; set; } // Identifiant de l'utilisateur ayant effectué la dépense.
 
-        /// <summary>
-        /// Obtient ou définit l'identifiant du domicile lié à la dépense.
-        /// </summary>
-        public int Home_Id { get; set; }
+        public int Home_Id { get; set; } // Identifiant du domicile associé à la dépense.
 
-        /// <summary>
-        /// Obtient ou définit le montant de la dépense.
-        /// </summary>
-        public double Amount { get; set; }
+        public double Amount { get; set; } // Montant de la dépense.
 
-        /// <summary>
-        /// Obtient ou définit la description de la dépense.
-        /// </summary>
-        public string Description { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty; // Description de la dépense.
 
-        /// <summary>
-        /// Obtient ou définit la date de la dépense.
-        /// </summary>
-        public DateTime Date_Expense { get; set; }
+        public DateTime Date_Expense { get; set; } // Date à laquelle la dépense a été effectuée.
     }
-
 }
