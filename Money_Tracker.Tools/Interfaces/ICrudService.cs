@@ -7,47 +7,33 @@ using System.Threading.Tasks;
 
 namespace Money_Tracker.Tools.Interfaces
 {
-    /// <summary>
-    /// Représente une interface de service générique CRUD (Create, Read, Update, Delete).
-    /// </summary>
-    /// <typeparam name="TId">Le type d'identifiant utilisé pour les entités.</typeparam>
-    /// <typeparam name="TModel">Le type du modèle/entité.</typeparam>
+    // Cette interface représente un service générique pour les opérations CRUD (Create, Read, Update, Delete).
+    // - TId : Le type de l'identifiant utilisé pour les entités.
+    // - TModel : Le type du modèle/entité.
     public interface ICrudService<TId, TModel> where TModel : class
     {
-        /// <summary>
-        /// Récupère toutes les entités de type TModel.
-        /// </summary>
-        /// <returns>Une collection énumérable des entités de type TModel.</returns>
+        // Méthode pour récupérer toutes les entités de type TModel.
         IEnumerable<TModel> GetAll();
 
-        /// <summary>
-        /// Récupère une entité spécifique de type TModel par son identifiant.
-        /// </summary>
-        /// <param name="id">L'identifiant de l'entité à récupérer.</param>
-        /// <returns>L'entité de type TModel si elle est trouvée ; sinon, retourne null.</returns>
+        // Méthode pour récupérer une entité spécifique de type TModel par son identifiant.
+        // - id : L'identifiant de l'entité à récupérer.
+        // Renvoie l'entité de type TModel si elle est trouvée ; sinon, retourne null.
         TModel? GetById(TId id);
 
-        /// <summary>
-        /// Crée une nouvelle entité de type TModel.
-        /// </summary>
-        /// <param name="entity">L'entité à créer.</param>
-        /// <returns>L'entité de type TModel créée.</returns>
+        // Méthode pour créer une nouvelle entité de type TModel.
+        // - entity : L'entité à créer.
+        // Renvoie l'entité de type TModel créée.
         TModel Create(TModel entity);
 
-        /// <summary>
-        /// Met à jour une entité existante de type TModel.
-        /// </summary>
-        /// <param name="id">L'identifiant de l'entité à mettre à jour.</param>
-        /// <param name="entity">Les données de l'entité mise à jour.</param>
-        /// <returns>True si l'opération de mise à jour a réussi ; sinon, false.</returns>
+        // Méthode pour mettre à jour une entité existante de type TModel.
+        // - id : L'identifiant de l'entité à mettre à jour.
+        // - entity : Les données de l'entité mise à jour.
+        // Renvoie true si l'opération de mise à jour a réussi ; sinon, false.
         bool Update(TId id, TModel entity);
 
-        /// <summary>
-        /// Supprime une entité de type TModel par son identifiant.
-        /// </summary>
-        /// <param name="id">L'identifiant de l'entité à supprimer.</param>
-        /// <returns>True si l'opération de suppression a réussi ; sinon, false.</returns>
+        // Méthode pour supprimer une entité de type TModel par son identifiant.
+        // - id : L'identifiant de l'entité à supprimer.
+        // Renvoie true si l'opération de suppression a réussi ; sinon, false.
         bool Delete(TId id);
     }
-
 }
