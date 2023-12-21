@@ -1,156 +1,209 @@
 ﻿using Money_Tracker.DAL.Entities;
+using Money_Tracker.DAL.Entities.Money_Tracker.DAL.Entities;
 using Money_Tracker.DAL.Interfaces;
 using Money_Tracker.DAL.Mappers;
 using Money_Tracker.Tools.Utils;
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Money_Tracker.DAL.Repositories
 {
-    /// <summary>
-    /// Implémentation du repository pour accéder aux données liées aux maisons.
-    /// </summary>
+    // La classe CategoryRepository gère l'accès aux données des maisons (Home) dans la base de données.
     public class HomeRepository : IHomeRepository
     {
+        // Connexion à la base de données utilisée pour exécuter les requêtes.
         private readonly DbConnection _DbConnection;
 
+        // Constructeur pour initialiser la connexion à la base de données.
         public HomeRepository(DbConnection dbConnection)
         {
             _DbConnection = dbConnection;
         }
 
-        /// <summary>
-        /// Récupère toutes les maisons depuis la base de données.
-        /// </summary>
+        // Méthode pour récupérer toutes les maisons de la base de données.
         public IEnumerable<Home> GetAll()
         {
+            // Création et configuration de la commande de base de données.
             using (DbCommand command = _DbConnection.CreateCommand())
             {
+                // Définition de la requête SQL pour sélectionner toutes les maisons.
                 command.CommandText = "SELECT * FROM [Home]";
+
+                // Ouverture de la connexion à la base de données.
                 _DbConnection.Open();
+
+                // Exécution de la commande et création d'un lecteur de données.
                 using (DbDataReader reader = command.ExecuteReader())
                 {
+                    // Lecture de l'enregistrement retenu par la requête.
                     while (reader.Read())
                     {
+                        // Convertit chaque enregistrement en un objet Home et le renvoie.
                         yield return HomeMapper.Mapper(reader);
                     }
                 };
+                // Fermeture de la connexion à la base de données.
                 _DbConnection.Close();
             }
         }
 
-        /// <summary>
-        /// Récupère une maison par son ID depuis la base de données.
-        /// </summary>
+        // Methode pour sélectionner une maison spécifique par son identifiant.
         public Home? GetById(int id)
         {
             Home? result = null;
+
+            // Création et configuration de la commande de base de données.
             using (DbCommand command = _DbConnection.CreateCommand())
             {
+                // Définition de la requête SQL avec un paramètre pour l'identifiant.
                 command.CommandText = "SELECT * FROM [Home] WHERE [Home_Id] = @id";
+
+                // Ajout des paramètres à la commande.
                 command.addParamWithValue("id", id);
+
+                // Ouverture de la connexion à la base de données.
                 _DbConnection.Open();
+
+                // Exécution de la commande et création d'un lecteur de données.
                 using (DbDataReader reader = command.ExecuteReader())
                 {
+                    // Vérification si un enregistrement est trouvé
                     if (reader.Read())
                     {
+                        // Conversion de l'enregistrement en objet Home
                         result = HomeMapper.Mapper(reader);
                     }
                 };
+                // Fermeture de la connexion à la base de données.
                 _DbConnection.Close();
             };
+            // Renvoi de l'objet Home trouvé ou null si aucun n'a été trouvé.
             return result;
         }
 
-        /// <summary>
-        /// Crée une nouvelle maison dans la base de données.
-        /// </summary>
+        // Méthode pour créer une nouvelle maison dans la base de données.
         public Home Create(Home home)
         {
             Home result;
+
+            // Création et configuration de la commande de base de données.
             using (DbCommand command = _DbConnection.CreateCommand())
             {
+                // Définition de la requête SQL pour insérer une nouvelle maison.
                 command.CommandText = "INSERT INTO [Home] ([User_Id],[Name_Home]) " +
                                       " OUTPUT INSERTED.* " +
                                       "VALUES (@user_id, @name_home)";
+
+                // Ajout des paramètres à la commande.
                 command.addParamWithValue("@user_id", home.User_Id);
                 command.addParamWithValue("@name_home", home.Name_Home);
+
+                // Ouverture de la connexion à la base de données.
                 _DbConnection.Open();
+
+                // Exécution de la commande et création d'un lecteur de données.
                 using (DbDataReader reader = command.ExecuteReader())
                 {
-                    if (reader.Read())
+                    // Lecture de l'enregistrement retenu par la requête.
+                    if (!reader.Read())
                     {
-                        result = HomeMapper.Mapper(reader);
-                    }
-                    else
-                    {
+                        // Lève une exception si aucune ligne n'est retournée
                         throw new Exception("Erreur lors de l'ajout de la maison");
                     }
+
+                    // Conversion de l'enregistrement en objet Home
+                    result = HomeMapper.Mapper(reader);
                 };
+                // Fermeture de la connexion à la base de données.
                 _DbConnection.Close();
-            };   
+            };
+
+            // Renvoi de l'objet Maison trouvé ou null si aucun n'a été trouvé.
             return result;
         }
 
-
-        /// <summary>
-        /// Met à jour une maison dans la base de données.
-        /// </summary>
+        // Methode pour mettre à jour une maison dans la base de données.
         public bool Update(int id, Home home)
         {
+            // Création et configuration de la commande de base de données.
             using (DbCommand command = _DbConnection.CreateCommand())
             {
+                // Définition de la requête SQL pour mettre à jour une maison.
                 command.CommandText =
                     "UPDATE [Home]" +
                     " SET [Name_Home] = @name_home," +
                     " WHERE [Home_Id] = @id";
+
+                // Ajout des paramètres à la commande.
                 command.addParamWithValue("name_home", home.Name_Home);
                 command.addParamWithValue("id", id);
+
+                // Ouverture de la connexion à la base de données.
                 _DbConnection.Open();
+
+                // Exécution de la commande et obtention du nombre d'enregistrements affectés.
                 int nbRowUpdated = command.ExecuteNonQuery();
+
+                // Fermeture de la connexion à la base de données.
                 _DbConnection.Close();
+
+                // Renvoi vrai si un enregistrement a été mis à jour, sinon faux.
                 return nbRowUpdated == 1;
             }
         }
 
-        /// <summary>
-        /// Supprime une maison de la base de données par son ID.
-        /// </summary>
+        // Methode pour supprimer une maison de la base de données.
         public bool Delete(int id)
         {
+            // Création et configuration de la commande de base de données.
             using (DbCommand command = _DbConnection.CreateCommand())
             {
+                // Définition de la requête SQL pour supprimer une catégorie par son identifiant.
                 command.CommandText = "DELETE FROM [Home] WHERE [Home_Id] = @id";
+
+                // Définition de la requête SQL pour supprimer une catégorie par son identifiant.
                 command.addParamWithValue("id", id);
+
+                // Ouverture de la connexion à la base de données.
                 _DbConnection.Open();
+
+                // Exécution de la commande et obtention du nombre d'enregistrement affectés.
                 int nbRowDeleted = command.ExecuteNonQuery();
+
+                // Fermeture de la connexion à la base de données.
                 _DbConnection.Close();
+
+                // Renvoi vrai si un enregistrement a été supprimé, sinon faux.
                 return nbRowDeleted == 1;
             };
         }
 
-        /// <summary>
-        /// Récupère les utilisateurs associés à une maison depuis la base de données.
-        /// </summary>
+        // Methode pour recuperer les utilisateurs d'une maison
         public IEnumerable<HomeUser> GetUsers(int userId)
         {
+            // Création et configuration de la commande de base de données.
             using (DbCommand command = _DbConnection.CreateCommand()) 
             {
+                // Définition de la requête SQL pour sélectionner les utilisateurs d'une maison spécifique.
                 command.CommandText = "SELECT * FROM [Home_User] WHERE [Home_id] = @id";
+
+                // Ajout des paramètres à la commande.
                 command.addParamWithValue("id", userId);
+
+                // Ouverture de la connexion à la base de données.
                 _DbConnection.Open();
+
+                // Exécution de la commande et création d'un lecteur de données.
                 using (DbDataReader reader = command.ExecuteReader())
                 {
+                    // Lecture de l'enregistrement retenu par la requête.
                     while (reader.Read())
                     {
+                        // Convertit chaque enregistrement en un objet HomeUser
                         yield return HomeUserMapper.MapperHS(reader);
                     }
                 };
+                // Fermeture de la connexion à la base de données.
                 _DbConnection.Close();
             }
         }

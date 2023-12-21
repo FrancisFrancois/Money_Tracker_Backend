@@ -34,7 +34,7 @@ namespace Money_Tracker.DAL.Repositories
                 // Exécution de la commande et création d'un lecteur de données.
                 using (DbDataReader reader = command.ExecuteReader())
                 {
-                    // Lecture de enregistrement retournée par la requête.
+                    // Lecture de l'enregistrement retournée par la requête.
                     while (reader.Read())
                     {
                         // Convertit chaque enregistrement en un objet Expense et le renvoie.
@@ -59,7 +59,7 @@ namespace Money_Tracker.DAL.Repositories
                 // Définition de la requête SQL avec un paramètre pour l'identifiant.
                 command.CommandText = "SELECT * FROM [Category] WHERE [Category_Id] = @id";
 
-                // Ajout du paramètre 'id' à la commande.
+                // Ajout des paramètres à la commande.
                 command.addParamWithValue("id", id);
 
                 // Ouverture de la connexion à la base de données.
@@ -133,23 +133,24 @@ namespace Money_Tracker.DAL.Repositories
                 command.CommandText =
                     "UPDATE [Category] SET [Category_Name] = @category_name WHERE [Category_Id] = @id";
 
-                / // Ajout des paramètres à la commande.
+                // Ajout des paramètres à la commande.
                 command.addParamWithValue("category_name", category.Category_Name);
                 command.addParamWithValue("id", id);
 
                 // Ouverture de la connexion à la base de données.
                 _DbConnection.Open();
 
-                // Exécution de la commande et obtention du nombre d'enregistrement affectées.
+                // Exécution de la commande et obtention du nombre d'enregistrements affectés.
                 int nbRowUpdated = command.ExecuteNonQuery();
 
                 // Fermeture de la connexion à la base de données.
                 _DbConnection.Close();
 
-                // Renvoi vrai si un enregistrement a été mise à jour, sinon faux.
+                // Renvoi vrai si un enregistrement a été mis à jour, sinon faux.
                 return nbRowUpdated == 1;
             }
         }
+
 
         // Méthode pour supprimer une catégorie de la base de données.
         public bool Delete(int id)

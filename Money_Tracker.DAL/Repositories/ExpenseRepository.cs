@@ -146,7 +146,7 @@ namespace Money_Tracker.DAL.Repositories
                 // Ouverture de la connexion à la base de données.
                 _DbConnection.Open();
 
-                // Exécution de la commande et obtention du nombre d'enregistrement affectées.
+                // Exécution de la commande et obtention du nombre d'enregistrement modifiés.
                 int nbRowUpdated = command.ExecuteNonQuery();
 
                 // Fermeture de la connexion à la base de données.
@@ -172,7 +172,7 @@ namespace Money_Tracker.DAL.Repositories
                 // Ouverture de la connexion à la base de données.
                 _DbConnection.Open();
 
-                // Exécution de la commande et obtention du nombre d'enregistrement affectées.
+                // Exécution de la commande et obtention du nombre d'enregistrement supprimés.
                 int nbRowDeleted = command.ExecuteNonQuery();
 
                 // Fermeture de la connexion à la base de données.
