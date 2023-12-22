@@ -1,13 +1,9 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using Money_Tracker.BLL.CustomExceptions;
+﻿using Money_Tracker.BLL.CustomExceptions;
 using Money_Tracker.BLL.Interfaces;
 using Money_Tracker.BLL.Mappers;
 using Money_Tracker.BLL.Models;
 using Money_Tracker.DAL.Interfaces;
-using Money_Tracker.DAL.Repositories;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace Money_Tracker.BLL.Services
 {
@@ -161,7 +157,15 @@ namespace Money_Tracker.BLL.Services
             return _UserRepository.Create(user.ToEntity()).ToModel();
         }
 
-
+        public int GetCurrentUserId()
+        {
+            var userIdClaim = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim != null)
+            {
+                return int.Parse(userIdClaim.Value);
+            }
+            throw new Exception("User ID not found");
+        }
 
     }
 }

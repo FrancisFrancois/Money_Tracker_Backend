@@ -118,5 +118,6 @@ namespace Money_Tracker.API.Controllers
             // Retourne le jeton JWT sous forme de chaîne
             return new JwtSecurityTokenHandler().WriteToken(Token);
         }
+
     }
 }

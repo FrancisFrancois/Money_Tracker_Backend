@@ -23,4 +23,5 @@ namespace Money_Tracker.BLL.Interfaces
         // Cette méthode est utilisée lors de la création d'un nouveau compte utilisateur.
         // Elle s'occupe de la sécurisation du mot de passe et de l'attribution d'un rôle par défaut.
     }
+
 }
