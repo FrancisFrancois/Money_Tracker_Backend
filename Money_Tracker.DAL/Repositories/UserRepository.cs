@@ -103,6 +103,10 @@ namespace Money_Tracker.DAL.Repositories
                 command.addParamWithValue("password", user.Password);
                 command.addParamWithValue("roles", user.Roles);
 
+                // Ouverture de la connexion à la base de données.
+                _DbConnection.Open();
+
+
                 // Exécution de la commande et création d'un lecteur de données.
                 using (DbDataReader reader = command.ExecuteReader())
                 {

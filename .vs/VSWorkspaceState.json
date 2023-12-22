@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Money_Tracker.BLL",
+    "\\Money_Tracker.BLL\\Mappers",
     "\\Money_Tracker.DAL",
     "\\Money_Tracker.DAL\\Repositories"
   ],
-  "SelectedNode": "\\Money_Tracker.DAL\\Repositories\\UserRepository.cs",
+  "SelectedNode": "\\Money_Tracker.BLL\\Mappers\\HomeUserMapper.cs",
   "PreviewInSolutionExplorer": false
 }

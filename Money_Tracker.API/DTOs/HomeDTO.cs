@@ -29,8 +29,9 @@ namespace Money_Tracker.API.DTOs
     // Classe HomeDataDTO : Utilisée pour capturer les données lors de la création ou de la mise à jour d'un domicile
     public class HomeDataDTO
     {
-        [Required] // Champ User_Id marqué comme obligatoire pour la création ou la mise à jour
+        [Required] 
         public int User_Id { get; set; } // Identifiant de l'utilisateur principal associé au domicile
+        [Required] 
         public string Name_Home { get; set; } = string.Empty; // Nom du domicile
     }
 }

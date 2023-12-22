@@ -1,5 +1,4 @@
 ﻿using Money_Tracker.DAL.Entities;
-using Money_Tracker.DAL.Entities.Money_Tracker.DAL.Entities;
 using System.Data;
 
 

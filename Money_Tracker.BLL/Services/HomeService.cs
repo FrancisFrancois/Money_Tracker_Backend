@@ -1,7 +1,6 @@
 ﻿using Money_Tracker.BLL.CustomExceptions;
 using Money_Tracker.BLL.Interfaces;
 using Money_Tracker.BLL.Mappers;
-using Money_Tracker.BLL.Mappers.Money_Tracker.BLL.Mappers;
 using Money_Tracker.BLL.Models;
 using Money_Tracker.DAL.Interfaces;
 

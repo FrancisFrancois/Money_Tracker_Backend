@@ -39,7 +39,8 @@ namespace Money_Tracker.BLL.Services
 
         // Crée et enregistre un nouvel utilisateur
         public User Create(User user)
-        {
+        {   
+
             // Hache le mot de passe avant de l'enregistrer
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
 
@@ -129,5 +130,38 @@ namespace Money_Tracker.BLL.Services
                 return false;
             }
         }
+
+        // Récupère le rôle d'un utilisateur
+        public string GetUserRole(string emailOrPseudo)
+        {
+            // Essayer de récupérer l'utilisateur par email. Si non trouvé, essayer par pseudo.
+            // Cette approche permet de gérer les utilisateurs qui se connectent soit avec leur email soit avec leur pseudo.
+            User? user = _UserRepository.GetUserByEmail(emailOrPseudo)?.ToModel() ?? _UserRepository.GetUserByPseudo(emailOrPseudo)?.ToModel();
+
+            // Vérifie si l'utilisateur a été trouvé.
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            // Retourner le rôle de l'utilisateur.
+            return user.Roles;
+        }
+
+        // Enregistre un nouvel utilisateur
+        public User Register(User user)
+        {
+            // Hache le mot de passe avant de l'enregistrer
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
+            // Attribuer automatiquement le rôle 'Manager' lors de l'inscription
+            user.Roles = "Manager";
+
+            // Crée l'utilisateur dans la base de données et renvoie le modèle créé
+            return _UserRepository.Create(user.ToEntity()).ToModel();
+        }
+
+
+
     }
 }

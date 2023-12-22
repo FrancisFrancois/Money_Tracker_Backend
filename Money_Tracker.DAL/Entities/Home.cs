@@ -15,7 +15,5 @@ namespace Money_Tracker.DAL.Entities
 
         public string Name_Home { get; set; } = string.Empty; // Nom de la maison
 
-        public IEnumerable<HomeUser> Users { get; set; } // Collection d'utilisateurs associés à la maison.
-
     }
 }

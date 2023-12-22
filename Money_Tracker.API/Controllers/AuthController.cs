@@ -4,6 +4,7 @@ using Money_Tracker.API.DTOs;
 using Money_Tracker.API.Mappers;
 using Money_Tracker.BLL.Interfaces;
 using Money_Tracker.BLL.Models;
+using Money_Tracker.BLL.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -40,7 +41,7 @@ namespace Money_Tracker.API.Controllers
             }
 
             // Crée l'utilisateur et le convertit en DTO
-            UserDTO createdUser = _UserService.Create(registerDTO.ToModel()).ToDTO();
+            UserDTO createdUser = _UserService.Register(registerDTO.ToModel()).ToDTO();
             if (createdUser is null)
             {
                 // Renvoie une réponse HTTP 400 (Bad Request) si la création de l'utilisateur échoue
@@ -74,8 +75,11 @@ namespace Money_Tracker.API.Controllers
       
             }
 
+            // Récupérer le rôle de l'utilisateur
+            string role = _UserService.GetUserRole(loginDto.PseudoOrEmail);
+
             // Génère un jeton JWT pour l'utilisateur
-            string token = GenerateJwtToken(loginDto.PseudoOrEmail);
+            string token = GenerateJwtToken(loginDto.PseudoOrEmail, role);
             DateTime expiration = DateTime.Now.AddSeconds(_JwtOptions.Expiration);
 
             // Retourne le jeton et la date d'expiration
@@ -87,12 +91,14 @@ namespace Money_Tracker.API.Controllers
         }
 
         // Méthode privée pour générer un jeton JWT
-        private string GenerateJwtToken(string userNameOrEmail)
+        private string GenerateJwtToken(string userPseudoOrEmail, string role)
         {
+            Console.WriteLine(_JwtOptions.SigningKey);
             // Crée les revendications (claims) pour le jeton
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, userNameOrEmail)
+                new Claim(ClaimTypes.Name, userPseudoOrEmail),
+                new Claim(ClaimTypes.Role, role)
             };
 
             // Crée une clé symétrique pour signer le jeton

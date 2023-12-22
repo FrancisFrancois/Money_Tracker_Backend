@@ -5,6 +5,7 @@ using Money_Tracker.API.DTOs;
 using Money_Tracker.API.Mappers;
 using Money_Tracker.BLL.CustomExceptions;
 using Money_Tracker.BLL.Interfaces;
+using System.Security.Claims;
 
 namespace Money_Tracker.API.Controllers
 {
@@ -53,11 +54,19 @@ namespace Money_Tracker.API.Controllers
         }
 
         // Route POST pour créer une nouvelle maison
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(HomeDTO))]
+        [ProducesResponseType(401)]
 
         public IActionResult Create([FromBody] HomeDataDTO home) 
         {
+            // Vérifiez si l'utilisateur actuel a le rôle de manager
+            var currentUserRole = User.FindFirst(ClaimTypes.Role)?.Value;
+            if (currentUserRole != "Manager")
+            {
+                return Unauthorized(new { Message = "Accès refusé. Seuls les managers peuvent créer des maisons." });
+            }
             // Crée une maison et le convertit en DTO
             HomeDTO result = _HomeService.Create(home.ToModel()).ToDTO();
 

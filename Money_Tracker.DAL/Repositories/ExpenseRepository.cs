@@ -94,7 +94,9 @@ namespace Money_Tracker.DAL.Repositories
             using (DbCommand command = _DbConnection.CreateCommand())
             {
                 // Définition de la requête SQL pour insérer une nouvelle dépense.
-                command.CommandText = "INSERT INTO [Expense] ([Category_Id], [User_Id], [Home_id], [Amount], [Description], [Date_Expense]) OUTPUT INSERTED.* VALUES(@category_id, @user_id, @home_id, @amount, @description, @date_expense)";
+                command.CommandText = "INSERT INTO [Expense] ([Category_Id], [User_Id], [Home_id], [Amount], [Description], [Date_Expense]) " +
+                                      "OUTPUT INSERTED.* " +
+                                      "VALUES(@category_id, @user_id, @home_id, @amount, @description, @date_expense)";
 
                 // Ajout des paramètres à la commande.
                 command.addParamWithValue("category_id", expense.Category_Id);
