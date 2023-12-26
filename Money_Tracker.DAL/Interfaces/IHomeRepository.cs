@@ -10,8 +10,10 @@ namespace Money_Tracker.DAL.Interfaces
         // Méthode pour récupérer les utilisateurs d'une maison spécifique par leur ID utilisateur
         IEnumerable<HomeUser> GetUsers(int userId);
 
+        // Méthode pour ajouter une nouvelle association HomeUser dans la table de jointure.
         HomeUser AddUserToHome(HomeUser homeUser);
 
+        // Méthode pour supprimer une association HomeUser existante de la table de jointure.
         bool RemoveUserFromHome(int homeId, int userId);
     }
 }

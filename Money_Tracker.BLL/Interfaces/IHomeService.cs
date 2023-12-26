@@ -7,7 +7,10 @@ namespace Money_Tracker.BLL.Interfaces
     // Hérite de l'interface générique ICrudService pour fournir des opérations CRUD standard
     public interface IHomeService : ICrudService<int, Home>
     {
+        // Méthode pour ajouter un utilisateur à un domicile.
         HomeUser AddUserToHome(HomeUser homeUser);
+
+        // Méthode pour supprimer un utilisateur d'un domicile
         bool RemoveUserFromHome(int homeId, int userId);
     }
 }

@@ -126,15 +126,20 @@ namespace Money_Tracker.API.Controllers
             return deleted ? NoContent() : NotFound("Home not found");
         }
 
+        // Route POST pour ajouter un utilisateur à une maison
         [HttpPost("AddUserToHome")]
         [ProducesResponseType(201, Type = typeof(HomeUserDTO))]
 
         public IActionResult InsertUserToHome([FromBody] HomeUserDTO homeUserData)
-        {
+        {   
+            // Ajoute un utilisateur à une maison et le convertir en DTO
             HomeUserDTO result = _HomeService.AddUserToHome(homeUserData.ToModel()).ToDTO();
+
+            // Renvoie une réponse HTTP 201 (Created) avec l'utilisateur ajouté à la maison
             return CreatedAtAction(nameof(GetById), new { homeId = result.Home_Id }, result);
         }
 
+        // Route DELETE pour supprimer un utilisateur d'une maison
         [HttpDelete("DeleteUserFromHome/{homeId}/{userId}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(404, Type = typeof(string))]
@@ -146,16 +151,20 @@ namespace Money_Tracker.API.Controllers
             bool deleted;
             try
             {
+                // Tente de supprimer l'utilisateur de la maison
                 deleted = _HomeService.RemoveUserFromHome(homeId, userId);
             }
             catch (NotFoundException ex)
             {
+                // Renvoie une recherche HTTP 404 (Not Found) si l'utilisateur n'est pas trouvé
                 return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
+                // Renvoie une recherche HTTP 400 (Bad Request)
                 return BadRequest(ex.Message);
             }
+            // Renvoie une recherche HTTP 204 (No Content) si la suppression a été réusii, sinon 404 (Not Found).
             return deleted ? NoContent() : NotFound("User not found");
         }
 

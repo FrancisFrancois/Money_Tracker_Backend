@@ -49,7 +49,6 @@ namespace Money_Tracker.BLL.Services
                 // Assignation des utilisateurs associés au modèle Home
                 home.Users = homeUsers;
             }
-
             return home;
         }
 
@@ -86,16 +85,22 @@ namespace Money_Tracker.BLL.Services
             return deleted;
         }
 
+        // Méthode pour ajouter un utilisateur à un domicile.
         public HomeUser AddUserToHome(HomeUser homeUser)
         {
+            // Utilise le repository pour ajouter une association HomeUser dans la table de jointure.
+            // Convertit d'abord l'objet HomeUser de la couche BLL en entité de la couche DAL pour l'insertion.
             return _HomeRepository.AddUserToHome(homeUser.ToEntity()).ToModel();
         }
 
+        // Méthode pour supprimer un utilisateur d'un domicile
         public bool RemoveUserFromHome(int homeId, int userId)
         {
+            // Tente de supprimer l'association HomeUser et renvoie un booléen indiquant si la suppression a réussi
             bool deleted = _HomeRepository.RemoveUserFromHome(homeId, userId);
             if (!deleted)
             {
+                // Si la suppression échoue, une exception est levée
                 throw new NotFoundException("User not found");
             }
             return deleted;
