@@ -3,6 +3,7 @@
     "",
     "\\Money_Tracker.BLL",
     "\\Money_Tracker.BLL\\Mappers",
+    "\\Money_Tracker.BLL\\Models",
     "\\Money_Tracker.DAL",
     "\\Money_Tracker.DAL\\Repositories"
   ],

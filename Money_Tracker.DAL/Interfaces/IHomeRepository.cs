@@ -9,5 +9,9 @@ namespace Money_Tracker.DAL.Interfaces
     {
         // Méthode pour récupérer les utilisateurs d'une maison spécifique par leur ID utilisateur
         IEnumerable<HomeUser> GetUsers(int userId);
+
+        HomeUser AddUserToHome(HomeUser homeUser);
+
+        bool RemoveUserFromHome(int homeId, int userId);
     }
 }

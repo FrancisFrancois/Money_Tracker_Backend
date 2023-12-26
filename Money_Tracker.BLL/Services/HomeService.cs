@@ -83,7 +83,21 @@ namespace Money_Tracker.BLL.Services
                 // Si la suppression échoue, une exception est levée
                 throw new NotFoundException("Home not found");
             }
+            return deleted;
+        }
 
+        public HomeUser AddUserToHome(HomeUser homeUser)
+        {
+            return _HomeRepository.AddUserToHome(homeUser.ToEntity()).ToModel();
+        }
+
+        public bool RemoveUserFromHome(int homeId, int userId)
+        {
+            bool deleted = _HomeRepository.RemoveUserFromHome(homeId, userId);
+            if (!deleted)
+            {
+                throw new NotFoundException("User not found");
+            }
             return deleted;
         }
     }

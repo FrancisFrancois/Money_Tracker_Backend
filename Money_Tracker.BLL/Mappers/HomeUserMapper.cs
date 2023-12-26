@@ -10,7 +10,8 @@ namespace Money_Tracker.BLL.Mappers
         public static Models.HomeUser ToModel(this Entities.HomeUser entity)
         {
             return new Models.HomeUser
-            {  
+            {
+                User = new Models.User { Id = entity.User_Id }, // Crée un modèle User avec l'identifiant fourni.
                 Home_Id = entity.Home_Id, // Mappe l'identifiant du domicile de l'entité vers le modèle.
             };
         }
@@ -20,6 +21,7 @@ namespace Money_Tracker.BLL.Mappers
         {
             return new Entities.HomeUser
             {
+                User_Id = model.User?.Id ?? 0, // Utilise l'identifiant de l'utilisateur, ou 0 si User est null.
                 Home_Id = model.Home_Id // Mappe l'identifiant du domicile du modèle vers l'entité.
             };
         }

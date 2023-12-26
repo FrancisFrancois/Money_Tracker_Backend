@@ -3,7 +3,7 @@ using Money_Tracker.DAL.Interfaces;
 using Money_Tracker.DAL.Mappers;
 using Money_Tracker.Tools.Utils;
 using System.Data.Common;
-
+using System.Security.Cryptography.X509Certificates;
 
 namespace Money_Tracker.DAL.Repositories
 {
@@ -117,7 +117,17 @@ namespace Money_Tracker.DAL.Repositories
                 _DbConnection.Close();
             };
 
-            // Renvoi de l'objet Maison trouvé ou null si aucun n'a été trouvé.
+            using (DbCommand command = _DbConnection.CreateCommand())
+            {
+                command.CommandText = "INSERT INTO [Home_User] ([Home_Id],[User_Id]) VALUES (@home_id, @user_id)";
+                command.addParamWithValue("@home_id", result.Id); // Utilise l'ID de la maison créée.
+                command.addParamWithValue("@user_id", home.User_Id); // ID de l'utilisateur.
+                _DbConnection.Open();
+                command.ExecuteNonQuery(); // Exécute la commande pour ajouter dans la table de jointure.
+                _DbConnection.Close();
+            }
+
+            // Renvoi de l'objet Home trouvé ou null si aucun n'a été trouvé
             return result;
         }
 
@@ -157,10 +167,10 @@ namespace Money_Tracker.DAL.Repositories
             // Création et configuration de la commande de base de données.
             using (DbCommand command = _DbConnection.CreateCommand())
             {
-                // Définition de la requête SQL pour supprimer une catégorie par son identifiant.
+                // Définition de la requête SQL pour supprimer une maison par son identifiant.
                 command.CommandText = "DELETE FROM [Home] WHERE [Home_Id] = @id";
 
-                // Définition de la requête SQL pour supprimer une catégorie par son identifiant.
+                // Définition de la requête SQL pour supprimer une maison par son identifiant.
                 command.addParamWithValue("id", id);
 
                 // Ouverture de la connexion à la base de données.
@@ -205,6 +215,53 @@ namespace Money_Tracker.DAL.Repositories
                 // Fermeture de la connexion à la base de données.
                 _DbConnection.Close();
             }
+
         }
+
+        public HomeUser AddUserToHome(HomeUser homeUser)
+        {
+            HomeUser result;
+
+            using (DbCommand command = _DbConnection.CreateCommand())
+            {
+                command.CommandText = "INSERT INTO [Home_User] ([Home_Id],[User_Id]) " +
+                                      " OUTPUT INSERTED.* " +
+                                      "VALUES (@home_id, @user_id)";
+
+                command.addParamWithValue("home_id", homeUser.Home_Id);
+                command.addParamWithValue("user_id", homeUser.User_Id);
+
+                _DbConnection.Open();
+
+                using (DbDataReader reader = command.ExecuteReader())
+                {
+                    if (!reader.Read())
+                    {
+                        throw new Exception("Erreur lors de l'ajout de l'utilisateur à la maison");
+                    }
+                    result = HomeUserMapper.MapperHS(reader);
+                };
+                _DbConnection.Close();
+            };
+            return result;
+        }
+
+        public bool RemoveUserFromHome(int homeId, int userId)
+        {
+            using (DbCommand command = _DbConnection.CreateCommand())
+            {
+                command.CommandText = "DELETE FROM [Home_User] WHERE [Home_Id] = @home_id AND [User_Id] = @user_id";
+                command.addParamWithValue("home_id", homeId);
+                command.addParamWithValue("user_id", userId);
+
+                _DbConnection.Open();
+                int nbRowDeleted = command.ExecuteNonQuery();
+                _DbConnection.Close();
+
+                return nbRowDeleted == 1;
+            }
+        }
+
     }
 }
+

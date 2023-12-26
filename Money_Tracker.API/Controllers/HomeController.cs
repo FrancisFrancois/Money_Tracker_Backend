@@ -47,26 +47,25 @@ namespace Money_Tracker.API.Controllers
             if (result is null)
             {
                 // Renvoie une réponse HTTP 404 (Not Found) si aucune maison n'est trouvé.
-                return NotFound("Track not found");
+                return NotFound("Home not found");
             }
             // Renvoie une réponse HTTP 200 (OK) avec les détails de la maison
             return Ok(result);
         }
 
         // Route POST pour créer une nouvelle maison
-        [Authorize]
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(HomeDTO))]
         [ProducesResponseType(401)]
 
         public IActionResult Create([FromBody] HomeDataDTO home) 
         {
-            // Vérifiez si l'utilisateur actuel a le rôle de manager
-            var currentUserRole = User.FindFirst(ClaimTypes.Role)?.Value;
-            if (currentUserRole != "Manager")
-            {
-                return Unauthorized(new { Message = "Accès refusé. Seuls les managers peuvent créer des maisons." });
-            }
+            //// Vérifiez si l'utilisateur actuel a le rôle de manager
+            //var currentUserRole = User.FindFirst(ClaimTypes.Role)?.Value;
+            //if (currentUserRole != "Manager")
+            //{
+            //    return Unauthorized(new { Message = "Accès refusé. Seuls les managers peuvent créer des maisons." });
+            //}
             // Crée une maison et le convertit en DTO
             HomeDTO result = _HomeService.Create(home.ToModel()).ToDTO();
 
@@ -126,5 +125,39 @@ namespace Money_Tracker.API.Controllers
             // Renvoie une sélection HTTP 204 (No Content) si la suppression a réussi, sinon 404 (Not Found).
             return deleted ? NoContent() : NotFound("Home not found");
         }
+
+        [HttpPost("AddUserToHome")]
+        [ProducesResponseType(201, Type = typeof(HomeUserDTO))]
+
+        public IActionResult InsertUserToHome([FromBody] HomeUserDTO homeUserData)
+        {
+            HomeUserDTO result = _HomeService.AddUserToHome(homeUserData.ToModel()).ToDTO();
+            return CreatedAtAction(nameof(GetById), new { homeId = result.Home_Id }, result);
+        }
+
+        [HttpDelete("DeleteUserFromHome/{homeId}/{userId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404, Type = typeof(string))]
+        [ProducesResponseType(409, Type = typeof(string))]
+        [ProducesResponseType(400)]
+
+        public IActionResult DeleteUserFromHome([FromRoute] int homeId, int userId)
+        {
+            bool deleted;
+            try
+            {
+                deleted = _HomeService.RemoveUserFromHome(homeId, userId);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return deleted ? NoContent() : NotFound("User not found");
+        }
+
     }
 }
