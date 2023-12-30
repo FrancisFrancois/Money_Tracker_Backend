@@ -45,9 +45,10 @@ namespace Money_Tracker.API.Mappers
             return new Home
             {
                 Id = 0, // L'ID est défini à 0, généralement auto-généré dans la base de données
+                User_Id = home.User_Id, // Transfère l'ID de l'utilisateur du DTO vers le modèle
                 Name_Home = home.Name_Home, // Transfère le nom du domicile du DTO vers le modèle
-                User_Id = home.User_Id // Transfère l'ID de l'utilisateur du DTO vers le modèle
             };
         }
+
     }
 }

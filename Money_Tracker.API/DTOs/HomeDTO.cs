@@ -31,7 +31,9 @@ namespace Money_Tracker.API.DTOs
     {
         [Required] 
         public int User_Id { get; set; } // Identifiant de l'utilisateur principal associé au domicile
+
         [Required] 
         public string Name_Home { get; set; } = string.Empty; // Nom du domicile
     }
+
 }

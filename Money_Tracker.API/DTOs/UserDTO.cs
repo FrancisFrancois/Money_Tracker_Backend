@@ -11,6 +11,7 @@ namespace Money_Tracker.API.DTOs
         public string Firstname { get; set; } = string.Empty; // Prénom de l'utilisateur
         public string Pseudo { get; set; } = string.Empty; // Pseudo de l'utilisateur
         public string Email { get; set; } = string.Empty; // Adresse email de l'utilisateur
+        public string Roles { get; set; } = string.Empty; // Rôles de l'utilisateur
     }
 
     // Classe UserDataDTO :  Utilisée pour capturer les données de la dépense lors des requêtes de création ou de mise à jour 

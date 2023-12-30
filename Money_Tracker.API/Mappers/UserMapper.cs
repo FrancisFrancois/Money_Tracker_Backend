@@ -16,6 +16,7 @@ namespace Money_Tracker.API.Mappers
                 Firstname = model.Firstname, // Transfère le prénom du modèle vers le DTO
                 Pseudo = model.Pseudo, // Transfère le pseudo du modèle vers le DTO
                 Email = model.Email, // Transfère l'email du modèle vers le DTO
+                Roles = model.Roles, // Transfère les rôles du modèle vers le DTO
             };
         }
 
