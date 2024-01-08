@@ -20,7 +20,8 @@ namespace Money_Tracker.API.Mappers
         public static Category ToModel(this CategoryDataDTO category)
         {
             return new Category
-            {
+            {   
+
                 Category_Name = category.Category_Name // Transfère le nom de la catégorie du DTO vers le Modèle
 
                 // Note : L'ID n'est pas transféré car il est généralement auto-généré dans la base de données pour les nouvelles catégories

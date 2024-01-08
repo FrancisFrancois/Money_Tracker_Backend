@@ -94,8 +94,8 @@ namespace Money_Tracker.DAL.Repositories
             using (DbCommand command = _DbConnection.CreateCommand())
             {
                 // Définition de la requête SQL pour insérer une nouvelle dépense.
-                command.CommandText = "INSERT INTO [Expense] ([Category_Id], [User_Id], [Home_id], [Amount], [Description], [Date_Expense]) " +
-                                      "OUTPUT INSERTED.* " +
+                command.CommandText = "INSERT INTO [Expense] ([Category_Id],[User_Id],[Home_id],[Amount],[Description],[Date_Expense]) " +
+                                      " OUTPUT INSERTED.* " +
                                       "VALUES(@category_id, @user_id, @home_id, @amount, @description, @date_expense)";
 
                 // Ajout des paramètres à la commande.
@@ -137,9 +137,10 @@ namespace Money_Tracker.DAL.Repositories
             using (DbCommand command = _DbConnection.CreateCommand())
             {
                 // Définition de la requête SQL pour mettre à jour une dépense spécifique.
-                command.CommandText = "UPDATE [Expense] SET [Amount] = @amount, [Description] = @description, [Date_Expense] = @date_expense WHERE [Expense_Id] = @id";
+                command.CommandText = "UPDATE [Expense] SET [Category_Id] = @category_id, [Amount] = @amount, [Description] = @description, [Date_Expense] = @date_expense WHERE [Expense_Id] = @id";
 
                 // Ajout des paramètres à la commande.
+                command.addParamWithValue("category_id", expense.Category_Id);
                 command.addParamWithValue("amount", expense.Amount);
                 command.addParamWithValue("description", expense.Description);
                 command.addParamWithValue("date_expense", expense.Date_Expense);

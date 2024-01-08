@@ -14,6 +14,7 @@ namespace Money_Tracker.API.DTOs
     {
         
         [Required] // Champ obligatoire
+        
         public string Category_Name { get; set; } = string.Empty;  // Le nom de la catégorie
     }
 }

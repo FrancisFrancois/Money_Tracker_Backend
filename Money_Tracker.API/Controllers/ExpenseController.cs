@@ -54,7 +54,7 @@ namespace Money_Tracker.API.Controllers
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(ExpenseDTO))]
         public IActionResult Insert([FromBody] ExpenseDataDTO expense)
-        {
+        {   
             // Crée une nouvelle dépense et la convertit en DTO
             ExpenseDTO result = _ExpenseService.Create(expense.ToModel()).ToDTO();
 

@@ -152,7 +152,7 @@ namespace Money_Tracker.DAL.Repositories
                 // Définition de la requête SQL pour mettre à jour une maison.
                 command.CommandText =
                     "UPDATE [Home]" +
-                    " SET [Name_Home] = @name_home," +
+                    " SET [Name_Home] = @name_home" +
                     " WHERE [Home_Id] = @id";
 
                 // Ajout des paramètres à la commande.
