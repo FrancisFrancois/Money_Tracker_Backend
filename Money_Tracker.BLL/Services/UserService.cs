@@ -151,11 +151,28 @@ namespace Money_Tracker.BLL.Services
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
 
             // Attribuer automatiquement le rôle 'Manager' lors de l'inscription
-            user.Roles = "Manager";
+            user.Roles = "MANAGER";
 
             // Crée l'utilisateur dans la base de données et renvoie le modèle créé
             return _UserRepository.Create(user.ToEntity()).ToModel();
         }
+
+        public int? GetUserId(string emailOrPseudo)
+        {
+            User? user;
+            if (IsEmail(emailOrPseudo))
+            {
+                user = _UserRepository.GetUserByEmail(emailOrPseudo)?.ToModel();
+            }
+            else
+            {
+                user = _UserRepository.GetUserByPseudo(emailOrPseudo)?.ToModel();
+            }
+
+            return user?.Id;
+        }
+
+
 
     }
 }

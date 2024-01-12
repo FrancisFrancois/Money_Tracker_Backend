@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Money_Tracker.API.DTOs;
 using Money_Tracker.API.Mappers;
 using Money_Tracker.BLL.CustomExceptions;
 using Money_Tracker.BLL.Interfaces;
+using System.Security.Claims;
 
 namespace Money_Tracker.API.Controllers
 {
@@ -19,6 +21,12 @@ namespace Money_Tracker.API.Controllers
         {
             _UserService = userService;
         }
+
+        // Récuperation de l'id de l'utilisateur via les informations du token
+        private int CurrentUserId => User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
+                                                       .Select(c => int.Parse(c.Value))
+                                                       .SingleOrDefault(-1);
+
 
         // Route GET pour obtenir tous les utilisateurs
         [HttpGet]

@@ -114,7 +114,7 @@ namespace Money_Tracker.DAL.Repositories
                     if (!reader.Read())
                     {
                         // Lève une exception si aucune ligne n'est retournée.
-                        throw new Exception("Erreur lors de l'ajout de la catégorie");
+                        throw new Exception("Erreur lors de l'ajout de l'utilisateur");
                     }
 
                     // Convertit l'enregistrement insérée en un objet User

@@ -75,6 +75,21 @@ namespace Money_Tracker.API.Controllers
       
             }
 
+            // Récupérer l'ID de l'utilisateur
+            var userId = _UserService.GetUserId(loginDto.PseudoOrEmail);
+            if (!userId.HasValue)
+            {
+                return Unauthorized("Invalid credentials");
+            }
+
+            // Récupération des informations de l'utilisateur
+            UserDTO? userDTO = _UserService.GetById(userId.Value)?.ToDTO();
+            if (userDTO == null)
+            {
+                return NotFound("User not found");
+            }
+
+
             // Récupérer le rôle de l'utilisateur
             string role = _UserService.GetUserRole(loginDto.PseudoOrEmail);
 
@@ -86,19 +101,29 @@ namespace Money_Tracker.API.Controllers
             return Ok(new
             {
                 accessToken = token,
-                Expiration = expiration
+                Expiration = expiration,
+                User = userDTO
+
             });
         }
 
         // Méthode privée pour générer un jeton JWT
         private string GenerateJwtToken(string userPseudoOrEmail, string role)
         {
+            var userId = _UserService.GetUserId(userPseudoOrEmail);
+            if (!userId.HasValue)
+            {
+                throw new Exception("User not found");
+            }
+
             Console.WriteLine(_JwtOptions.SigningKey);
             // Crée les revendications (claims) pour le jeton
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, userPseudoOrEmail),
-                new Claim(ClaimTypes.Role, role)
+                new Claim(ClaimTypes.Role, role),
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString())
+
             };
 
             // Crée une clé symétrique pour signer le jeton

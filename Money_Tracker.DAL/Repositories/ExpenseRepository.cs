@@ -137,9 +137,17 @@ namespace Money_Tracker.DAL.Repositories
             using (DbCommand command = _DbConnection.CreateCommand())
             {
                 // Définition de la requête SQL pour mettre à jour une dépense spécifique.
-                command.CommandText = "UPDATE [Expense] SET [Category_Id] = @category_id, [Amount] = @amount, [Description] = @description, [Date_Expense] = @date_expense WHERE [Expense_Id] = @id";
+                command.CommandText = "UPDATE [Expense] SET [Category_Id] = @category_id," +
+                                             "[User_Id] = @user_id, " +
+                                             "[Home_Id] = @home_id, " +
+                                             "[Amount] = @amount, " +
+                                             "[Description] = @description, " +
+                                             "[Date_Expense] = @date_expense " +
+                                      "WHERE [Expense_Id] = @id";
 
                 // Ajout des paramètres à la commande.
+                command.addParamWithValue("user_id", expense.User_Id);
+                command.addParamWithValue("home_id", expense.Home_Id);
                 command.addParamWithValue("category_id", expense.Category_Id);
                 command.addParamWithValue("amount", expense.Amount);
                 command.addParamWithValue("description", expense.Description);
