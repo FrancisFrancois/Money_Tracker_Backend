@@ -13,7 +13,7 @@ namespace Money_Tracker.Tools.Interfaces
     public interface ICrudService<TId, TModel> where TModel : class
     {
         // Méthode pour récupérer toutes les entités de type TModel.
-        IEnumerable<TModel> GetAll();
+        //  IEnumerable<TModel> GetAll(int userId);
 
         // Méthode pour récupérer une entité spécifique de type TModel par son identifiant.
         // - id : L'identifiant de l'entité à récupérer.

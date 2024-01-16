@@ -7,6 +7,7 @@ namespace Money_Tracker.DAL.Interfaces
     // Hérite de l'interface générique ICrud pour fournir des opérations CRUD standard
     public interface ICategoryRepository : ICrud<int, Category>
     {
+        IEnumerable<Category> GetAll();
         // Cette interface étend l'interface ICrud en spécifiant les types de clé génériques (int) et d'entité générique (Category).
 
         // Par conséquent, toutes les méthodes définies dans l'interface ICrud doivent être implémentées ici.

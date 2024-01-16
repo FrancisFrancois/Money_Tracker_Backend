@@ -31,6 +31,8 @@ namespace Money_Tracker.DAL.Interfaces
         //double GetTotalExpensesByYear(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
         #endregion
 
+        IEnumerable<Expense> GetAll(int userId);
+
         // Méthode pour récupérer une liste d'objets Expense (dépenses) dans une période spécifiée, avec des options de filtrage.
         IEnumerable<Expense> GetExpenses(DateTime startDate, DateTime endDate, int? homeId = null, int? userId = null, int? categoryId = null);
 

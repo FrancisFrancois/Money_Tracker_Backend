@@ -7,6 +7,7 @@ namespace Money_Tracker.BLL.Interfaces
     // Hérite de l'interface générique ICrudService pour fournir des opérations CRUD standard
     public interface IUserService : ICrudService<int, User>
     {
+        IEnumerable<User> GetAll();
         bool IsEmailOrPseudoExists(string email, string pseudo);
         // Méthode pour vérifier si un email ou pseudo existe déjà.
 

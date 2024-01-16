@@ -27,7 +27,7 @@ namespace Money_Tracker.API.Controllers
                                                        .Select(c => int.Parse(c.Value))
                                                        .SingleOrDefault(-1);
 
-
+    
         // Route GET pour obtenir tous les utilisateurs
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<UserDTO>))]

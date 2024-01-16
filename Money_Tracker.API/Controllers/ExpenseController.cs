@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Money_Tracker.API.DTOs;
 using Money_Tracker.API.Mappers;
 using Money_Tracker.BLL.CustomExceptions;
 using Money_Tracker.BLL.Interfaces;
 using System.Globalization;
+using System.Security.Claims;
 
 namespace Money_Tracker.API.Controllers
 {
@@ -21,13 +23,19 @@ namespace Money_Tracker.API.Controllers
             _ExpenseService = expenseService;
         }
 
+        private int CurrentUserId => User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
+                                              .Select(c => int.Parse(c.Value))
+                                              .SingleOrDefault(-1);
+
+
         // Route GET pour obtenir toutes les dépenses
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseDTO>))]
         public IActionResult GetAll()
         {
             // Récupère toutes les dépenses et les convertit en DTO
-            IEnumerable<ExpenseDTO> result = _ExpenseService.GetAll().Select(e => e.ToDTO());
+            IEnumerable<ExpenseDTO> result = _ExpenseService.GetAll(CurrentUserId).Select(e => e.ToDTO());
 
             // Renvoie une réponse HTTP 200 (OK) avec la liste des maisons
             return Ok(result);

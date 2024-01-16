@@ -25,13 +25,14 @@ namespace Money_Tracker.DAL.Repositories
         }
 
         // Méthode pour récupérer toutes les dépenses de la base de données.
-        public IEnumerable<Expense> GetAll()
+        public IEnumerable<Expense> GetAll(int userId)
         {
             // Création et configuration de la commande de base de données.
             using (DbCommand command = _DbConnection.CreateCommand())
             {
                 // Définition de la requête SQL pour sélectionner toutes les dépenses.
-                command.CommandText = "SELECT * FROM [Expense]";
+                command.CommandText = "SELECT * FROM [Expense] WHERE [User_Id] = @id";
+                command.addParamWithValue("id", userId);
 
                 // Ouverture de la connexion à la base de données.
                 _DbConnection.Open();

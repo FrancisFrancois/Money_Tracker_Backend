@@ -7,6 +7,7 @@ namespace Money_Tracker.DAL.Interfaces
     // Hérite de l'interface générique ICrud pour fournir des opérations CRUD standard
     public interface IHomeRepository : ICrud<int, Home>
     {
+        IEnumerable<Home> GetAll();
         // Méthode pour récupérer les utilisateurs d'une maison spécifique par leur ID utilisateur
         IEnumerable<HomeUser> GetUsers(int userId);
 

@@ -20,10 +20,10 @@ namespace Money_Tracker.BLL.Services
         }
 
         // Récupère toutes les dépenses et les convertit en modèles (Expense).
-        public IEnumerable<Expense> GetAll()
+        public IEnumerable<Expense> GetAll(int userId)
         {
             // Utilise le repository pour récupérer toutes les dépenses et les convertit de l'entité vers le modèle Expense.
-            return _ExpenseRepository.GetAll().Select(e => e.ToModel());
+            return _ExpenseRepository.GetAll(userId).Select(e => e.ToModel());
         }
 
         // Récupère une dépense spécifique par son ID et la convertit en modèle Expense.

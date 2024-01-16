@@ -9,7 +9,7 @@ namespace Money_Tracker.Tools.Interfaces
     public interface ICrud<TId, TEntity> where TEntity : class
     {
         // Méthode pour récupérer toutes les entités de type TEntity.
-        IEnumerable<TEntity> GetAll();
+        // IEnumerable<TEntity> GetAll(int? userId);
 
         // Méthode pour récupérer une entité spécifique de type TEntity par son identifiant.
         // - id : L'identifiant de l'entité à récupérer.

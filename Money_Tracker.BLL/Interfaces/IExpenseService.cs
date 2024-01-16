@@ -10,6 +10,8 @@ namespace Money_Tracker.BLL.Interfaces
         #region Unused
         #endregion
 
+        IEnumerable<Expense> GetAll(int userId);
+
         // Récupère les dépenses pour un jour donné, avec des options de filtrage par domicile, utilisateur, et catégorie
         IEnumerable<Expense> GetExpensesByDay(DateTime date, int? homeId = null, int? userId = null, int? categoryId = null);
 
