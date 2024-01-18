@@ -11,9 +11,9 @@ namespace Money_Tracker.DAL.Interfaces
         public bool isLivingInHouse(int id);
 
         // Méthode pour récupérer un utilisateur par son adresse e-mail
-        User GetUserByEmail(string email);
+        User? GetUserByEmail(string email);
 
         // Méthode pour récupérer un utilisateur par son pseudo 
-        User GetUserByPseudo(string pseudo);
+        User? GetUserByPseudo(string pseudo);
     }
 }

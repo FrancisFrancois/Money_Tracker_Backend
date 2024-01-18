@@ -57,13 +57,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
         o.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = true,                              // valider l'émetteur du jeton
-            ValidateAudience = true,                            // valider le public cible du jeton
-            ValidateLifetime = true,                            // Valider la durée de vie du jeton
-            ValidateIssuerSigningKey = true,                    // Valider la clé de signature
-            ValidIssuer = options.Issuer,                       // Émetteur du jeton
-            ValidAudience = options.Audience,                   // Public cible du jeton
-            IssuerSigningKey = new SymmetricSecurityKey(sKey)   // Clé de signature
+            ValidateIssuer = true,                                // Valider l'émetteur du jeton
+            ValidateAudience = true,                              // Valider le public cible du jeton
+            ValidateLifetime = true,                              // Valider la durée de vie du jeton
+            ValidateIssuerSigningKey = true,                      // Valider la clé de signature
+            ValidIssuer = options.Issuer,                         // Émetteur du jeton
+            ValidAudience = options.Audience,                     // Public cible du jeton
+            IssuerSigningKey = new SymmetricSecurityKey(sKey)     // Clé de signature
         };
     });
 

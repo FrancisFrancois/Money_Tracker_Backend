@@ -27,7 +27,7 @@ namespace Money_Tracker.API.Controllers
             _JwtOptions = jwtOptions;
         }
 
-        // Route POST pour l'enregistrement d'un nouvel utilisateur
+        // Route POST pour l'enregistrement d'un nouvel utilisateurtr
         [HttpPost("Register")]
         [ProducesResponseType(201, Type = typeof(UserDTO))]
         [ProducesResponseType(400)]
@@ -110,39 +110,48 @@ namespace Money_Tracker.API.Controllers
         // Méthode privée pour générer un jeton JWT
         private string GenerateJwtToken(string userPseudoOrEmail, string role)
         {
+            // Obtient l'ID de l'utilisateur en fonction de son pseudo ou de son email
             var userId = _UserService.GetUserId(userPseudoOrEmail);
+
+            // Si l'ID de l'utilisateur n'existe pas, lance une exception
             if (!userId.HasValue)
             {
                 throw new Exception("User not found");
             }
 
-            Console.WriteLine(_JwtOptions.SigningKey);
             // Crée les revendications (claims) pour le jeton
             List<Claim> claims = new List<Claim>
             {
+                // Revendication pour le nom de l'utilisateur
                 new Claim(ClaimTypes.Name, userPseudoOrEmail),
-                new Claim(ClaimTypes.Role, role),
-                new Claim(ClaimTypes.NameIdentifier, userId.ToString())
 
+                // Revendication pour le rôle de l'utilisateur
+                new Claim(ClaimTypes.Role, role),
+
+                // Revendication pour l'identifiant de l'utilisateur
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString())
             };
 
-            // Crée une clé symétrique pour signer le jeton
+            // Crée une clé symétrique pour signer le jeton à l'aide de la clé de signature JWT
             SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_JwtOptions.SigningKey));
+
+            // Crée des informations d'authentification pour signer le jeton
             SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            // Crée le jeton JWT
+            // Crée le jeton JWT en spécifiant diverses informations
             JwtSecurityToken Token = new JwtSecurityToken
-                (
-                issuer: _JwtOptions.Issuer,
-                audience: _JwtOptions.Audience,
-                claims: claims,
-                expires: DateTime.Now.AddSeconds(_JwtOptions.Expiration),
-                signingCredentials: creds
-                );
+            (
+                issuer: _JwtOptions.Issuer,                                  // Émetteur du jeton
+                audience: _JwtOptions.Audience,                              // Public cible du jeton
+                claims: claims,                                              // Revendications incluses dans le jeton
+                expires: DateTime.Now.AddSeconds(_JwtOptions.Expiration),    // Date d'expiration du jeton
+                signingCredentials: creds                                    // Informations d'authentification pour la signature
+            );
 
             // Retourne le jeton JWT sous forme de chaîne
             return new JwtSecurityTokenHandler().WriteToken(Token);
         }
+
 
     }
 }

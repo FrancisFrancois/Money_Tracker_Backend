@@ -227,7 +227,7 @@ namespace Money_Tracker.DAL.Repositories
             return isLiving;
         }
 
-        public User GetUserByEmail(string email)
+        public User? GetUserByEmail(string email)
         {
             // Initialisation du résultat en tant que null.
             User? result = null;
@@ -252,7 +252,7 @@ namespace Money_Tracker.DAL.Repositories
                         // Convertit l'enregistrement insérée en un objet User
                         result = UserMapper.Mapper(reader) ?? throw new Exception("User by email not found");
                     }
-                }
+                };
 
                 // Fermeture de la connexion à la base de données.
                 _DbConnection.Close();
@@ -262,7 +262,7 @@ namespace Money_Tracker.DAL.Repositories
             return result;
         }
 
-        public User GetUserByPseudo(string pseudo)
+        public User? GetUserByPseudo(string pseudo)
         {
             // Initialisation du résultat en tant que null.
             User? result = null;

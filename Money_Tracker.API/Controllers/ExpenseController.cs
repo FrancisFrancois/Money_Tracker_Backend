@@ -23,6 +23,8 @@ namespace Money_Tracker.API.Controllers
             _ExpenseService = expenseService;
         }
 
+        // Propriété privée pour obtenir l'ID de l'utilisateur actuel à partir des revendications (claims) de l'utilisateur authentifié.
+        // Cette propriété permet de récupérer l'ID de l'utilisateur actuel à partir des revendications JWT (JSON Web Token) lorsqu'un utilisateur est authentifié.
         private int CurrentUserId => User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
                                               .Select(c => int.Parse(c.Value))
                                               .SingleOrDefault(-1);
@@ -69,7 +71,7 @@ namespace Money_Tracker.API.Controllers
             // Renvoie une réponse HTTP 201 (Created) avec les détails de la dépense créé.
             return CreatedAtAction(nameof(GetById), new { expenseId = result.Id }, result);
         }
-
+        
         // Route PUT pour mettre à jour un utilisateur
         [HttpPut("{expenseId}")]
         [ProducesResponseType(204)]
